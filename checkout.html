@@ -1,0 +1,1394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>African Artifacts | Checkout</title>
+  <style>
+    :root {
+      --clay-50: #fdf7ef;
+      --clay-100: #f2e2cf;
+      --clay-200: #e0c6a3;
+      --clay-300: #caa174;
+      --clay-400: #b58255;
+      --clay-500: #9c653b;
+      --clay-600: #7d4f2b;
+      --clay-700: #613c20;
+      --clay-800: #452b16;
+      --clay-900: #2f1d0d;
+      --forest-400: #6b8e23;
+      --forest-500: #4f7116;
+      --sunset-400: #f28c44;
+      --sunset-500: #e8722c;
+      --shadow: rgba(0, 0, 0, 0.08);
+      --gradient-bg: linear-gradient(135deg, #f8ebe0 0%, #ecd2b4 50%, #f8ebe0 100%);
+      --gradient-card: linear-gradient(145deg, rgba(255, 255, 255, 0.9) 0%, rgba(245, 229, 209, 0.9) 100%);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Poppins", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--gradient-bg);
+      color: var(--clay-800);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font-family: inherit;
+    }
+
+    .checkout-page {
+      width: 100%;
+      max-width: 1280px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      padding: 2.5rem 1.5rem 2rem;
+    }
+
+    .checkout-hero {
+      background: linear-gradient(135deg, rgba(72, 45, 21, 0.92) 0%, rgba(116, 71, 32, 0.92) 100%);
+      color: #fff;
+      border-radius: 28px;
+      padding: 2.8rem;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 2rem;
+      box-shadow: 0 28px 50px rgba(69, 43, 22, 0.25);
+    }
+
+    .hero-brand {
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+      font-weight: 700;
+      font-size: 1.2rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .hero-brand span {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 3rem;
+      height: 3rem;
+      background: rgba(255, 255, 255, 0.16);
+      border-radius: 1rem;
+      font-size: 1.3rem;
+    }
+
+    .hero-copy {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .hero-copy h1 {
+      margin: 0;
+      font-size: 2.4rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .hero-copy p {
+      margin: 0;
+      font-size: 1.05rem;
+      color: rgba(255, 255, 255, 0.78);
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+    }
+
+    .hero-tag {
+      padding: 0.6rem 1.1rem;
+      border-radius: 2rem;
+      background: rgba(255, 255, 255, 0.14);
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+
+    .hero-cart {
+      position: relative;
+      background: rgba(255, 255, 255, 0.16);
+      border-radius: 50%;
+      width: 3.2rem;
+      height: 3.2rem;
+      display: grid;
+      place-items: center;
+      font-size: 1.35rem;
+    }
+
+    #cart-count {
+      position: absolute;
+      top: -0.35rem;
+      right: -0.35rem;
+      background: var(--sunset-500);
+      width: 1.7rem;
+      height: 1.7rem;
+      border-radius: 50%;
+      color: #fff;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+      font-weight: 600;
+      box-shadow: 0 8px 18px rgba(232, 114, 44, 0.35);
+    }
+
+    .checkout-main {
+      margin-top: 2.5rem;
+      display: grid;
+      grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+      gap: 2rem;
+    }
+
+    .card {
+      background: var(--gradient-card);
+      border-radius: 26px;
+      padding: 2.3rem;
+      box-shadow: 0 25px 50px var(--shadow);
+      display: flex;
+      flex-direction: column;
+      gap: 1.8rem;
+      border: 1px solid rgba(197, 157, 115, 0.25);
+      backdrop-filter: blur(6px);
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .card-header h2 {
+      margin: 0;
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--clay-800);
+    }
+
+    .profile-status {
+      font-size: 0.95rem;
+      font-weight: 500;
+      border-radius: 12px;
+      padding: 0.75rem 1rem;
+      background: rgba(155, 105, 63, 0.12);
+      color: var(--clay-700);
+    }
+
+    .profile-status.success {
+      background: rgba(81, 150, 71, 0.12);
+      color: #3f7f24;
+    }
+
+    .profile-status.warning {
+      background: rgba(232, 114, 44, 0.12);
+      color: var(--sunset-500);
+    }
+
+    .order-item-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .order-item-card {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 1rem;
+      background: rgba(255, 255, 255, 0.75);
+      padding: 1rem 1.2rem;
+      border-radius: 18px;
+      border: 1px solid rgba(212, 165, 116, 0.35);
+    }
+
+    .order-item-card strong {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 1rem;
+    }
+
+    .order-item-meta {
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+      color: var(--clay-500);
+      font-size: 0.9rem;
+    }
+
+    .order-item-quantity {
+      background: rgba(232, 114, 44, 0.12);
+      color: var(--sunset-500);
+      border-radius: 50%;
+      width: 2rem;
+      height: 2rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    .order-item-price {
+      font-weight: 600;
+      font-size: 1rem;
+      color: var(--clay-700);
+    }
+
+    .order-total-breakdown {
+      display: grid;
+      gap: 0.8rem;
+      font-size: 0.95rem;
+    }
+
+    .order-total-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      color: var(--clay-600);
+    }
+
+    .order-total-row.total {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--clay-800);
+    }
+
+    .divider {
+      height: 1px;
+      background: linear-gradient(90deg, rgba(197, 157, 115, 0) 0%, rgba(197, 157, 115, 0.75) 50%, rgba(197, 157, 115, 0) 100%);
+    }
+
+    .payment-methods {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .payment-methods h3 {
+      margin: 0;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--clay-700);
+    }
+
+    .payment-method-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1rem;
+    }
+
+    .payment-method {
+      position: relative;
+      border-radius: 18px;
+      padding: 1rem 1.2rem;
+      background: rgba(255, 255, 255, 0.75);
+      border: 2px solid transparent;
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      font-weight: 600;
+      color: var(--clay-700);
+    }
+
+    .payment-method input {
+      display: none;
+    }
+
+    .payment-method span {
+      font-size: 1.8rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 2.4rem;
+      height: 2.4rem;
+      background: rgba(232, 114, 44, 0.12);
+      border-radius: 16px;
+      color: var(--sunset-500);
+    }
+
+    .payment-method.selected {
+      border-color: var(--sunset-500);
+      box-shadow: 0 18px 30px rgba(232, 114, 44, 0.25);
+      background: rgba(255, 255, 255, 0.92);
+    }
+
+    .payment-extra {
+      display: none;
+      gap: 1rem;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      background: rgba(255, 255, 255, 0.72);
+      border-radius: 18px;
+      padding: 1.2rem;
+      border: 1px solid rgba(197, 157, 115, 0.35);
+    }
+
+    .payment-extra label {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      font-size: 0.85rem;
+      color: var(--clay-600);
+    }
+
+    .payment-extra input {
+      padding: 0.7rem;
+      border-radius: 12px;
+      border: 1px solid rgba(197, 157, 115, 0.5);
+      background: rgba(255, 255, 255, 0.9);
+      font-size: 0.95rem;
+      color: var(--clay-800);
+    }
+
+    .checkout-form-card form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.4rem;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 1.3rem;
+    }
+
+    .form-field {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      color: var(--clay-700);
+      font-size: 0.95rem;
+    }
+
+    .form-field input,
+    .form-field select {
+      border-radius: 14px;
+      border: 1px solid rgba(197, 157, 115, 0.45);
+      padding: 0.85rem 1rem;
+      font-size: 1rem;
+      color: var(--clay-800);
+      background: rgba(255, 255, 255, 0.92);
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .form-field input:focus,
+    .form-field select:focus {
+      border-color: var(--sunset-500);
+      box-shadow: 0 0 0 4px rgba(232, 114, 44, 0.2);
+      outline: none;
+    }
+
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .btn-primary {
+      flex: 1;
+      min-width: 220px;
+      border: none;
+      border-radius: 20px;
+      padding: 1rem 1.2rem;
+      background: linear-gradient(135deg, #f28c44 0%, #e8722c 100%);
+      color: #fff;
+      font-size: 1.05rem;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 18px 30px rgba(232, 114, 44, 0.35);
+      transition: transform 0.2s ease;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      border: none;
+      border-radius: 20px;
+      padding: 1rem 1.2rem;
+      background: rgba(107, 142, 35, 0.12);
+      color: var(--forest-500);
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+
+    .btn-secondary:hover {
+      transform: translateY(-1px);
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-weight: 600;
+      color: var(--forest-400);
+    }
+
+    .checkout-footer {
+      margin-top: 2.5rem;
+      text-align: center;
+      color: rgba(69, 43, 22, 0.75);
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 1024px) {
+      .checkout-main {
+        grid-template-columns: 1fr;
+      }
+
+      .checkout-hero {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+
+      .hero-actions {
+        justify-content: center;
+      }
+    }
+
+    /* Success Popup Modal */
+    .success-popup-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(4px);
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .success-popup-overlay.active {
+      display: flex;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes popIn {
+      0% {
+        transform: scale(0.3) rotateX(180deg);
+        opacity: 0;
+      }
+      50% {
+        transform: scale(1.05);
+      }
+      100% {
+        transform: scale(1) rotateX(0deg);
+        opacity: 1;
+      }
+    }
+
+    .success-popup {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(245, 229, 209, 0.95) 100%);
+      border-radius: 32px;
+      padding: 3.5rem 2.5rem;
+      max-width: 500px;
+      width: 90%;
+      text-align: center;
+      box-shadow: 0 40px 80px rgba(69, 43, 22, 0.3);
+      border: 2px solid rgba(107, 142, 35, 0.3);
+      animation: popIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .success-popup-icon {
+      font-size: 4rem;
+      margin-bottom: 1.5rem;
+      animation: bounce 0.6s ease-in-out 0.4s both;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+    }
+
+    .success-popup h2 {
+      font-size: 2rem;
+      color: var(--clay-800);
+      margin: 0 0 0.8rem 0;
+      font-weight: 700;
+    }
+
+    .success-popup p {
+      font-size: 1.1rem;
+      color: var(--clay-600);
+      margin: 0 0 2rem 0;
+      line-height: 1.6;
+    }
+
+    .success-popup-amount {
+      background: linear-gradient(135deg, rgba(107, 142, 35, 0.1) 0%, rgba(107, 142, 35, 0.05) 100%);
+      border-radius: 18px;
+      padding: 1.2rem;
+      margin: 1.5rem 0;
+      border-left: 4px solid var(--forest-500);
+    }
+
+    .success-popup-amount span {
+      display: block;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--forest-500);
+    }
+
+    .success-popup-amount small {
+      display: block;
+      font-size: 0.9rem;
+      color: var(--clay-600);
+      margin-top: 0.3rem;
+    }
+
+    .success-popup-redirect {
+      font-size: 0.95rem;
+      color: var(--clay-500);
+      margin-top: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    .redirect-dots {
+      display: inline-flex;
+      gap: 0.3rem;
+    }
+
+    .redirect-dots span {
+      width: 0.4rem;
+      height: 0.4rem;
+      background: var(--sunset-500);
+      border-radius: 50%;
+      animation: pulse 1.4s ease-in-out infinite;
+    }
+
+    .redirect-dots span:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+
+    .redirect-dots span:nth-child(3) {
+      animation-delay: 0.4s;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 0.5; }
+      50% { transform: scale(1.5); opacity: 1; }
+    }
+
+    @media (max-width: 640px) {
+      .checkout-page {
+        padding: 2rem 1rem 1.5rem;
+      }
+
+      .checkout-hero {
+        padding: 2.1rem;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.8rem;
+      }
+
+      .hero-tag {
+        justify-content: center;
+      }
+
+      .card {
+        padding: 1.8rem;
+        border-radius: 22px;
+      }
+
+      .order-item-card {
+        grid-template-columns: 1fr;
+        gap: 1.2rem;
+      }
+
+      .order-item-card > div:first-child {
+        display: flex;
+        flex-direction: column;
+        gap: 0.6rem;
+      }
+
+      .order-item-meta {
+        flex-wrap: wrap;
+        gap: 0.6rem;
+      }
+
+      .order-item-price {
+        text-align: right;
+      }
+
+      .cta-row {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .btn-primary,
+      .btn-secondary {
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .checkout-page {
+        padding: 1.5rem 0.75rem 1rem;
+      }
+
+      .checkout-hero {
+        padding: 1.5rem;
+        gap: 1.5rem;
+      }
+
+      .hero-actions {
+        align-items: center;
+      }
+
+      .hero-brand {
+        font-size: 1rem;
+      }
+
+      .hero-copy h1 {
+        font-size: 2rem;
+      }
+
+      .hero-copy p {
+        font-size: 0.9rem;
+      }
+
+      .hero-tag {
+        padding: 0.5rem 0.9rem;
+        font-size: 0.85rem;
+      }
+
+      .hero-cart {
+        width: 2.8rem;
+        height: 2.8rem;
+        font-size: 1.2rem;
+      }
+
+      .checkout-main {
+        margin-top: 2rem;
+        gap: 1.5rem;
+      }
+
+      .card {
+        padding: 1.5rem;
+        border-radius: 20px;
+      }
+
+      .card-header h2 {
+        font-size: 1.4rem;
+      }
+
+      .order-item-card {
+        padding: 0.8rem 1rem;
+      }
+
+      .order-item-price {
+        font-size: 0.9rem;
+      }
+
+      .payment-method-grid {
+        grid-template-columns: 1fr;
+        gap: 0.8rem;
+      }
+
+      .payment-method {
+        padding: 0.8rem 1rem;
+      }
+
+      .form-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+
+      .form-field input,
+      .form-field select {
+        padding: 0.75rem 0.9rem;
+        font-size: 0.95rem;
+      }
+
+      .btn-primary {
+        padding: 0.9rem 1rem;
+        font-size: 0.95rem;
+        min-width: unset;
+      }
+
+      .btn-secondary {
+        padding: 0.9rem 1rem;
+        font-size: 0.95rem;
+      }
+
+      .checkout-footer {
+        font-size: 0.85rem;
+      }
+
+      .success-popup {
+        padding: 2.5rem 1.5rem;
+        max-width: 90%;
+      }
+
+      .success-popup h2 {
+        font-size: 1.8rem;
+      }
+
+      .success-popup p {
+        font-size: 1rem;
+      }
+
+      .success-popup-amount span {
+        font-size: 1.6rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="checkout-page">
+    <header class="checkout-hero">
+      <div class="hero-brand">
+        <span>AA</span>
+        African Artifacts
+      </div>
+      <div class="hero-copy">
+        <h1>Complete Your Cultural Treasure</h1>
+        <p>Secure delivery, curated from artisans across Africa directly to your doorstep.</p>
+      </div>
+      <div class="hero-actions">
+        <div class="hero-tag">Secure &amp; Encrypted Checkout</div>
+        <div class="hero-cart">
+          🛍️
+          <div id="cart-count"></div>
+        </div>
+      </div>
+    </header>
+
+    <main class="checkout-main">
+      <section class="card">
+        <div class="card-header">
+          <h2>Order Summary</h2>
+        </div>
+        <div id="profile-status" class="profile-status">Enter your contact details to complete the order.</div>
+        <div id="order-items" class="order-item-list"></div>
+        <div class="divider"></div>
+        <div id="order-total" class="order-total-breakdown">
+          <div class="order-total-row"><span>Subtotal</span><span>Ksh 0.00</span></div>
+          <div class="order-total-row"><span>Shipping</span><span>Ksh 0.00</span></div>
+          <div class="order-total-row total"><span>Order Total</span><span>Ksh 0.00</span></div>
+        </div>
+        <div class="payment-methods">
+          <h3>Pay securely with Paystack</h3>
+          <div class="payment-method-grid">
+            <label class="payment-method selected" data-method="paystack">
+              <input type="radio" name="payment-method" value="paystack" checked>
+              <span>💳</span>
+              Paystack Checkout
+            </label>
+          </div>
+        </div>
+      </section>
+
+      <section class="card checkout-form-card">
+        <div class="card-header">
+          <h2>Shipping &amp; Contact</h2>
+        </div>
+        <form id="checkout-form">
+          <div class="form-grid">
+            <label class="form-field">
+              First Name
+              <input type="text" id="first-name" required>
+            </label>
+            <label class="form-field">
+              Last Name
+              <input type="text" id="last-name" required>
+            </label>
+            <label class="form-field">
+              Email Address
+              <input type="email" id="email" required>
+            </label>
+            <label class="form-field">
+              Phone Number
+              <input type="tel" id="phone" required>
+            </label>
+            <label class="form-field" style="grid-column: span 2;">
+              Street Address
+              <input type="text" id="address" required>
+            </label>
+            <label class="form-field">
+              City
+              <input type="text" id="city" required>
+            </label>
+            <label class="form-field">
+              State / Province
+              <input type="text" id="state" required>
+            </label>
+            <label class="form-field">
+              Postal / Zip Code
+              <input type="text" id="zip" required>
+            </label>
+            <label class="form-field">
+              Country
+              <select id="country" required>
+                <option value="">Select Country</option>
+                <option value="Kenya">Kenya</option>
+                <option value="Tanzania">Tanzania</option>
+                <option value="Uganda">Uganda</option>
+                <option value="Rwanda">Rwanda</option>
+                <option value="Ethiopia">Ethiopia</option>
+                <option value="Nigeria">Nigeria</option>
+                <option value="Ghana">Ghana</option>
+                <option value="South Africa">South Africa</option>
+                <option value="USA">United States</option>
+                <option value="UK">United Kingdom</option>
+                <option value="Canada">Canada</option>
+                <option value="Australia">Australia</option>
+                <option value="Other">Other</option>
+              </select>
+            </label>
+          </div>
+        </form>
+        <div class="cta-row">
+          <button type="button" class="btn-primary" onclick="processPayment()">Complete Secure Payment</button>
+        </div>
+        <a href="cart.html" class="back-link">← Return to cart</a>
+      </section>
+    </main>
+
+    <footer class="checkout-footer">
+      © 2025 African Artifacts. Handcrafted heritage, delivered with care.
+    </footer>
+  </div>
+
+  <!-- Success Popup Modal -->
+  <div id="successPopupOverlay" class="success-popup-overlay">
+    <div class="success-popup">
+      <div class="success-popup-icon">✓</div>
+      <h2>Payment Successful!</h2>
+      <p>Your order has been placed and is being processed.</p>
+      <div class="success-popup-amount">
+        <span id="successAmount">Ksh 0.00</span>
+        <small>Amount Paid</small>
+      </div>
+      <p style="font-size: 0.95rem; color: var(--clay-600);">
+        Thank you for your purchase! We're preparing your beautiful African artifacts for shipment.
+      </p>
+      <div class="success-popup-redirect">
+        Redirecting to dashboard
+        <span class="redirect-dots">
+          <span></span>
+          <span></span>
+          <span></span>
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://js.paystack.co/v1/inline.js" defer></script>
+  <script src="js/api.js" defer></script>
+  <script src="js/checkout-profile-manager.js" defer></script>
+  <script defer>
+    let checkoutData = null;
+    let isAuthenticating = false;
+    let authPromise = null;
+    let isProcessingPayment = false;
+    const PAYSTACK_PUBLIC_KEY = 'pk_test_232531a5c927ef2cc67ed1b85af3f26e3b8ed2f2';
+
+    function closeAuthModal() {
+      const modal = document.getElementById('auth-modal');
+      if (modal) modal.remove();
+    }
+
+    function setActiveAuthView(view) {
+      const modal = document.getElementById('auth-modal');
+      if (!modal) return;
+      const loginForm = modal.querySelector('#auth-login-form');
+      const signupForm = modal.querySelector('#auth-signup-form');
+      const tabs = modal.querySelectorAll('.auth-tab');
+      if (loginForm) loginForm.style.display = view === 'login' ? 'flex' : 'none';
+      if (signupForm) signupForm.style.display = view === 'signup' ? 'flex' : 'none';
+      tabs.forEach(tab => {
+        const isActive = tab.dataset.view === view;
+        tab.classList.toggle('active', isActive);
+        tab.style.background = isActive ? 'linear-gradient(135deg, #E8722C 0%, #D65A1F 100%)' : 'transparent';
+        tab.style.color = isActive ? '#fff' : '#6B4423';
+        tab.style.boxShadow = isActive ? '0 6px 15px rgba(232, 114, 44, 0.35)' : 'none';
+      });
+    }
+
+    function showAuthModal({ onSuccess, onCancel } = {}) {
+      if (typeof loginUser !== 'function') {
+        alert('Authentication utilities are unavailable. Please ensure api.js is loaded.');
+        if (typeof onCancel === 'function') onCancel();
+        return;
+      }
+      const existing = document.getElementById('auth-modal');
+      if (existing) existing.remove();
+      const modal = document.createElement('div');
+      modal.id = 'auth-modal';
+      modal.innerHTML = `
+        <div class="auth-modal-overlay" style="position: fixed; inset: 0; background: rgba(0,0,0,0.75); display: flex; align-items: center; justify-content: center; z-index: 2000;">
+          <div class="auth-modal-dialog" style="background: #fdf7ef; border-radius: 18px; width: min(430px, 92vw); padding: 2.5rem 2.2rem 2.2rem; box-shadow: 0 30px 60px rgba(0,0,0,0.35); border: 3px solid #D4A574; position: relative;">
+            <button type="button" class="auth-modal-close" style="position: absolute; top: 1rem; right: 1rem; background: transparent; border: none; font-size: 1.5rem; color: #6B4423; cursor: pointer;">×</button>
+            <h2 style="margin: 0 0 0.8rem; font-size: 1.9rem; color: #6B4423; text-align: center;">Secure Checkout Access</h2>
+            <p style="margin: 0 0 1.7rem; color: #8B5A2B; text-align: center;">Sign in or create an account to complete your order.</p>
+            <div class="auth-tabs" style="display: flex; background: #f0dec7; border-radius: 50px; padding: 0.4rem; margin-bottom: 1.5rem;">
+              <button type="button" class="auth-tab" data-view="login" style="flex: 1; border: none; border-radius: 40px; padding: 0.7rem 0; font-weight: 600; cursor: pointer; color: #6B4423; background: transparent; transition: all 0.3s ease;">Login</button>
+              <button type="button" class="auth-tab" data-view="signup" style="flex: 1; border: none; border-radius: 40px; padding: 0.7rem 0; font-weight: 600; cursor: pointer; color: #6B4423; background: transparent; transition: all 0.3s ease;">Sign Up</button>
+            </div>
+            <form id="auth-login-form" style="display: flex; flex-direction: column; gap: 1rem;">
+              <input type="email" id="auth-login-email" placeholder="Email address" required style="padding: 0.85rem; border-radius: 10px; border: 2px solid #D4A574; font-size: 1rem;">
+              <input type="password" id="auth-login-password" placeholder="Password" required style="padding: 0.85rem; border-radius: 10px; border: 2px solid #D4A574; font-size: 1rem;">
+              <button type="submit" style="background: linear-gradient(135deg, #6B8E23 0%, #556B2F 100%); color: #fff; border: none; border-radius: 10px; padding: 0.9rem; font-size: 1rem; font-weight: 600; cursor: pointer; box-shadow: 0 8px 16px rgba(107, 142, 35, 0.3);">Sign In</button>
+              <button type="button" class="auth-modal-cancel" style="background: transparent; border: 2px solid #D4A574; border-radius: 10px; padding: 0.85rem; font-size: 0.95rem; font-weight: 600; color: #6B4423; cursor: pointer;">Cancel</button>
+            </form>
+            <form id="auth-signup-form" style="display: none; flex-direction: column; gap: 1rem;">
+              <input type="text" id="auth-signup-name" placeholder="Full name" required style="padding: 0.85rem; border-radius: 10px; border: 2px solid #D4A574; font-size: 1rem;">
+              <input type="email" id="auth-signup-email" placeholder="Email address" required style="padding: 0.85rem; border-radius: 10px; border: 2px solid #D4A574; font-size: 1rem;">
+              <input type="password" id="auth-signup-password" placeholder="Password" required style="padding: 0.85rem; border-radius: 10px; border: 2px solid #D4A574; font-size: 1rem;">
+              <input type="password" id="auth-signup-confirm" placeholder="Confirm password" required style="padding: 0.85rem; border-radius: 10px; border: 2px solid #D4A574; font-size: 1rem;">
+              <button type="submit" style="background: linear-gradient(135deg, #E8722C 0%, #D65A1F 100%); color: #fff; border: none; border-radius: 10px; padding: 0.9rem; font-size: 1rem; font-weight: 600; cursor: pointer; box-shadow: 0 8px 16px rgba(232, 114, 44, 0.3);">Create Account</button>
+              <button type="button" class="auth-modal-cancel" style="background: transparent; border: 2px solid #D4A574; border-radius: 10px; padding: 0.85rem; font-size: 0.95rem; font-weight: 600; color: #6B4423; cursor: pointer;">Cancel</button>
+            </form>
+            <div class="auth-modal-message" style="margin-top: 1rem; min-height: 1.2rem; text-align: center; font-size: 0.95rem; font-weight: 500; color: #6B4423;"></div>
+          </div>
+        </div>
+      `;
+      document.body.appendChild(modal);
+      setActiveAuthView('login');
+      const overlay = modal.querySelector('.auth-modal-overlay');
+      const closeButton = modal.querySelector('.auth-modal-close');
+      const tabs = modal.querySelectorAll('.auth-tab');
+      const loginForm = modal.querySelector('#auth-login-form');
+      const signupForm = modal.querySelector('#auth-signup-form');
+      const message = modal.querySelector('.auth-modal-message');
+      const cancelButtons = modal.querySelectorAll('.auth-modal-cancel');
+      tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          setActiveAuthView(tab.dataset.view);
+          message.textContent = '';
+        });
+      });
+      const handleCancel = () => {
+        closeAuthModal();
+        if (typeof onCancel === 'function') onCancel();
+      };
+      closeButton.addEventListener('click', handleCancel);
+      cancelButtons.forEach(button => {
+        button.addEventListener('click', handleCancel);
+      });
+      overlay.addEventListener('click', event => {
+        if (event.target === overlay) handleCancel();
+      });
+      loginForm.addEventListener('submit', async event => {
+        event.preventDefault();
+        message.textContent = 'Signing you in...';
+        message.style.color = '#6B4423';
+        try {
+          const email = document.getElementById('auth-login-email').value.trim();
+          const password = document.getElementById('auth-login-password').value;
+          const result = await loginUser(email, password);
+          if (!result || result.error || !result.token) {
+            message.textContent = result?.error || 'Unable to sign in.';
+            message.style.color = '#E8722C';
+            return;
+          }
+          if (result.user) localStorage.setItem('user', JSON.stringify(result.user));
+          message.textContent = 'Welcome back!';
+          message.style.color = '#6B8E23';
+          setTimeout(() => {
+            closeAuthModal();
+            if (typeof onSuccess === 'function') onSuccess(result.token);
+          }, 400);
+        } catch (error) {
+          message.textContent = error.message || 'Unexpected error. Please try again.';
+          message.style.color = '#E8722C';
+        }
+      });
+      signupForm.addEventListener('submit', async event => {
+        event.preventDefault();
+        message.textContent = 'Creating your account...';
+        message.style.color = '#6B4423';
+        try {
+          const name = document.getElementById('auth-signup-name').value.trim();
+          const email = document.getElementById('auth-signup-email').value.trim();
+          const password = document.getElementById('auth-signup-password').value;
+          const confirmPassword = document.getElementById('auth-signup-confirm').value;
+          if (password !== confirmPassword) {
+            message.textContent = 'Passwords do not match.';
+            message.style.color = '#E8722C';
+            return;
+          }
+          const result = await registerUser(name, email, password, confirmPassword);
+          if (!result || result.error || !result.token) {
+            message.textContent = result?.error || 'Unable to create account.';
+            message.style.color = '#E8722C';
+            return;
+          }
+          if (!result.user) {
+            const signinResult = await loginUser(email, password);
+            if (signinResult && !signinResult.error && signinResult.user) {
+              localStorage.setItem('user', JSON.stringify(signinResult.user));
+            }
+          } else {
+            localStorage.setItem('user', JSON.stringify(result.user));
+          }
+          message.textContent = 'Account ready!';
+          message.style.color = '#6B8E23';
+          setTimeout(() => {
+            closeAuthModal();
+            if (typeof onSuccess === 'function') onSuccess(localStorage.getItem('authToken'));
+          }, 400);
+        } catch (error) {
+          message.textContent = error.message || 'Unexpected error. Please try again.';
+          message.style.color = '#E8722C';
+        }
+      });
+    }
+
+    async function ensureUserAuthenticated() {
+      const existingToken = localStorage.getItem('authToken');
+      if (existingToken) return existingToken;
+      if (authPromise) return authPromise;
+      isAuthenticating = true;
+      authPromise = new Promise((resolve) => {
+        showAuthModal({
+          onSuccess: (newToken) => {
+            isAuthenticating = false;
+            authPromise = null;
+            resolve(newToken || localStorage.getItem('authToken'));
+          },
+          onCancel: () => {
+            isAuthenticating = false;
+            authPromise = null;
+            window.location.href = 'cart.html';
+            resolve(null);
+          }
+        });
+      });
+      return authPromise;
+    }
+
+    async function loadCheckoutData() {
+      checkoutData = JSON.parse(sessionStorage.getItem('checkoutData'));
+      if (!checkoutData) {
+        window.location.href = 'cart.html';
+        return;
+      }
+      const token = await ensureUserAuthenticated();
+      if (!token) return;
+      await loadUserProfile(token);
+      loadOrderSummary();
+    }
+
+    async function loadUserProfile(token) {
+      const profileStatus = document.getElementById('profile-status');
+      if (!token || typeof getUserProfile !== 'function') {
+        if (profileStatus) {
+          profileStatus.textContent = 'Enter your contact details to complete the order.';
+          profileStatus.className = 'profile-status warning';
+        }
+        return;
+      }
+      try {
+        const user = await getUserProfile();
+        if (!user || user.error) {
+          if (profileStatus) {
+            profileStatus.textContent = 'We could not load your saved profile. Please complete the form below.';
+            profileStatus.className = 'profile-status warning';
+          }
+          return;
+        }
+        if (user.name) {
+          const names = user.name.split(' ');
+          document.getElementById('first-name').value = names[0] || '';
+          document.getElementById('last-name').value = names.slice(1).join(' ') || '';
+        }
+        document.getElementById('email').value = user.email || '';
+        if (user.phone) document.getElementById('phone').value = user.phone;
+        if (user.address) {
+          document.getElementById('address').value = user.address.street || '';
+          document.getElementById('city').value = user.address.city || '';
+          document.getElementById('state').value = user.address.state || '';
+          document.getElementById('zip').value = user.address.zipCode || '';
+          document.getElementById('country').value = user.address.country || 'Kenya';
+        } else {
+          document.getElementById('country').value = 'Kenya';
+        }
+        if (profileStatus) {
+          profileStatus.textContent = 'We filled your details from your profile. Review and confirm below.';
+          profileStatus.className = 'profile-status success';
+        }
+        // Initialize profile manager
+        if (typeof window.checkoutProfileManager !== 'undefined') {
+          await window.checkoutProfileManager.init();
+        }
+      } catch (error) {
+        console.error('Error loading user profile:', error);
+        if (profileStatus) {
+          profileStatus.textContent = 'Unable to reach the server right now. Enter your details manually to continue.';
+          profileStatus.className = 'profile-status warning';
+        }
+      }
+    }
+
+    function loadOrderSummary() {
+      const orderItemsContainer = document.getElementById('order-items');
+      const orderTotalElement = document.getElementById('order-total');
+      if (!checkoutData || !orderItemsContainer || !orderTotalElement) return;
+      if (!checkoutData.items || checkoutData.items.length === 0) {
+        orderItemsContainer.innerHTML = '<div class="order-item-card"><strong>Your cart looks empty.</strong><div class="order-item-meta">Add treasures from the store to continue.</div></div>';
+        return;
+      }
+      orderItemsContainer.innerHTML = checkoutData.items.map((item) => {
+        const original = (checkoutData.currentCart || []).find(c => {
+          const identifier = item.productId || item.id;
+          return c.productId === identifier || c.id === identifier || (!identifier && c.name === item.name);
+        }) || {};
+        const displayName = item.name || original.name || 'Curated Item';
+        const displaySize = item.size || original.size;
+        const unitPrice = Number(item.price ?? original.price ?? 0);
+        const quantity = Number(item.quantity ?? original.quantity ?? 1);
+        const subtotal = unitPrice * quantity;
+        return `
+          <div class="order-item-card">
+            <div>
+              <strong><span class="order-item-quantity">${quantity}</span>${displayName}</strong>
+              <div class="order-item-meta">
+                ${displaySize ? `<span>Size: ${displaySize}</span>` : ''}
+                <span>Unit: Ksh ${unitPrice.toFixed(2)}</span>
+              </div>
+            </div>
+            <div class="order-item-price">Ksh ${subtotal.toFixed(2)}</div>
+          </div>
+        `;
+      }).join('');
+      orderTotalElement.innerHTML = `
+        <div class="order-total-row"><span>Subtotal</span><span>Ksh ${Number(checkoutData.totalPrice).toFixed(2)}</span></div>
+        <div class="order-total-row"><span>Shipping</span><span>Ksh ${Number(checkoutData.shippingCost).toFixed(2)}</span></div>
+        <div class="order-total-row total"><span>Order Total</span><span>Ksh ${Number(checkoutData.totalWithShipping).toFixed(2)}</span></div>
+      `;
+      updateCartCount();
+    }
+
+    function updateCartCount() {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const count = cart.reduce((total, item) => total + (item.quantity || 1), 0);
+      const cartCountElement = document.getElementById('cart-count');
+      if (!cartCountElement) return;
+      if (count > 0) {
+        cartCountElement.textContent = count;
+        cartCountElement.style.display = 'flex';
+      } else {
+        cartCountElement.style.display = 'none';
+      }
+    }
+
+    function selectPaymentMethod(method) {
+      document.querySelectorAll('.payment-method').forEach(option => {
+        option.classList.toggle('selected', option.dataset.method === method);
+      });
+      const radio = document.querySelector(`input[name="payment-method"][value="${method}"]`);
+      if (radio && !radio.checked) radio.checked = true;
+    }
+
+    function collectShippingForm() {
+      return {
+        firstName: document.getElementById('first-name').value.trim(),
+        lastName: document.getElementById('last-name').value.trim(),
+        email: document.getElementById('email').value.trim(),
+        phone: document.getElementById('phone').value.trim(),
+        address: document.getElementById('address').value.trim(),
+        city: document.getElementById('city').value.trim(),
+        state: document.getElementById('state').value.trim(),
+        zip: document.getElementById('zip').value.trim(),
+        country: document.getElementById('country').value
+      };
+    }
+
+    function isShippingFormComplete(form) {
+      if (!form) return false;
+      const values = Object.values({ ...form, country: form.country?.trim?.() });
+      if (values.some(value => !value)) return false;
+      if (form.country === '' || form.country === 'Select Country') return false;
+      return true;
+    }
+
+    function validateAndCollectShippingForm() {
+      const formElement = document.getElementById('checkout-form');
+      if (!formElement) return null;
+      if (!formElement.reportValidity()) return null;
+      const formValues = collectShippingForm();
+      if (!isShippingFormComplete(formValues)) {
+        alert('Please fill in all required fields.');
+        return null;
+      }
+      return formValues;
+    }
+
+    function buildShippingAddress(form) {
+      return {
+        firstName: form.firstName,
+        lastName: form.lastName,
+        email: form.email,
+        phone: form.phone,
+        address: form.address,
+        city: form.city,
+        state: form.state,
+        zip: form.zip,
+        zipCode: form.zip,
+        country: form.country.trim()
+      };
+    }
+
+    function showSuccessPopup(amount) {
+      const overlay = document.getElementById('successPopupOverlay');
+      const amountElement = document.getElementById('successAmount');
+      if (amountElement) {
+        amountElement.textContent = `Ksh ${Number(amount).toFixed(2)}`;
+      }
+      if (overlay) {
+        overlay.classList.add('active');
+      }
+      // Redirect after 4 seconds
+      setTimeout(() => {
+        localStorage.setItem('cart', JSON.stringify([]));
+        sessionStorage.removeItem('checkoutData');
+        window.location.href = 'dashboard.html';
+      }, 4000);
+    }
+
+    async function processPayment() {
+      if (isProcessingPayment) return;
+      const token = await ensureUserAuthenticated();
+      if (!token) return;
+      const formValues = validateAndCollectShippingForm();
+      if (!formValues) return;
+      if (!checkoutData || !Array.isArray(checkoutData.items) || checkoutData.items.length === 0) {
+        alert('Your cart is empty.');
+        return;
+      }
+      if (typeof createOrder !== 'function') {
+        alert('Order service is unavailable. Please ensure api.js is loaded.');
+        return;
+      }
+      if (typeof PaystackPop === 'undefined' || typeof PaystackPop.setup !== 'function') {
+        alert('Paystack checkout is unavailable.');
+        return;
+      }
+      const shippingAddress = buildShippingAddress(formValues);
+      const totalAmount = Number(checkoutData.totalWithShipping ?? checkoutData.totalPrice ?? 0);
+      const orderResult = await createOrder(checkoutData.items, shippingAddress, totalAmount, {
+        total: totalAmount,
+        amountPaid: 0,
+        paymentMethod: 'paystack',
+        paymentReference: 'pending',
+        balanceRemaining: totalAmount
+      });
+      if (orderResult?.error) {
+        alert('Error creating order: ' + orderResult.error);
+        return;
+      }
+      const orderId = orderResult?.order?._id || orderResult?._id;
+      if (!orderId) {
+        alert('Order ID missing. Payment cannot continue.');
+        return;
+      }
+      isProcessingPayment = true;
+      const handler = PaystackPop.setup({
+        key: PAYSTACK_PUBLIC_KEY,
+        email: formValues.email,
+        amount: Math.round(totalAmount * 100),
+        currency: 'KES',
+        ref: `AA_${orderId}_${Date.now()}`,
+        metadata: {
+          orderId,
+          phone: formValues.phone,
+          firstName: formValues.firstName,
+          lastName: formValues.lastName
+        },
+        callback: function(response) {
+          try {
+            verifyPaystackPayment(orderId, response.reference).then(verification => {
+              if (verification?.error) {
+                alert('Error verifying payment: ' + verification.error);
+                isProcessingPayment = false;
+                return;
+              }
+              
+              // Check if user wants to save profile changes
+              if (typeof window.checkoutProfileManager !== 'undefined' && window.checkoutProfileManager.hasChanged()) {
+                window.checkoutProfileManager.showSaveModal(
+                  () => {
+                    // On confirm (profile saved)
+                    isProcessingPayment = false;
+                    showSuccessPopup(totalAmount);
+                  },
+                  () => {
+                    // On skip
+                    isProcessingPayment = false;
+                    showSuccessPopup(totalAmount);
+                  }
+                );
+              } else {
+                isProcessingPayment = false;
+                showSuccessPopup(totalAmount);
+              }
+            }).catch(error => {
+              alert('Payment verification failed. Please contact support.');
+              isProcessingPayment = false;
+            });
+          } catch (error) {
+            alert('Payment verification failed. Please contact support.');
+            isProcessingPayment = false;
+          }
+        },
+        onClose: () => {
+          isProcessingPayment = false;
+        }
+      });
+      handler.openIframe();
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      creditCardDetailsSection = document.getElementById('credit-card-details');
+      const paymentMethods = document.querySelectorAll('input[name="payment-method"]');
+      paymentMethods.forEach(input => {
+        input.addEventListener('change', () => {
+          selectPaymentMethod(input.value);
+        });
+      });
+      selectPaymentMethod(paymentMethods[0]?.value || 'card');
+      loadCheckoutData();
+    });
+  </script>
+</body>
+</html>

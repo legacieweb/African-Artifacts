@@ -1,0 +1,1074 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Account | African Artifacts</title>
+  <script src="js/api.js"></script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary-brown: #6B4423;
+      --secondary-brown: #8B5A2B;
+      --accent-gold: #D4A574;
+      --accent-orange: #E8722C;
+      --accent-green: #6B8E23;
+      --success-green: #52B788;
+      --light-cream: #F5E6D3;
+      --text-dark: #2d1810;
+      --text-light: #666;
+      --border-light: #E8D4B8;
+      --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+      --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.12);
+      --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.16);
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #f5e6d3 0%, #ecd2b4 100%);
+      color: var(--text-dark);
+      min-height: 100vh;
+    }
+
+    /* Header */
+    header {
+      background: linear-gradient(135deg, var(--primary-brown) 0%, var(--secondary-brown) 100%);
+      color: white;
+      padding: 2rem;
+      box-shadow: var(--shadow-md);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    header .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    header h1 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+    }
+
+    .header-actions {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .btn {
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: inherit;
+    }
+
+    .btn-primary {
+      background: var(--accent-orange);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: #d65a1a;
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+      border: 2px solid white;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    .btn-danger {
+      background: #dc3545;
+      color: white;
+    }
+
+    .btn-danger:hover {
+      background: #c82333;
+    }
+
+    /* Main Container */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    /* Tabs Navigation */
+    .tabs-nav {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      border-bottom: 2px solid var(--border-light);
+      overflow-x: auto;
+      padding-bottom: 1rem;
+    }
+
+    .tab-btn {
+      padding: 0.75rem 1.5rem;
+      background: none;
+      border: none;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text-light);
+      cursor: pointer;
+      border-bottom: 3px solid transparent;
+      transition: all 0.3s ease;
+      font-family: inherit;
+      white-space: nowrap;
+    }
+
+    .tab-btn:hover {
+      color: var(--accent-orange);
+    }
+
+    .tab-btn.active {
+      color: var(--accent-orange);
+      border-bottom-color: var(--accent-orange);
+    }
+
+    /* Tab Content */
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Card Styles */
+    .card {
+      background: white;
+      border-radius: 12px;
+      padding: 2rem;
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 1.5rem;
+      border: 1px solid var(--border-light);
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 2px solid var(--border-light);
+    }
+
+    .card-header h2 {
+      font-size: 1.5rem;
+      color: var(--primary-brown);
+      margin: 0;
+    }
+
+    .profile-status {
+      display: inline-block;
+      padding: 0.5rem 1rem;
+      background: rgba(82, 183, 136, 0.1);
+      color: var(--success-green);
+      border-radius: 20px;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .profile-status.incomplete {
+      background: rgba(232, 114, 44, 0.1);
+      color: var(--accent-orange);
+    }
+
+    /* Form Styles */
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+      color: var(--text-dark);
+      font-size: 0.95rem;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border: 1px solid var(--border-light);
+      border-radius: 8px;
+      font-family: inherit;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--accent-orange);
+      box-shadow: 0 0 0 3px rgba(232, 114, 44, 0.1);
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .form-actions {
+      display: flex;
+      gap: 1rem;
+      margin-top: 2rem;
+      justify-content: flex-end;
+    }
+
+    /* User Info Grid */
+    .user-info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .info-item {
+      background: var(--light-cream);
+      padding: 1rem;
+      border-radius: 8px;
+      border-left: 4px solid var(--accent-orange);
+    }
+
+    .info-item label {
+      font-size: 0.85rem;
+      color: var(--text-light);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    .info-item value {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--text-dark);
+      word-break: break-word;
+    }
+
+    /* Order List */
+    .order-item {
+      background: var(--light-cream);
+      padding: 1.5rem;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+      border-left: 4px solid var(--accent-green);
+      transition: all 0.3s ease;
+    }
+
+    .order-item:hover {
+      box-shadow: var(--shadow-md);
+      transform: translateY(-2px);
+    }
+
+    .order-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .order-id {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--primary-brown);
+    }
+
+    .order-status {
+      display: inline-block;
+      padding: 0.4rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-transform: capitalize;
+    }
+
+    .order-status.processing {
+      background: rgba(74, 144, 226, 0.1);
+      color: #4a90e2;
+    }
+
+    .order-status.completed {
+      background: rgba(82, 183, 136, 0.1);
+      color: var(--success-green);
+    }
+
+    .order-status.cancelled {
+      background: rgba(220, 53, 69, 0.1);
+      color: #dc3545;
+    }
+
+    .order-details {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin: 1rem 0;
+      font-size: 0.95rem;
+    }
+
+    .order-detail {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .order-detail span:first-child {
+      color: var(--text-light);
+      font-weight: 600;
+    }
+
+    .order-detail span:last-child {
+      color: var(--text-dark);
+      font-weight: 700;
+    }
+
+    .order-items {
+      background: white;
+      padding: 1rem;
+      border-radius: 6px;
+      margin-top: 1rem;
+    }
+
+    .order-items ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .order-items li {
+      padding: 0.5rem 0;
+      border-bottom: 1px solid var(--border-light);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .order-items li:last-child {
+      border-bottom: none;
+    }
+
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+
+    .modal.active {
+      display: flex;
+      animation: slideIn 0.3s ease;
+    }
+
+    @keyframes slideIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .modal-content {
+      background: white;
+      border-radius: 12px;
+      padding: 2rem;
+      max-width: 500px;
+      width: 100%;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .modal-content h2 {
+      margin-top: 0;
+      color: var(--primary-brown);
+      margin-bottom: 1rem;
+    }
+
+    .modal-content p {
+      color: var(--text-light);
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+    }
+
+    .modal-actions {
+      display: flex;
+      gap: 1rem;
+      justify-content: flex-end;
+    }
+
+    /* Alerts */
+    .alert {
+      padding: 1rem 1.5rem;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      animation: slideDown 0.3s ease;
+    }
+
+    @keyframes slideDown {
+      from { transform: translateY(-20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    .alert-success {
+      background: rgba(82, 183, 136, 0.1);
+      color: var(--success-green);
+      border: 1px solid var(--success-green);
+    }
+
+    .alert-error {
+      background: rgba(220, 53, 69, 0.1);
+      color: #dc3545;
+      border: 1px solid #dc3545;
+    }
+
+    .alert-warning {
+      background: rgba(232, 114, 44, 0.1);
+      color: var(--accent-orange);
+      border: 1px solid var(--accent-orange);
+    }
+
+    .alert-info {
+      background: rgba(74, 144, 226, 0.1);
+      color: #4a90e2;
+      border: 1px solid #4a90e2;
+    }
+
+    /* Empty State */
+    .empty-state {
+      text-align: center;
+      padding: 3rem 1rem;
+      color: var(--text-light);
+    }
+
+    .empty-state-icon {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      opacity: 0.5;
+    }
+
+    .empty-state h3 {
+      color: var(--text-dark);
+      margin-bottom: 0.5rem;
+    }
+
+    .empty-state p {
+      margin-bottom: 1.5rem;
+    }
+
+    /* Loading */
+    .loading {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 3px solid var(--border-light);
+      border-top-color: var(--accent-orange);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      header .container {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .tabs-nav {
+        gap: 0.5rem;
+      }
+
+      .tab-btn {
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+      }
+
+      .card {
+        padding: 1.5rem;
+      }
+
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+
+      .order-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .modal-content {
+        padding: 1.5rem;
+      }
+    }
+
+    .form-divider {
+      margin: 2rem 0;
+      border-top: 2px solid var(--border-light);
+      padding-top: 2rem;
+    }
+
+    .form-divider h3 {
+      margin-top: 0;
+      color: var(--primary-brown);
+      margin-bottom: 1.5rem;
+      font-size: 1.2rem;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="container">
+      <div>
+        <h1>🌍 My Account</h1>
+        <p style="margin: 0.5rem 0 0 0; opacity: 0.9; font-size: 0.95rem;">Manage your profile and orders</p>
+      </div>
+      <div class="header-actions">
+        <button class="btn btn-secondary" onclick="goShopping()">← Back to Shop</button>
+        <button class="btn btn-danger" onclick="showLogoutModal()">Logout</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <div class="container" style="margin-top: 2rem;">
+    <!-- Alerts -->
+    <div id="alertContainer"></div>
+
+    <!-- Tabs Navigation -->
+    <div class="tabs-nav">
+      <button class="tab-btn active" onclick="switchTab('profile')">👤 Profile</button>
+      <button class="tab-btn" onclick="switchTab('address')">📍 Addresses</button>
+      <button class="tab-btn" onclick="switchTab('orders')">📦 Orders</button>
+    </div>
+
+    <!-- Profile Tab -->
+    <div id="profile" class="tab-content active">
+      <div class="card">
+        <div class="card-header">
+          <h2>Personal Information</h2>
+          <span class="profile-status" id="profileStatus">Complete</span>
+        </div>
+
+        <div class="user-info-grid" id="userInfoDisplay"></div>
+
+        <div style="margin-top: 1.5rem; border-top: 2px solid var(--border-light); padding-top: 1.5rem;">
+          <button class="btn btn-primary" onclick="toggleEditProfile()">✏️ Edit Profile</button>
+        </div>
+      </div>
+
+      <!-- Edit Profile Form -->
+      <div id="editProfileForm" style="display: none;">
+        <div class="card">
+          <div class="card-header">
+            <h2>Edit Personal Information</h2>
+          </div>
+
+          <form onsubmit="saveProfile(event)">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="firstName">First Name *</label>
+                <input type="text" id="firstName" name="firstName" placeholder="Enter your first name" required />
+              </div>
+              <div class="form-group">
+                <label for="lastName">Last Name *</label>
+                <input type="text" id="lastName" name="lastName" placeholder="Enter your last name" required />
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="email">Email *</label>
+                <input type="email" id="email" name="email" required readonly style="background: #f0f0f0; cursor: not-allowed;" />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="phone">Phone Number</label>
+              <input type="tel" id="phone" name="phone" placeholder="+254..." />
+            </div>
+
+            <div class="form-actions">
+              <button type="button" class="btn btn-secondary" onclick="toggleEditProfile()">Cancel</button>
+              <button type="submit" class="btn btn-primary">Save Changes</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Address Tab -->
+    <div id="address" class="tab-content">
+      <div class="card">
+        <div class="card-header">
+          <h2>Shipping Address</h2>
+          <span class="profile-status" id="addressStatus">Incomplete</span>
+        </div>
+
+        <div class="user-info-grid" id="addressDisplay"></div>
+
+        <div style="margin-top: 1.5rem; border-top: 2px solid var(--border-light); padding-top: 1.5rem;">
+          <button class="btn btn-primary" onclick="toggleEditAddress()">✏️ Edit Address</button>
+        </div>
+      </div>
+
+      <!-- Edit Address Form -->
+      <div id="editAddressForm" style="display: none;">
+        <div class="card">
+          <div class="card-header">
+            <h2>Edit Shipping Address</h2>
+          </div>
+
+          <form onsubmit="saveAddress(event)">
+            <div class="form-group">
+              <label for="street">Street Address *</label>
+              <input type="text" id="street" name="street" placeholder="123 Main Street" required />
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="city">City *</label>
+                <input type="text" id="city" name="city" required />
+              </div>
+              <div class="form-group">
+                <label for="state">State/Province</label>
+                <input type="text" id="state" name="state" />
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="country">Country *</label>
+                <input type="text" id="country" name="country" placeholder="Kenya" required />
+              </div>
+              <div class="form-group">
+                <label for="zipCode">Zip/Postal Code</label>
+                <input type="text" id="zipCode" name="zipCode" />
+              </div>
+            </div>
+
+            <div class="form-actions">
+              <button type="button" class="btn btn-secondary" onclick="toggleEditAddress()">Cancel</button>
+              <button type="submit" class="btn btn-primary">Save Address</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Orders Tab -->
+    <div id="orders" class="tab-content">
+      <div class="card">
+        <div class="card-header">
+          <h2>Order History</h2>
+        </div>
+
+        <div id="ordersList"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Logout Confirmation Modal -->
+  <div id="logoutModal" class="modal">
+    <div class="modal-content">
+      <h2>Confirm Logout</h2>
+      <p>Are you sure you want to log out? You'll need to log in again to access your account.</p>
+      <div class="modal-actions">
+        <button class="btn btn-secondary" onclick="hideLogoutModal()">Cancel</button>
+        <button class="btn btn-danger" onclick="confirmLogout()">Yes, Logout</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Save Profile Modal -->
+  <div id="saveProfileModal" class="modal">
+    <div class="modal-content">
+      <h2>Save Profile Changes?</h2>
+      <p>You've made changes to your profile. Would you like to save these changes for future orders? This will make checkout faster.</p>
+      <div class="modal-actions">
+        <button class="btn btn-secondary" onclick="closeModal('saveProfileModal')">Skip for Now</button>
+        <button class="btn btn-primary" onclick="confirmSaveProfile()">Yes, Save Profile</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Save Address Modal -->
+  <div id="saveAddressModal" class="modal">
+    <div class="modal-content">
+      <h2>Save Address?</h2>
+      <p>Save this address to your profile for faster checkout next time?</p>
+      <div class="modal-actions">
+        <button class="btn btn-secondary" onclick="closeModal('saveAddressModal')">Skip for Now</button>
+        <button class="btn btn-primary" onclick="confirmSaveAddress()">Yes, Save Address</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let currentUser = null;
+    let pendingProfileData = null;
+    let pendingAddressData = null;
+
+    // Initialize
+    document.addEventListener('DOMContentLoaded', async () => {
+      await loadDashboard();
+    });
+
+    async function loadDashboard() {
+      try {
+        const token = localStorage.getItem('authToken');
+        if (!token) {
+          window.location.href = 'cart.html';
+          return;
+        }
+
+        currentUser = await getUserProfile();
+        if (currentUser && !currentUser.error) {
+          displayProfile();
+          displayAddress();
+          loadUserOrders();
+        }
+      } catch (error) {
+        console.error('Error loading dashboard:', error);
+        showAlert('Failed to load dashboard', 'error');
+      }
+    }
+
+    function displayProfile() {
+      const html = `
+        <div class="info-item">
+          <label>Full Name</label>
+          <value>${currentUser.name || 'Not provided'}</value>
+        </div>
+        <div class="info-item">
+          <label>Email</label>
+          <value>${currentUser.email}</value>
+        </div>
+        <div class="info-item">
+          <label>Phone</label>
+          <value>${currentUser.phone || 'Not provided'}</value>
+        </div>
+        <div class="info-item">
+          <label>Member Since</label>
+          <value>${new Date(currentUser.createdAt).toLocaleDateString()}</value>
+        </div>
+      `;
+      document.getElementById('userInfoDisplay').innerHTML = html;
+    }
+
+    function displayAddress() {
+      const addr = currentUser.address;
+      const hasAddress = addr && (addr.street || addr.city || addr.country);
+
+      if (hasAddress) {
+        document.getElementById('addressStatus').textContent = '✓ Complete';
+        document.getElementById('addressStatus').classList.remove('incomplete');
+      } else {
+        document.getElementById('addressStatus').textContent = '! Incomplete';
+        document.getElementById('addressStatus').classList.add('incomplete');
+      }
+
+      const html = addr && addr.street ? `
+        <div class="info-item">
+          <label>Street</label>
+          <value>${addr.street}</value>
+        </div>
+        <div class="info-item">
+          <label>City</label>
+          <value>${addr.city || 'N/A'}</value>
+        </div>
+        <div class="info-item">
+          <label>State</label>
+          <value>${addr.state || 'N/A'}</value>
+        </div>
+        <div class="info-item">
+          <label>Country</label>
+          <value>${addr.country || 'N/A'}</value>
+        </div>
+        <div class="info-item">
+          <label>Zip Code</label>
+          <value>${addr.zipCode || 'N/A'}</value>
+        </div>
+      ` : `
+        <div class="empty-state">
+          <div class="empty-state-icon">📍</div>
+          <h3>No Address on File</h3>
+          <p>Add your shipping address to make checkout faster</p>
+        </div>
+      `;
+
+      document.getElementById('addressDisplay').innerHTML = html;
+    }
+
+    async function loadUserOrders() {
+      try {
+        const orders = await getUserOrders();
+
+        if (!Array.isArray(orders) || orders.length === 0) {
+          document.getElementById('ordersList').innerHTML = `
+            <div class="empty-state">
+              <div class="empty-state-icon">📦</div>
+              <h3>No Orders Yet</h3>
+              <p>Start shopping to place your first order</p>
+              <button class="btn btn-primary" onclick="goShopping()">Start Shopping</button>
+            </div>
+          `;
+          return;
+        }
+
+        const html = orders.map(order => `
+          <div class="order-item">
+            <div class="order-header">
+              <span class="order-id">#${order._id.slice(-8).toUpperCase()}</span>
+              <span class="order-status ${order.status.toLowerCase().replace(' ', '-')}">${order.status}</span>
+            </div>
+            <div class="order-details">
+              <div class="order-detail">
+                <span>Order Date:</span>
+                <span>${new Date(order.createdAt).toLocaleDateString()}</span>
+              </div>
+              <div class="order-detail">
+                <span>Total:</span>
+                <span>Ksh ${order.total.toFixed(2)}</span>
+              </div>
+              <div class="order-detail">
+                <span>Paid:</span>
+                <span>Ksh ${order.amountPaid.toFixed(2)}</span>
+              </div>
+              <div class="order-detail">
+                <span>Balance:</span>
+                <span>Ksh ${(order.total - order.amountPaid).toFixed(2)}</span>
+              </div>
+            </div>
+            <div class="order-items">
+              <strong>Items:</strong>
+              <ul>
+                ${order.items.map(item => `<li><span>${item.name}</span> <span>x${item.quantity} - Ksh ${(item.price * item.quantity).toFixed(2)}</span></li>`).join('')}
+              </ul>
+            </div>
+          </div>
+        `).join('');
+
+        document.getElementById('ordersList').innerHTML = html;
+      } catch (error) {
+        console.error('Error loading orders:', error);
+        showAlert('Failed to load orders', 'error');
+      }
+    }
+
+    // Tab Switching
+    function switchTab(tabName) {
+      // Hide all tabs
+      document.querySelectorAll('.tab-content').forEach(tab => {
+        tab.classList.remove('active');
+      });
+
+      // Remove active class from all buttons
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove('active');
+      });
+
+      // Show selected tab
+      document.getElementById(tabName).classList.add('active');
+
+      // Add active class to clicked button
+      event.target.classList.add('active');
+    }
+
+    // Profile Editing
+    function toggleEditProfile() {
+      const form = document.getElementById('editProfileForm');
+      form.style.display = form.style.display === 'none' ? 'block' : 'none';
+
+      if (form.style.display === 'block') {
+        document.getElementById('name').value = currentUser.name;
+        document.getElementById('email').value = currentUser.email;
+        document.getElementById('phone').value = currentUser.phone || '';
+      }
+    }
+
+    async function saveProfile(event) {
+      event.preventDefault();
+
+      const formData = {
+        name: document.getElementById('name').value,
+        phone: document.getElementById('phone').value
+      };
+
+      pendingProfileData = formData;
+      openModal('saveProfileModal');
+    }
+
+    async function confirmSaveProfile() {
+      try {
+        closeModal('saveProfileModal');
+        
+        const result = await updateUserProfile({
+          name: pendingProfileData.name,
+          phone: pendingProfileData.phone
+        });
+
+        if (result.error) {
+          showAlert(result.error, 'error');
+        } else {
+          currentUser = result;
+          displayProfile();
+          toggleEditProfile();
+          showAlert('Profile updated successfully!', 'success');
+          pendingProfileData = null;
+        }
+      } catch (error) {
+        showAlert('Error saving profile', 'error');
+      }
+    }
+
+    // Address Editing
+    function toggleEditAddress() {
+      const form = document.getElementById('editAddressForm');
+      form.style.display = form.style.display === 'none' ? 'block' : 'none';
+
+      if (form.style.display === 'block') {
+        const addr = currentUser.address || {};
+        document.getElementById('street').value = addr.street || '';
+        document.getElementById('city').value = addr.city || '';
+        document.getElementById('state').value = addr.state || '';
+        document.getElementById('country').value = addr.country || '';
+        document.getElementById('zipCode').value = addr.zipCode || '';
+      }
+    }
+
+    async function saveAddress(event) {
+      event.preventDefault();
+
+      const formData = {
+        street: document.getElementById('street').value,
+        city: document.getElementById('city').value,
+        state: document.getElementById('state').value,
+        country: document.getElementById('country').value,
+        zipCode: document.getElementById('zipCode').value
+      };
+
+      pendingAddressData = formData;
+      openModal('saveAddressModal');
+    }
+
+    async function confirmSaveAddress() {
+      try {
+        closeModal('saveAddressModal');
+
+        const result = await updateUserProfile({
+          address: pendingAddressData
+        });
+
+        if (result.error) {
+          showAlert(result.error, 'error');
+        } else {
+          currentUser = result;
+          displayAddress();
+          toggleEditAddress();
+          showAlert('Address saved successfully!', 'success');
+          pendingAddressData = null;
+        }
+      } catch (error) {
+        showAlert('Error saving address', 'error');
+      }
+    }
+
+    // Logout
+    function showLogoutModal() {
+      openModal('logoutModal');
+    }
+
+    function hideLogoutModal() {
+      closeModal('logoutModal');
+    }
+
+    function confirmLogout() {
+      logoutUser();
+      window.location.href = 'index.html';
+    }
+
+    // Navigation
+    function goShopping() {
+      window.location.href = 'index.html';
+    }
+
+    // Modal Helpers
+    function openModal(modalId) {
+      document.getElementById(modalId).classList.add('active');
+    }
+
+    function closeModal(modalId) {
+      document.getElementById(modalId).classList.remove('active');
+    }
+
+    // Alert Helper
+    function showAlert(message, type = 'info') {
+      const alertContainer = document.getElementById('alertContainer');
+      const alertId = 'alert-' + Date.now();
+      const html = `
+        <div class="alert alert-${type}" id="${alertId}">
+          <span>${message}</span>
+        </div>
+      `;
+      alertContainer.insertAdjacentHTML('beforeend', html);
+
+      setTimeout(() => {
+        const alert = document.getElementById(alertId);
+        if (alert) alert.remove();
+      }, 4000);
+    }
+  </script>
+</body>
+</html>

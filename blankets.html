@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>African Artifacts | Blankets</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #1a1a1a 0%, #2d2416 100%);
+      color: #333;
+      min-height: 100vh;
+    }
+
+    header {
+      background-color: #3e2f1c;
+      color: white;
+      padding: 1.5rem;
+      text-align: center;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    }
+
+    header h1 {
+      font-size: 2rem;
+      font-weight: bold;
+      margin: 0;
+      text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+    }
+
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      background-color: #5a4228;
+      padding: 1rem 0;
+      gap: 1rem;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      padding: 0.7rem 1rem;
+      border-radius: 4px;
+      transition: all 0.3s ease;
+    }
+
+    nav a:hover {
+      background-color: #7b5934;
+      transform: translateY(-2px);
+    }
+
+    .category-header {
+      background: linear-gradient(135deg, rgba(120, 80, 40, 0.95) 0%, rgba(80, 50, 20, 0.95) 100%),
+                  url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400"><defs><pattern id="weave" x="0" y="0" width="50" height="50" patternUnits="userSpaceOnUse"><line x1="0" y1="0" x2="50" y2="50" stroke="%23d4af6a" stroke-width="1" opacity="0.2"/><line x1="50" y1="0" x2="0" y2="50" stroke="%23d4af6a" stroke-width="1" opacity="0.2"/></pattern></defs><rect width="1200" height="400" fill="url(%23weave)"/></svg>');
+      background-attachment: fixed;
+      padding: 3rem 2rem;
+      text-align: center;
+      color: white;
+      margin-bottom: 2rem;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .category-header h2 {
+      font-size: 2.8rem;
+      margin-bottom: 1rem;
+      text-shadow: 3px 3px 12px rgba(0, 0, 0, 0.8);
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+
+    .category-header p {
+      font-size: 1.1rem;
+      max-width: 800px;
+      margin: 0 auto;
+      text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+      line-height: 1.6;
+    }
+
+    .search-container {
+      max-width: 600px;
+      margin: 2rem auto;
+      padding: 0 2rem;
+    }
+
+    .search-box {
+      display: flex;
+      gap: 0.5rem;
+      background: white;
+      padding: 0.5rem;
+      border-radius: 30px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .search-box input {
+      flex: 1;
+      border: none;
+      padding: 0.8rem 1.5rem;
+      font-size: 1rem;
+      outline: none;
+      border-radius: 25px;
+    }
+
+    .search-box button {
+      background-color: #8a4c2c;
+      color: white;
+      border: none;
+      padding: 0.8rem 1.5rem;
+      border-radius: 25px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: all 0.3s ease;
+    }
+
+    .search-box button:hover {
+      background-color: #a85a38;
+      transform: scale(1.05);
+    }
+
+    .products-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 2rem;
+      animation: fadeIn 0.5s ease-in;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .product-card {
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .product-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+    }
+
+    .product-image {
+      width: 100%;
+      height: 250px;
+      background: linear-gradient(135deg, #e0c5b0 0%, #d4b5a0 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .product-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    .product-card:hover .product-image img {
+      transform: scale(1.05);
+      opacity: 1;
+    }
+
+    .image-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 40px;
+      height: 40px;
+      background: rgba(0, 0, 0, 0.6);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .image-btn:hover {
+      background: rgba(0, 0, 0, 0.9);
+      transform: translateY(-50%) scale(1.1);
+    }
+
+    .image-btn-prev {
+      left: 8px;
+    }
+
+    .image-btn-next {
+      right: 8px;
+    }
+
+    .image-nav {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      background: rgba(0, 0, 0, 0.7);
+      padding: 0.4rem 0.8rem;
+      border-radius: 20px;
+      color: white;
+      font-size: 0.85rem;
+      font-weight: bold;
+    }
+
+    .product-image img {
+      opacity: 1;
+      transition: opacity 0.3s ease;
+    }
+
+    .product-info {
+      padding: 1.5rem;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .product-title {
+      font-size: 1.1rem;
+      font-weight: bold;
+      color: #3e2f1c;
+      margin-bottom: 0.5rem;
+      min-height: 2.5rem;
+    }
+
+    .product-description {
+      font-size: 0.9rem;
+      color: #666;
+      margin-bottom: 0.8rem;
+      line-height: 1.4;
+      flex-grow: 1;
+    }
+
+    .product-details {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+      font-weight: 600;
+      color: #5a4228;
+    }
+
+    .product-size {
+      font-size: 0.85rem;
+      background-color: #f3e5d5;
+      padding: 0.3rem 0.8rem;
+      border-radius: 20px;
+    }
+
+    .product-price {
+      font-size: 1.4rem;
+      color: #8a4c2c;
+      font-weight: bold;
+    }
+
+    .product-actions {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .btn-add-cart {
+      flex: 1;
+      background-color: #8a4c2c;
+      color: white;
+      border: none;
+      padding: 0.8rem;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 0.95rem;
+    }
+
+    .btn-add-cart:hover {
+      background-color: #a85a38;
+      transform: scale(1.02);
+    }
+
+    .size-selector {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .size-selector label {
+      font-size: 0.85rem;
+      font-weight: bold;
+      color: #3e2f1c;
+    }
+
+    .size-selector select {
+      padding: 0.6rem;
+      border: 2px solid #8a4c2c;
+      border-radius: 6px;
+      font-size: 0.95rem;
+      background-color: white;
+      color: #3e2f1c;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .size-selector select:hover,
+    .size-selector select:focus {
+      border-color: #a85a38;
+      background-color: #f9f5f0;
+      outline: none;
+    }
+
+    .no-results {
+      text-align: center;
+      padding: 3rem 2rem;
+      color: white;
+      font-size: 1.2rem;
+    }
+
+    .cart-count {
+      position: absolute;
+      top: 0;
+      right: 0;
+      background-color: #d4af6a;
+      color: #3e2f1c;
+      border-radius: 50%;
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    footer {
+      background-color: #3e2f1c;
+      color: white;
+      text-align: center;
+      padding: 2rem;
+      margin-top: 3rem;
+    }
+
+    /* Mobile Responsive Design */
+    @media (max-width: 480px) {
+      header { padding: 0.8rem 0.5rem; }
+      header h1 { font-size: 1.3rem; }
+      header p { font-size: 0.8rem; display: none; }
+      nav { padding: 0.5rem 0; gap: 0.25rem; flex-wrap: wrap; justify-content: space-around; }
+      nav a { padding: 0.5rem 0.5rem; font-size: 0.7rem; flex: 0 1 auto; min-width: 50px; text-align: center; }
+      .category-header { padding: 1.2rem 0.8rem; margin-bottom: 0.8rem; }
+      .category-header h2 { font-size: 1.3rem; margin-bottom: 0.3rem; letter-spacing: 0; }
+      .category-header p { font-size: 0.75rem; line-height: 1.3; }
+      .search-container { padding: 0 0.5rem; margin: 0.8rem auto; max-width: 100%; }
+      .search-box { flex-direction: row; gap: 0.3rem; padding: 0.3rem; }
+      .search-box input { padding: 0.6rem 1rem; font-size: 0.9rem; }
+      .search-box button { padding: 0.6rem 0.8rem; font-size: 0.75rem; }
+      .products-container { padding: 1rem 0.5rem; }
+      .products-grid { grid-template-columns: repeat(1, 1fr); gap: 0.8rem; }
+      .image-btn { width: 36px; height: 36px; font-size: 1.1rem; }
+      .image-btn-prev { left: 5px; }
+      .image-btn-next { right: 5px; }
+      .product-image { height: 140px; }
+      .product-info { padding: 0.8rem; }
+      .product-title { font-size: 0.9rem; min-height: 1.8rem; }
+      .product-description { font-size: 0.7rem; margin-bottom: 0.4rem; line-height: 1.3; }
+      .product-price { font-size: 1rem; }
+      .product-size { font-size: 0.75rem; padding: 0.2rem 0.6rem; }
+      .size-selector { gap: 0.3rem; margin-bottom: 0.8rem; }
+      .size-selector label { font-size: 0.7rem; }
+      .size-selector select { padding: 0.5rem; font-size: 0.8rem; border: 1.5px solid #8a4c2c; }
+      .btn-add-cart { padding: 0.7rem; font-size: 0.8rem; font-weight: bold; }
+      .image-nav { font-size: 0.75rem; padding: 0.3rem 0.6rem; }
+      footer { padding: 1rem 0.5rem; font-size: 0.8rem; }
+    }
+    @media (min-width: 481px) and (max-width: 768px) {
+      header { padding: 1rem 0.8rem; }
+      header h1 { font-size: 1.5rem; }
+      header p { font-size: 0.85rem; display: none; }
+      nav { padding: 0.7rem 0; gap: 0.5rem; }
+      nav a { padding: 0.5rem 0.7rem; font-size: 0.8rem; }
+      .category-header { padding: 2rem 1rem; margin-bottom: 1rem; }
+      .category-header h2 { font-size: 1.6rem; margin-bottom: 0.5rem; }
+      .category-header p { font-size: 0.85rem; }
+      .search-container { padding: 0 1rem; margin: 1rem auto; }
+      .search-box { gap: 0.4rem; padding: 0.4rem; }
+      .search-box input { padding: 0.7rem 1.2rem; font-size: 0.95rem; }
+      .search-box button { padding: 0.7rem 1rem; font-size: 0.85rem; }
+      .products-container { padding: 1.5rem 0.8rem; }
+      .products-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+      .image-btn { width: 36px; height: 36px; font-size: 1rem; }
+      .product-image { height: 160px; }
+      .product-info { padding: 1rem; }
+      .product-title { font-size: 0.95rem; min-height: 2rem; }
+      .product-description { font-size: 0.8rem; margin-bottom: 0.6rem; }
+      .product-price { font-size: 1.1rem; }
+      .size-selector { gap: 0.4rem; margin-bottom: 1rem; }
+      .size-selector label { font-size: 0.8rem; }
+      .size-selector select { padding: 0.5rem; font-size: 0.9rem; }
+      .btn-add-cart { padding: 0.7rem; font-size: 0.85rem; }
+      footer { padding: 1.5rem 0.8rem; font-size: 0.9rem; }
+    }
+    @media (min-width: 769px) and (max-width: 1024px) {
+      nav { gap: 0.8rem; }
+      nav a { padding: 0.6rem 0.9rem; font-size: 0.9rem; }
+      .category-header h2 { font-size: 2rem; }
+      .products-container { padding: 2rem 1rem; }
+      .products-grid { grid-template-columns: repeat(3, 1fr); gap: 1.3rem; }
+      .image-btn { width: 38px; height: 38px; font-size: 1.1rem; }
+      .product-image { height: 190px; }
+      .product-info { padding: 1.2rem; }
+      .product-title { font-size: 1rem; }
+      .product-description { font-size: 0.85rem; }
+      .product-price { font-size: 1.25rem; }
+    }
+    @media (min-width: 1025px) {
+      .products-grid { grid-template-columns: repeat(4, 1fr); gap: 2rem; }
+      .category-header h2 { font-size: 2.8rem; }
+      .products-container { padding: 2rem; }
+    }
+    /* Popup Styles */
+    .popup-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.6); display: none; align-items: center; justify-content: center; z-index: 1000; animation: fadeIn 0.3s ease; }
+    .popup-overlay.active { display: flex; }
+    .popup-modal { background: white; border-radius: 15px; padding: 2rem; max-width: 500px; width: 90%; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3); animation: slideUp 0.4s ease; position: relative; }
+    @keyframes slideUp { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+    .popup-header { font-size: 1.5rem; font-weight: bold; color: #3e2f1c; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
+    .popup-content { color: #666; font-size: 1rem; margin-bottom: 1.5rem; line-height: 1.6; }
+    .popup-actions { display: flex; gap: 1rem; justify-content: flex-end; }
+    .popup-btn { padding: 0.8rem 1.5rem; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; transition: all 0.3s ease; }
+    .popup-btn-primary { background-color: #8a4c2c; color: white; }
+    .popup-btn-primary:hover { background-color: #a85a38; transform: scale(1.05); }
+    .popup-btn-secondary { background-color: #e0e0e0; color: #333; }
+    .popup-btn-secondary:hover { background-color: #d0d0d0; }
+    .popup-close { position: absolute; top: 1rem; right: 1rem; font-size: 1.5rem; cursor: pointer; color: #999; transition: all 0.3s ease; }
+    .popup-close:hover { color: #333; transform: scale(1.2); }
+    .success-icon { font-size: 2rem; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>African Artifacts</h1>
+    <p>Authentic African Products | Premium Quality</p>
+  </header>
+
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="tshirts.html">T-Shirts</a>
+    <a href="shirts.html">Shirts</a>
+    <a href="jerseys.html">Jerseys</a>
+    <a href="ponchos.html">Ponchos</a>
+    <a href="hoodies.html">Hoodies</a>
+    <a href="material.html">Material</a>
+    <a href="blankets.html">Blankets</a>
+    <a href="sandals.html">Sandals</a>
+    <a href="womens.html">Women's</a>
+    <a href="soapstone.html">Soapstone</a>
+    <a href="leatherbags.html">Leather Bags</a>
+    <a href="handmadebags.html">Handmade Bags</a>
+    <a href="cart.html" style="position: relative;">
+      Cart
+      <span id="cart-count" class="cart-count" style="display: none;">0</span>
+    </a>
+  </nav>
+
+  <div class="category-header">
+    <h2>Traditional African Blankets</h2>
+    <p>Wrap yourself in authentic African blankets including traditional Maasai shuka, wool blankets, and woven textiles. Perfect for any season.</p>
+  </div>
+
+  <div class="search-container">
+    <div class="search-box">
+      <input 
+        type="text" 
+        id="searchInput" 
+        placeholder="Search products by name or description..." 
+        onkeyup="filterProducts()"
+      />
+      <button onclick="filterProducts()">🔍 Search</button>
+    </div>
+  </div>
+
+  <div class="products-container">
+    <div class="products-grid" id="productsGrid">
+      <!-- Products will be generated by JavaScript -->
+    </div>
+    <div id="noResults" class="no-results" style="display: none;">
+      No products found matching your search. Please try again!
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2024 African Artifacts. All rights reserved.</p>
+  </footer>
+
+  <script>
+    const blanketImages = [
+      "African Kenyan Handmade Traditional sarong Shuka….jpg",
+      "This Wall Hangings item by JollyWorldAU has 9….jpg",
+      "Mudcloth African Long Vest.jpg",
+      "💯% Cotton Handloomed in Nepal Ponchos have been a….jpg"
+    ];
+    
+    const products = Array.from({length: 52}, (_, i) => ({
+      id: i+1,
+      name: ["Maasai Shuka Red", "Maasai Shuka Blue", "Wall Hangings", "Mudcloth Long Blanket", "Cotton Handloomed", "Shuka Kente", "Shuka Mudcloth", "Shuka Ankara", "Shuka Indigo", "Shuka Fleece", "Tribal Pattern Blanket", "Heritage Blanket", "Gold Accent Blanket", "Maasai Double Shuka", "Premium Wool Blanket", "Kente Premium Blanket", "Mudcloth Premium", "Ankara Premium Blanket", "Royal Blanket", "Festival Blanket", "Sunset Colors Blanket", "Maasai Heritage", "Traditional Weave", "Cultural Blanket", "Artisan Blanket", "Luxury Wool Blanket", "Luxury Kente Blanket", "Luxury Mudcloth", "Signature Blanket", "Limited Edition Shuka", "Premium Shuka", "Extra Soft Blanket", "Warm Winter Blanket", "Summer Light Blanket", "Year Round Blanket", "Compact Travel Blanket", "Mini Throw Blanket", "King Size Blanket", "Queen Size Blanket", "Couple Blanket", "Family Blanket", "Plush Blanket", "Cozy Blanket", "Premium Comfort", "Heritage Comfort", "Master Collection", "Exclusive Blend", "Premium Quality", "Limited Shuka", "Exclusive Shuka", "Signature Shuka", "Premium Heritage Collection"][i],
+      description: "Premium African blanket with authentic design and comfort",
+      size: "Large",
+      price: [72.99, 72.99, 75.99, 75.99, 68.99, 79.99, 76.99, 71.99, 73.99, 67.99, 70.99, 74.99, 82.99, 89.99, 85.99, 84.99, 82.99, 79.99, 86.99, 77.99, 76.99, 80.99, 74.99, 75.99, 81.99, 89.99, 88.99, 86.99, 84.99, 94.99, 82.99, 79.99, 81.99, 68.99, 76.99, 54.99, 42.99, 99.99, 85.99, 88.99, 95.99, 83.99, 79.99, 86.99, 82.99, 92.99, 89.99, 87.99, 96.99, 98.99, 91.99, 104.99][i],
+      images: [blanketImages[i % 4], blanketImages[(i + 1) % 4], blanketImages[(i + 2) % 4]],
+      currentImageIndex: 0
+    }));
+
+    const _products_old = [
+      { id: 1, name: "Maasai Shuka Red", description: "Traditional red Maasai shuka blanket", size: "Large", price: 72.99, image: blanketImages[0] },
+      { id: 2, name: "Maasai Shuka Blue", description: "Traditional blue Maasai shuka", size: "Large", price: 72.99, image: blanketImages[1] },
+      { id: 3, name: "Wall Hangings", description: "Handmade wall hangings blanket tapestry", size: "Large", price: 75.99, image: blanketImages[2] },
+      { id: 4, name: "Mudcloth Long Blanket", description: "Mudcloth African long vest blanket", size: "Large", price: 75.99, image: blanketImages[3] },
+      { id: 5, name: "Cotton Handloomed", description: "100% cotton handloomed Nepal blanket", size: "Large", price: 68.99, image: blanketImages[0] },
+      { id: 6, name: "Shuka Kente", description: "Kente pattern Shuka blanket", size: "Large", price: 79.99, image: blanketImages[1] },
+      { id: 7, name: "Shuka Mudcloth", description: "Mudcloth Shuka blanket", size: "Large", price: 76.99, image: blanketImages[2] },
+      { id: 8, name: "Shuka Ankara", description: "Ankara Shuka blanket", size: "Large", price: 71.99, image: blanketImages[3] },
+      { id: 9, name: "Shuka Indigo", description: "Deep indigo Shuka blanket", size: "Large", price: 73.99, image: blanketImages[0] },
+      { id: 10, name: "Shuka Fleece", description: "Soft Shuka fleece blanket", size: "Large", price: 67.99, image: blanketImages[1] },
+      { id: 11, name: "Tribal Pattern Blanket", description: "Tribal pattern design", size: "Large", price: 70.99, image: blanketImages[2] },
+      { id: 12, name: "Heritage Blanket", description: "Heritage design blanket", size: "Large", price: 74.99, image: blanketImages[3] },
+      { id: 13, name: "Gold Accent Blanket", description: "Gold threaded accents", size: "Large", price: 82.99, image: blanketImages[0] },
+      { id: 14, name: "Maasai Double Shuka", description: "Double sized Maasai shuka", size: "Extra Large", price: 89.99, image: blanketImages[1] },
+      { id: 15, name: "Premium Wool Blanket", description: "Premium quality wool", size: "Large", price: 85.99, image: blanketImages[2] },
+      { id: 16, name: "Kente Premium Blanket", description: "Premium Kente blanket", size: "Large", price: 84.99, image: blanketImages[3] },
+      { id: 17, name: "Mudcloth Premium", description: "Premium mudcloth blanket", size: "Large", price: 82.99, image: blanketImages[0] },
+      { id: 18, name: "Ankara Premium Blanket", description: "Premium Ankara blanket", size: "Large", price: 79.99, image: blanketImages[1] },
+      { id: 19, name: "Royal Blanket", description: "Royal quality design", size: "Large", price: 86.99, image: blanketImages[2] },
+      { id: 20, name: "Festival Blanket", description: "Festival celebration design", size: "Large", price: 77.99, image: blanketImages[3] },
+      { id: 21, name: "Sunset Colors Blanket", description: "Warm sunset inspired", size: "Large", price: 76.99, image: blanketImages[0] },
+      { id: 22, name: "Maasai Heritage", description: "Maasai heritage design", size: "Large", price: 80.99, image: blanketImages[1] },
+      { id: 23, name: "Traditional Weave", description: "Traditional weave pattern", size: "Large", price: 74.99, image: blanketImages[2] },
+      { id: 24, name: "Cultural Blanket", description: "Cultural design blanket", size: "Large", price: 75.99, image: blanketImages[3] },
+      { id: 25, name: "Artisan Blanket", description: "Artisan crafted blanket", size: "Large", price: 81.99, image: blanketImages[0] },
+      { id: 26, name: "Luxury Wool Blanket", description: "Luxury wool material", size: "Large", price: 89.99, image: blanketImages[1] },
+      { id: 27, name: "Luxury Kente Blanket", description: "Luxury Kente blanket", size: "Large", price: 88.99, image: blanketImages[2] },
+      { id: 28, name: "Luxury Mudcloth", description: "Luxury mudcloth blanket", size: "Large", price: 86.99, image: blanketImages[3] },
+      { id: 29, name: "Signature Blanket", description: "Signature collection", size: "Large", price: 84.99, image: blanketImages[0] },
+      { id: 30, name: "Limited Edition Shuka", description: "Limited edition Maasai", size: "Large", price: 94.99, image: blanketImages[1] },
+      { id: 31, name: "Premium Shuka", description: "Premium Maasai shuka", size: "Large", price: 82.99, image: blanketImages[2] },
+      { id: 32, name: "Extra Soft Blanket", description: "Extra soft material", size: "Large", price: 79.99, image: blanketImages[3] },
+      { id: 33, name: "Warm Winter Blanket", description: "Winter warmth blanket", size: "Large", price: 81.99, image: blanketImages[0] },
+      { id: 34, name: "Summer Light Blanket", description: "Summer light design", size: "Large", price: 68.99, image: blanketImages[1] },
+      { id: 35, name: "Year Round Blanket", description: "Year round use", size: "Large", price: 76.99, image: blanketImages[2] },
+      { id: 36, name: "Compact Travel Blanket", description: "Travel size blanket", size: "Medium", price: 54.99, image: blanketImages[3] },
+      { id: 37, name: "Mini Throw Blanket", description: "Small throw blanket", size: "Small", price: 42.99, image: blanketImages[0] },
+      { id: 38, name: "King Size Blanket", description: "King size blanket", size: "Extra Large", price: 99.99, image: blanketImages[1] },
+      { id: 39, name: "Queen Size Blanket", description: "Queen size blanket", size: "Large", price: 85.99, image: blanketImages[2] },
+      { id: 40, name: "Couple Blanket", description: "Couple size blanket", size: "Large", price: 88.99, image: blanketImages[3] },
+      { id: 41, name: "Family Blanket", description: "Family size blanket", size: "Extra Large", price: 95.99, image: blanketImages[0] },
+      { id: 42, name: "Plush Blanket", description: "Plush soft material", size: "Large", price: 83.99, image: blanketImages[1] },
+      { id: 43, name: "Cozy Blanket", description: "Cozy comfort blanket", size: "Large", price: 79.99, image: blanketImages[2] },
+      { id: 44, name: "Premium Comfort", description: "Premium comfort level", size: "Large", price: 86.99, image: blanketImages[3] },
+      { id: 45, name: "Heritage Comfort", description: "Heritage comfort design", size: "Large", price: 82.99, image: blanketImages[0] },
+      { id: 46, name: "Master Collection", description: "Master collection piece", size: "Large", price: 92.99, image: blanketImages[1] },
+      { id: 47, name: "Exclusive Blend", description: "Exclusive blend material", size: "Large", price: 89.99, image: blanketImages[2] },
+      { id: 48, name: "Premium Quality", description: "Premium quality assurance", size: "Large", price: 87.99, image: blanketImages[3] },
+      { id: 49, name: "Limited Shuka", description: "Limited Maasai shuka", size: "Large", price: 96.99, image: blanketImages[0] },
+      { id: 50, name: "Exclusive Shuka", description: "Exclusive Maasai shuka", size: "Large", price: 98.99, image: blanketImages[1] },
+      { id: 51, name: "Signature Shuka", description: "Signature Maasai design", size: "Large", price: 91.99, image: blanketImages[2] },
+      { id: 52, name: "Premium Heritage Collection", description: "Premium heritage", size: "Extra Large", price: 104.99, image: blanketImages[3] },
+    ];
+
+    function renderProducts(productsToShow = products) {
+      const grid = document.getElementById('productsGrid');
+      const noResults = document.getElementById('noResults');
+
+      if (productsToShow.length === 0) {
+        grid.innerHTML = '';
+        noResults.style.display = 'block';
+        return;
+      }
+
+      noResults.style.display = 'none';
+      grid.innerHTML = productsToShow.map(product => `
+        <div class="product-card">
+          <div class="product-image">
+            <img class="product-img-${product.id}" src="${product.images[product.currentImageIndex]}" alt="${product.name}" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 250 250%22><rect fill=%22%23d4b5a0%22 width=%22250%22 height=%22250%22/><text x=%2250%25%22 y=%2250%25%22 font-family=%22Arial%22 font-size=%2216%22 fill=%22%238a6d47%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22>Product Image</text></svg>'">
+            <button class="image-btn image-btn-prev" onclick="changeProductImage(${product.id}, -1)">❮</button>
+            <button class="image-btn image-btn-next" onclick="changeProductImage(${product.id}, 1)">❯</button>
+            <div class="image-nav"><span id="img-counter-${product.id}">1</span>/${product.images.length}</div>
+          </div>
+          <div class="product-info">
+            <h3 class="product-title">${product.name}</h3>
+            <p class="product-description">${product.description}</p>
+            <div class="product-details">
+              <span class="product-price">Ksh ${(product.price * 130).toFixed(2)}</span>
+            </div>
+            <div class="size-selector">
+              <label for="size-${product.id}">Select Size:</label>
+              <select id="size-${product.id}">
+                <option value="">Choose a size...</option>
+                <option value="Small">Small</option>
+                <option value="Medium">Medium</option>
+                <option value="Large">Large</option>
+                <option value="Extra Large">Extra Large</option>
+              </select>
+            </div>
+            <div class="product-actions">
+              <button class="btn-add-cart" onclick="addToCart(${product.id}, '${product.name}', ${product.price})">
+                Add to Cart
+              </button>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function filterProducts() {
+      const searchInput = document.getElementById('searchInput').value.toLowerCase();
+      const filtered = products.filter(product =>
+        product.name.toLowerCase().includes(searchInput) ||
+        product.description.toLowerCase().includes(searchInput)
+      );
+      renderProducts(filtered);
+    }
+
+    function addToCart(productId, productName, price) {
+      const sizeSelect = document.getElementById(`size-${productId}`);
+      const selectedSize = sizeSelect.value;
+
+      if (!selectedSize) {
+        showPopup('⚠️ Size Required', 'Please select a size before adding to cart.', '⚠️');
+        return;
+      }
+
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      cart.push({ 
+        name: productName, 
+        price: price, 
+        quantity: 1, 
+        size: selectedSize,
+        timestamp: new Date().toISOString() 
+      });
+      localStorage.setItem('cart', JSON.stringify(cart));
+      updateCartCount();
+      showPopup('🛏️ Added to Cart', `${productName} (Size: ${selectedSize}) added to cart!`, '✓');
+      sizeSelect.value = ''; // Reset size selector
+    }
+
+    function updateCartCount() {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const countBadge = document.getElementById('cart-count');
+      if (cart.length > 0) {
+        countBadge.textContent = cart.length;
+        countBadge.style.display = 'flex';
+      } else {
+        countBadge.style.display = 'none';
+      }
+    }
+
+    function changeProductImage(productId, direction) {
+      const product = products.find(p => p.id === productId);
+      if (!product) return;
+
+      product.currentImageIndex = (product.currentImageIndex + direction + product.images.length) % product.images.length;
+      const img = document.querySelector(`.product-img-${productId}`);
+      const counter = document.getElementById(`img-counter-${productId}`);
+      
+      img.style.opacity = '0';
+      setTimeout(() => {
+        img.src = product.images[product.currentImageIndex];
+        counter.textContent = product.currentImageIndex + 1;
+        img.style.opacity = '1';
+      }, 150);
+    }
+
+    // Track active product for keyboard navigation
+    let activeProductId = null;
+    document.addEventListener('mouseover', (e) => {
+      const card = e.target.closest('.product-card');
+      if (card) activeProductId = parseInt(card.querySelector('button').onclick.toString().match(/\d+/)[0]);
+    });
+    document.addEventListener('mouseout', (e) => {
+      if (e.target.closest('.product-card') && !e.relatedTarget?.closest('.product-card')) activeProductId = null;
+    });
+    document.addEventListener('keydown', (e) => {
+      if (!activeProductId) return;
+      if (e.key === 'ArrowLeft') changeProductImage(activeProductId, -1);
+      if (e.key === 'ArrowRight') changeProductImage(activeProductId, 1);
+    });
+
+    renderProducts();
+    updateCartCount();
+  </script>
+
+  <!-- Popup Modal -->
+  <div class="popup-overlay" id="popupOverlay">
+    <div class="popup-modal">
+      <span class="popup-close" onclick="closePopup()">✕</span>
+      <div class="popup-header">
+        <span class="success-icon" id="popupIcon">✓</span>
+        <span id="popupTitle">Success</span>
+      </div>
+      <div class="popup-content" id="popupContent">
+        Your item has been added to cart!
+      </div>
+      <div class="popup-actions">
+        <button class="popup-btn popup-btn-secondary" onclick="closePopup()">Close</button>
+        <button class="popup-btn popup-btn-primary" onclick="goToCart()">View Cart</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function showPopup(title, message, icon) {
+      document.getElementById('popupTitle').textContent = title;
+      document.getElementById('popupContent').textContent = message;
+      document.getElementById('popupIcon').textContent = icon;
+      document.getElementById('popupOverlay').classList.add('active');
+    }
+
+    function closePopup() {
+      document.getElementById('popupOverlay').classList.remove('active');
+    }
+
+    function goToCart() {
+      closePopup();
+      window.location.href = 'cart.html';
+    }
+  </script>
+</body>
+</html>

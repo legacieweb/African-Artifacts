@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>African Artifacts | Sandals</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #1a1a1a 0%, #2d2416 100%); color: #333; min-height: 100vh; }
+    header { background-color: #3e2f1c; color: white; padding: 1.5rem; text-align: center; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); }
+    header h1 { font-size: 2rem; font-weight: bold; margin: 0; text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7); }
+    nav { display: flex; flex-wrap: wrap; justify-content: center; background-color: #5a4228; padding: 1rem 0; gap: 1rem; }
+    nav a { color: white; text-decoration: none; font-weight: bold; padding: 0.7rem 1rem; border-radius: 4px; transition: all 0.3s ease; }
+    nav a:hover { background-color: #7b5934; transform: translateY(-2px); }
+    .category-header { background: linear-gradient(135deg, rgba(140, 100, 60, 0.95) 0%, rgba(100, 70, 40, 0.95) 100%), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400"><defs><pattern id="steps" x="0" y="0" width="60" height="60" patternUnits="userSpaceOnUse"><line x1="0" y1="30" x2="60" y2="30" stroke="%23d4af6a" stroke-width="1" opacity="0.2"/></pattern></defs><rect width="1200" height="400" fill="url(%23steps)"/></svg>'); background-attachment: fixed; padding: 3rem 2rem; text-align: center; color: white; margin-bottom: 2rem; box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); }
+    .category-header h2 { font-size: 2.8rem; margin-bottom: 1rem; text-shadow: 3px 3px 12px rgba(0, 0, 0, 0.8); font-weight: bold; letter-spacing: 1px; }
+    .category-header p { font-size: 1.1rem; max-width: 800px; margin: 0 auto; text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7); line-height: 1.6; }
+    .search-container { max-width: 600px; margin: 2rem auto; padding: 0 2rem; }
+    .search-box { display: flex; gap: 0.5rem; background: white; padding: 0.5rem; border-radius: 30px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); }
+    .search-box input { flex: 1; border: none; padding: 0.8rem 1.5rem; font-size: 1rem; outline: none; border-radius: 25px; }
+    .search-box button { background-color: #8a4c2c; color: white; border: none; padding: 0.8rem 1.5rem; border-radius: 25px; cursor: pointer; font-weight: bold; transition: all 0.3s ease; }
+    .search-box button:hover { background-color: #a85a38; transform: scale(1.05); }
+    .products-container { max-width: 1400px; margin: 0 auto; padding: 2rem; }
+    .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 2rem; animation: fadeIn 0.5s ease-in; }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    .product-card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15); transition: all 0.3s ease; display: flex; flex-direction: column; height: 100%; }
+    .product-card:hover { transform: translateY(-8px); box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25); }
+    .product-image { width: 100%; height: 250px; background: linear-gradient(135deg, #f5ead7 0%, #f0dcc8 100%); display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative; }
+    .product-image img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease, opacity 0.3s ease; }
+    .product-card:hover .product-image img { transform: scale(1.05); }
+    .image-nav { position: absolute; bottom: 10px; right: 10px; background: rgba(0, 0, 0, 0.7); padding: 0.4rem 0.8rem; border-radius: 20px; color: white; font-size: 0.85rem; font-weight: bold; }
+    .image-btn { position: absolute; top: 50%; transform: translateY(-50%); width: 40px; height: 40px; background: rgba(0, 0, 0, 0.6); color: white; border: none; border-radius: 50%; font-size: 1.2rem; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; justify-content: center; }
+    .image-btn:hover { background: rgba(0, 0, 0, 0.9); transform: translateY(-50%) scale(1.1); }
+    .image-btn-prev { left: 8px; }
+    .image-btn-next { right: 8px; }
+    .product-info { padding: 1.5rem; flex-grow: 1; display: flex; flex-direction: column; }
+    .product-title { font-size: 1.1rem; font-weight: bold; color: #3e2f1c; margin-bottom: 0.5rem; min-height: 2.5rem; }
+    .product-description { font-size: 0.9rem; color: #666; margin-bottom: 0.8rem; line-height: 1.4; flex-grow: 1; }
+    .product-details { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; font-weight: 600; color: #5a4228; }
+    .product-size { font-size: 0.85rem; background-color: #f3e5d5; padding: 0.3rem 0.8rem; border-radius: 20px; }
+    .product-price { font-size: 1.4rem; color: #8a4c2c; font-weight: bold; }
+    .size-selector { display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 1rem; }
+    .size-selector label { font-size: 0.85rem; font-weight: bold; color: #3e2f1c; }
+    .size-selector select { padding: 0.6rem; border: 2px solid #8a4c2c; border-radius: 6px; font-size: 0.95rem; background-color: white; color: #3e2f1c; font-weight: 600; cursor: pointer; transition: all 0.3s ease; }
+    .size-selector select:hover, .size-selector select:focus { border-color: #a85a38; background-color: #f9f5f0; outline: none; }
+    .btn-add-cart { flex: 1; background-color: #8a4c2c; color: white; border: none; padding: 0.8rem; border-radius: 6px; font-weight: bold; cursor: pointer; transition: all 0.3s ease; font-size: 0.95rem; }
+    .btn-add-cart:hover { background-color: #a85a38; transform: scale(1.02); }
+    .no-results { text-align: center; padding: 3rem 2rem; color: white; font-size: 1.2rem; }
+    .cart-count { position: absolute; top: 0; right: 0; background-color: #d4af6a; color: #3e2f1c; border-radius: 50%; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: bold; }
+    /* Popup Styles */
+    .popup-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.6); display: none; align-items: center; justify-content: center; z-index: 1000; animation: fadeIn 0.3s ease; }
+    .popup-overlay.active { display: flex; }
+    .popup-modal { background: white; border-radius: 15px; padding: 2rem; max-width: 500px; width: 90%; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3); animation: slideUp 0.4s ease; position: relative; }
+    @keyframes slideUp { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    .popup-header { font-size: 1.5rem; font-weight: bold; color: #3e2f1c; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
+    .popup-content { color: #666; font-size: 1rem; margin-bottom: 1.5rem; line-height: 1.6; }
+    .popup-actions { display: flex; gap: 1rem; justify-content: flex-end; }
+    .popup-btn { padding: 0.8rem 1.5rem; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; transition: all 0.3s ease; }
+    .popup-btn-primary { background-color: #8a4c2c; color: white; }
+    .popup-btn-primary:hover { background-color: #a85a38; transform: scale(1.05); }
+    .popup-btn-secondary { background-color: #e0e0e0; color: #333; }
+    .popup-btn-secondary:hover { background-color: #d0d0d0; }
+    .popup-close { position: absolute; top: 1rem; right: 1rem; font-size: 1.5rem; cursor: pointer; color: #999; transition: all 0.3s ease; }
+    .popup-close:hover { color: #333; transform: scale(1.2); }
+    .success-icon { font-size: 2rem; }
+    footer { background-color: #3e2f1c; color: white; text-align: center; padding: 2rem; margin-top: 3rem; }
+    /* Mobile Responsive Design */
+    @media (max-width: 480px) {
+      header { padding: 0.8rem 0.5rem; }
+      header h1 { font-size: 1.3rem; }
+      header p { font-size: 0.8rem; display: none; }
+      nav { padding: 0.5rem 0; gap: 0.25rem; flex-wrap: wrap; justify-content: space-around; }
+      nav a { padding: 0.5rem 0.5rem; font-size: 0.7rem; flex: 0 1 auto; min-width: 50px; text-align: center; }
+      .category-header { padding: 1.2rem 0.8rem; margin-bottom: 0.8rem; }
+      .category-header h2 { font-size: 1.3rem; margin-bottom: 0.3rem; letter-spacing: 0; }
+      .category-header p { font-size: 0.75rem; line-height: 1.3; }
+      .search-container { padding: 0 0.5rem; margin: 0.8rem auto; max-width: 100%; }
+      .search-box { flex-direction: row; gap: 0.3rem; padding: 0.3rem; }
+      .search-box input { padding: 0.6rem 1rem; font-size: 0.9rem; }
+      .search-box button { padding: 0.6rem 0.8rem; font-size: 0.75rem; }
+      .products-container { padding: 1rem 0.5rem; }
+      .products-grid { grid-template-columns: repeat(1, 1fr); gap: 0.8rem; }
+      .image-btn { width: 36px; height: 36px; font-size: 1.1rem; }
+      .image-btn-prev { left: 5px; }
+      .image-btn-next { right: 5px; }
+      .product-image { height: 140px; }
+      .product-info { padding: 0.8rem; }
+      .product-title { font-size: 0.9rem; min-height: 1.8rem; }
+      .product-description { font-size: 0.7rem; margin-bottom: 0.4rem; line-height: 1.3; }
+      .product-price { font-size: 1rem; }
+      .product-size { font-size: 0.75rem; padding: 0.2rem 0.6rem; }
+      .size-selector { gap: 0.3rem; margin-bottom: 0.8rem; }
+      .size-selector label { font-size: 0.7rem; }
+      .size-selector select { padding: 0.5rem; font-size: 0.8rem; border: 1.5px solid #8a4c2c; }
+      .btn-add-cart { padding: 0.7rem; font-size: 0.8rem; font-weight: bold; }
+      .image-nav { font-size: 0.75rem; padding: 0.3rem 0.6rem; }
+      footer { padding: 1rem 0.5rem; font-size: 0.8rem; }
+    }
+    @media (min-width: 481px) and (max-width: 768px) {
+      header { padding: 1rem 0.8rem; }
+      header h1 { font-size: 1.5rem; }
+      header p { font-size: 0.85rem; display: none; }
+      nav { padding: 0.7rem 0; gap: 0.5rem; }
+      nav a { padding: 0.5rem 0.7rem; font-size: 0.8rem; }
+      .category-header { padding: 2rem 1rem; margin-bottom: 1rem; }
+      .category-header h2 { font-size: 1.6rem; margin-bottom: 0.5rem; }
+      .category-header p { font-size: 0.85rem; }
+      .search-container { padding: 0 1rem; margin: 1rem auto; }
+      .search-box { gap: 0.4rem; padding: 0.4rem; }
+      .search-box input { padding: 0.7rem 1.2rem; font-size: 0.95rem; }
+      .search-box button { padding: 0.7rem 1rem; font-size: 0.85rem; }
+      .products-container { padding: 1.5rem 0.8rem; }
+      .products-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+      .image-btn { width: 36px; height: 36px; font-size: 1rem; }
+      .product-image { height: 160px; }
+      .product-info { padding: 1rem; }
+      .product-title { font-size: 0.95rem; min-height: 2rem; }
+      .product-description { font-size: 0.8rem; margin-bottom: 0.6rem; }
+      .product-price { font-size: 1.1rem; }
+      .size-selector { gap: 0.4rem; margin-bottom: 1rem; }
+      .size-selector label { font-size: 0.8rem; }
+      .size-selector select { padding: 0.5rem; font-size: 0.9rem; }
+      .btn-add-cart { padding: 0.7rem; font-size: 0.85rem; }
+      footer { padding: 1.5rem 0.8rem; font-size: 0.9rem; }
+    }
+    @media (min-width: 769px) and (max-width: 1024px) {
+      nav { gap: 0.8rem; }
+      nav a { padding: 0.6rem 0.9rem; font-size: 0.9rem; }
+      .category-header h2 { font-size: 2rem; }
+      .products-container { padding: 2rem 1rem; }
+      .products-grid { grid-template-columns: repeat(3, 1fr); gap: 1.3rem; }
+      .image-btn { width: 38px; height: 38px; font-size: 1.1rem; }
+      .product-image { height: 190px; }
+      .product-info { padding: 1.2rem; }
+      .product-title { font-size: 1rem; }
+      .product-description { font-size: 0.85rem; }
+      .product-price { font-size: 1.25rem; }
+    }
+    @media (min-width: 1025px) {
+      .products-grid { grid-template-columns: repeat(4, 1fr); gap: 2rem; }
+      .category-header h2 { font-size: 2.8rem; }
+      .products-container { padding: 2rem; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>African Artifacts</h1>
+    <p>Authentic African Products | Premium Quality</p>
+  </header>
+
+  <nav>
+    <a href="index.html">Home</a> <a href="tshirts.html">T-Shirts</a> <a href="shirts.html">Shirts</a> <a href="jerseys.html">Jerseys</a> <a href="ponchos.html">Ponchos</a> <a href="hoodies.html">Hoodies</a> <a href="material.html">Material</a> <a href="blankets.html">Blankets</a> <a href="sandals.html">Sandals</a> <a href="womens.html">Women's</a> <a href="soapstone.html">Soapstone</a> <a href="leatherbags.html">Leather Bags</a> <a href="handmadebags.html">Handmade Bags</a> <a href="cart.html" style="position: relative;"> Cart <span id="cart-count" class="cart-count" style="display: none;">0</span> </a>
+  </nav>
+
+  <div class="category-header">
+    <h2>African Leather Sandals</h2>
+    <p>Step into comfort with authentic African leather sandals. Handcrafted with premium leather and traditional designs perfect for any occasion.</p>
+  </div>
+
+  <div class="search-container">
+    <div class="search-box">
+      <input type="text" id="searchInput" placeholder="Search products..." onkeyup="filterProducts()" />
+      <button onclick="filterProducts()">🔍 Search</button>
+    </div>
+  </div>
+
+  <div class="products-container">
+    <div class="products-grid" id="productsGrid"></div>
+    <div id="noResults" class="no-results" style="display: none;">No products found!</div>
+  </div>
+
+  <footer>
+    <p>&copy; 2024 African Artifacts. All rights reserved.</p>
+  </footer>
+
+  <!-- Popup Modal -->
+  <div class="popup-overlay" id="popupOverlay">
+    <div class="popup-modal">
+      <span class="popup-close" onclick="closePopup()">✕</span>
+      <div class="popup-header">
+        <span class="success-icon" id="popupIcon">✓</span>
+        <span id="popupTitle">Success</span>
+      </div>
+      <div class="popup-content" id="popupContent">
+        Your item has been added to cart!
+      </div>
+      <div class="popup-actions">
+        <button class="popup-btn popup-btn-secondary" onclick="closePopup()">Close</button>
+        <button class="popup-btn popup-btn-primary" onclick="goToCart()">View Cart</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const sandalsImages = [
+      "Brown father's day giftMen sandalsmaasai….jpg",
+      "Style _ Classics Occasion _ Beach Outsole Material….jpg",
+      "SPECIFICATIONS Sandals Solid Color Leather Men….jpg",
+      "These sandals with a super cute pineapple pattern….jpg"
+    ];
+    
+    const products = Array.from({length: 52}, (_, i) => ({
+      id: i+1,
+      name: ["Maasai Red Leather", "Beach Classic Sandal", "Leather Specifications", "Pineapple Pattern", "Heritage Comfort", "Traditional Brown", "Festival Ready", "Premium Leather", "Everyday Wear", "Casual Style", "Sport Sandal", "Comfort Classic", "Summer Ready", "Walking Comfort", "Daily Wear", "Traveler's Choice", "Casual Brown", "Premium Comfort", "Heritage Style", "Royal Design", "Signature Sandal", "Limited Edition", "Exclusive Craft", "Master Crafted", "Premium Quality", "Heritage Comfort", "Festival Style", "Traveler Ready", "Summer Style", "Winter Ready", "All Weather", "Performance Craft", "Comfort Plus", "Luxury Design", "Heritage Pride", "Cultural Sandal", "Artisan Master", "Premium Comfort", "Exclusive Leather", "Limited Craft", "Master Design", "Heritage Master", "Luxury Sandal", "Premium Heritage", "Royal Heritage", "Signature Heritage", "Exclusive Heritage", "Limited Heritage", "Master Heritage", "Premium Master", "Quality First", "Ultimate Comfort"][i],
+      description: ["Premium red Maasai leather sandals, perfect for fathers day gift", "Beach-ready classic sandals with durable outsole material", "Professional specifications leather sandals for men", "Cute pineapple pattern design sandals", "Heritage comfort with traditional craftsmanship", "Traditional brown leather construction", "Festival celebration ready sandals", "Premium quality leather construction", "Everyday wear comfort sandals", "Casual style perfect for any occasion", "Sport sandal for active wear", "Comfortable classic design", "Summer ready leather sandals", "Walking comfort focused design", "Daily wear everyday sandals", "Perfect for travelers", "Casual brown leather sandal", "Premium comfort construction", "Heritage style traditional design", "Royal design sandals", "Signature brand sandal", "Limited edition craft", "Exclusive handcrafted design", "Master crafted by artisans", "Premium quality materials", "Heritage comfort technology", "Festival style sandals", "Travel-ready construction", "Summer style collection", "Winter ready materials", "All weather functionality", "Performance craft design", "Extra comfort cushioning", "Luxury design elements", "Heritage pride collection", "Cultural design sandal", "Artisan master crafted", "Premium comfort features", "Exclusive leather quality", "Limited craft edition", "Master design creation", "Heritage master collection", "Luxury sandal design", "Premium heritage materials", "Royal heritage design", "Signature heritage style", "Exclusive heritage craft", "Limited heritage edition", "Master heritage creation", "Premium master crafted", "Quality first priority", "Ultimate comfort experience"][i],
+      size: i % 3 === 0 ? "6-12" : i % 3 === 1 ? "7-13" : "8-14",
+      price: 45.99 + (i % 20) * 2.50,
+      images: [sandalsImages[i % sandalsImages.length], sandalsImages[(i + 1) % sandalsImages.length], sandalsImages[(i + 2) % sandalsImages.length]],
+      currentImageIndex: 0
+    }));
+
+    function renderProducts(productsToShow = products) {
+      const grid = document.getElementById('productsGrid');
+      const noResults = document.getElementById('noResults');
+      if (productsToShow.length === 0) { grid.innerHTML = ''; noResults.style.display = 'block'; return; }
+      noResults.style.display = 'none';
+      grid.innerHTML = productsToShow.map(p => `
+        <div class="product-card">
+          <div class="product-image">
+            <img src="${p.images[p.currentImageIndex]}" alt="${p.name}" class="product-img-${p.id}" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 250 250%22><rect fill=%22%23f0dcc8%22 width=%22250%22 height=%22250%22/><text x=%2250%25%22 y=%2250%25%22 font-family=%22Arial%22 font-size=%2216%22 fill=%22%238a6d47%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22>Product</text></svg>'">
+            <button class="image-btn image-btn-prev" onclick="changeProductImage(${p.id}, -1)">❮</button>
+            <button class="image-btn image-btn-next" onclick="changeProductImage(${p.id}, 1)">❯</button>
+            <div class="image-nav"><span id="img-counter-${p.id}">${p.currentImageIndex + 1}/${p.images.length}</span></div>
+          </div>
+          <div class="product-info">
+            <h3 class="product-title">${p.name}</h3>
+            <p class="product-description">${p.description}</p>
+            <div class="product-details">
+              <span class="product-price">Ksh ${p.price.toFixed(2)}</span>
+            </div>
+            <div class="size-selector">
+              <label for="size-${p.id}">Shoe Size:</label>
+              <select id="size-${p.id}">
+                <option value="">Select your size...</option>
+                <option value="5">Size 5</option>
+                <option value="6">Size 6</option>
+                <option value="7">Size 7</option>
+                <option value="8">Size 8</option>
+                <option value="9">Size 9</option>
+                <option value="10">Size 10</option>
+                <option value="11">Size 11</option>
+                <option value="12">Size 12</option>
+                <option value="13">Size 13</option>
+                <option value="14">Size 14</option>
+              </select>
+            </div>
+            <button class="btn-add-cart" onclick="addToCart(${p.id}, '${p.name}', ${p.price})">Add to Cart</button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function changeProductImage(productId, direction) {
+      const product = products.find(p => p.id === productId);
+      if (!product) return;
+      
+      product.currentImageIndex += direction;
+      if (product.currentImageIndex < 0) product.currentImageIndex = product.images.length - 1;
+      if (product.currentImageIndex >= product.images.length) product.currentImageIndex = 0;
+      
+      const img = document.querySelector(`.product-img-${productId}`);
+      const counter = document.getElementById(`img-counter-${productId}`);
+      
+      if (img) {
+        img.style.opacity = '0';
+        setTimeout(() => {
+          img.src = product.images[product.currentImageIndex];
+          img.style.opacity = '1';
+        }, 150);
+      }
+      if (counter) counter.textContent = `${product.currentImageIndex + 1}/${product.images.length}`;
+    }
+
+    function filterProducts() {
+      const search = document.getElementById('searchInput').value.toLowerCase();
+      const filtered = products.filter(p => p.name.toLowerCase().includes(search) || p.description.toLowerCase().includes(search));
+      renderProducts(filtered);
+    }
+
+    function showPopup(title, message, icon = '✓') {
+      document.getElementById('popupTitle').textContent = title;
+      document.getElementById('popupContent').textContent = message;
+      document.getElementById('popupIcon').textContent = icon;
+      document.getElementById('popupOverlay').classList.add('active');
+    }
+
+    function closePopup() {
+      document.getElementById('popupOverlay').classList.remove('active');
+    }
+
+    function goToCart() {
+      closePopup();
+      window.location.href = 'cart.html';
+    }
+
+    function addToCart(productId, name, price) {
+      const sizeSelect = document.getElementById(`size-${productId}`);
+      const selectedSize = sizeSelect.value;
+
+      if (!selectedSize) {
+        showPopup('⚠️ Size Required', 'Please select a shoe size before adding to cart.', '⚠️');
+        return;
+      }
+
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      cart.push({
+        id: productId,
+        name: name,
+        price: price,
+        quantity: 1,
+        size: selectedSize,
+        timestamp: new Date().toISOString()
+      });
+      localStorage.setItem('cart', JSON.stringify(cart));
+      updateCartCount();
+      showPopup('✓ Added to Cart', `${name} (Size ${selectedSize}) has been added to your cart! 👟`);
+      sizeSelect.value = ''; // Reset size selector
+    }
+
+    function updateCartCount() {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const badge = document.getElementById('cart-count');
+      if (cart.length > 0) { badge.textContent = cart.length; badge.style.display = 'flex'; } else { badge.style.display = 'none'; }
+    }
+
+    // Keyboard navigation for images
+    let activeProductId = null;
+    document.addEventListener('keydown', (e) => {
+      if (activeProductId && (e.key === 'ArrowLeft' || e.key === 'ArrowRight')) {
+        changeProductImage(activeProductId, e.key === 'ArrowLeft' ? -1 : 1);
+      }
+    });
+
+    // Track which product card is being hovered
+    document.addEventListener('mouseover', (e) => {
+      const card = e.target.closest('.product-card');
+      if (card) {
+        const idMatch = card.querySelector('[class*="product-img-"]')?.className.match(/product-img-(\d+)/);
+        if (idMatch) activeProductId = parseInt(idMatch[1]);
+      }
+    });
+
+    renderProducts();
+    updateCartCount();
+  </script>
+</body>
+</html>

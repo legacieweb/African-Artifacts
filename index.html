@@ -1,0 +1,1388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>African Artifacts | Home</title>
+  
+
+  
+  <style>
+    #about {
+      background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), url("African Clothing For Women Plus Size, Ankara Top….jpg");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      color: #1a1a1a;
+      border-radius: 12px;
+      padding: 3rem 2rem;
+      margin: 2rem;
+      margin-top: 2rem;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      font-size: 1.1rem;
+      line-height: 1.8;
+      font-weight: 500;
+    }
+    #about h2 {
+      font-size: 2.2rem;
+      color: #2c1810;
+      font-weight: bold;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+    }
+    #about em {
+      color: #0066cc;
+      font-weight: bold;
+    }
+    #about strong {
+      color: #cc2200;
+      font-weight: bold;
+    }
+
+    /* Mobile Responsive About Section */
+    @media (max-width: 480px) {
+      #about {
+        padding: 2rem 1rem;
+        margin: 1rem;
+        border-radius: 8px;
+      }
+
+      #about h2 {
+        font-size: 1.5rem;
+      }
+
+      #about {
+        font-size: 0.9rem;
+        line-height: 1.6;
+      }
+    }
+
+    @media (min-width: 481px) and (max-width: 768px) {
+      #about {
+        padding: 2.5rem 1.5rem;
+        margin: 1.5rem;
+      }
+
+      #about h2 {
+        font-size: 1.9rem;
+      }
+
+      #about {
+        font-size: 1rem;
+      }
+    }
+    
+    .cart-count {
+      position: absolute;
+      top: 0;
+      right: 0;
+      background-color: #8a4c2c;
+      color: white;
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: bold;
+      transform: translate(50%, -50%);
+    }
+
+    body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #131313;
+    color: #333;
+    font-size: 18px;
+  }
+
+  header {
+    background: linear-gradient(rgba(20, 20, 20, 0.7), rgba(20, 20, 20, 0.7)), url("Animated wallpaper.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: white;
+    padding: 0;
+    text-align: center;
+  }
+
+  .header-top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.8rem 1.5rem;
+    background: rgba(0, 0, 0, 0.4);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .header-auth-buttons {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+  }
+
+  .auth-btn {
+    padding: 0.6rem 1.2rem;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+  }
+
+  .cart-btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    color: white;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    padding: 0.5rem;
+  }
+
+  .cart-btn:hover {
+    transform: scale(1.1);
+  }
+
+  .cart-icon {
+    font-size: 1.5rem;
+  }
+
+  .cart-badge {
+    position: absolute;
+    top: -0.5rem;
+    right: -0.5rem;
+    background: #ff6b35;
+    color: white;
+    border-radius: 50%;
+    width: 1.3rem;
+    height: 1.3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+    font-weight: bold;
+    box-shadow: 0 2px 8px rgba(255, 107, 53, 0.4);
+  }
+
+  .auth-btn.login {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+  }
+
+  .auth-btn.login:hover {
+    background: rgba(255, 255, 255, 0.3);
+    border-color: rgba(255, 255, 255, 0.6);
+  }
+
+  .auth-btn.primary {
+    background: linear-gradient(135deg, #f28c44 0%, #e8722c 100%);
+    color: white;
+  }
+
+  .auth-btn.primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(232, 114, 44, 0.4);
+  }
+
+  .auth-btn.logout {
+    background: rgba(232, 114, 44, 0.2);
+    color: #ff9966;
+    border: 1px solid rgba(232, 114, 44, 0.4);
+  }
+
+  .auth-btn.logout:hover {
+    background: rgba(232, 114, 44, 0.3);
+  }
+
+  .header-content {
+    padding: 1.5rem;
+  }
+
+  header h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin: 0;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+  }
+
+  header p {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin: 0.5rem 0 0 0;
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.7);
+  }
+
+  /* Mobile Responsive Header */
+  @media (max-width: 480px) {
+    .header-top-bar {
+      flex-direction: row;
+      gap: 0.5rem;
+      padding: 0.6rem 1rem;
+      justify-content: space-between;
+    }
+
+    .header-auth-buttons {
+      justify-content: flex-start;
+      flex-wrap: nowrap;
+      gap: 0.5rem;
+    }
+
+    .auth-btn {
+      padding: 0.5rem 0.8rem;
+      font-size: 0.75rem;
+    }
+
+    .cart-btn {
+      padding: 0.3rem;
+    }
+
+    .cart-icon {
+      font-size: 1.2rem;
+    }
+
+    .cart-badge {
+      width: 1.1rem;
+      height: 1.1rem;
+      font-size: 0.6rem;
+    }
+
+    header {
+      padding: 0;
+    }
+
+    .header-content {
+      padding: 1rem;
+    }
+
+    header h1 {
+      font-size: 1.6rem;
+    }
+
+    header p {
+      font-size: 0.85rem;
+    }
+  }
+
+  @media (min-width: 481px) and (max-width: 768px) {
+    .header-top-bar {
+      padding: 0.7rem 1.2rem;
+    }
+
+    .auth-btn {
+      padding: 0.55rem 1.1rem;
+      font-size: 0.9rem;
+    }
+
+    header {
+      padding: 0;
+    }
+
+    .header-content {
+      padding: 1.2rem;
+    }
+
+    header h1 {
+      font-size: 2rem;
+    }
+
+    header p {
+      font-size: 1rem;
+    }
+  }
+
+  nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    background-color: #5a4228;
+    padding: 1rem 0;
+  }
+
+  nav a {
+    color: white;
+    text-decoration: none;
+    margin: 0.3rem 0.5rem;
+    font-weight: bold;
+    font-size: 1.1rem;
+    padding: 0.7rem 1rem;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  nav a:hover,
+  nav a:focus {
+    background-color: #7b5934;
+  }
+
+  nav a .cart-icon {
+    font-size: 1.3rem;
+  }
+
+  /* Mobile Responsive Navigation */
+  @media (max-width: 480px) {
+    nav {
+      padding: 0.6rem 0;
+    }
+
+    nav a {
+      font-size: 0.8rem;
+      padding: 0.5rem 0.6rem;
+      margin: 0.2rem 0.3rem;
+    }
+  }
+
+  @media (min-width: 481px) and (max-width: 768px) {
+    nav {
+      padding: 0.8rem 0;
+    }
+
+    nav a {
+      font-size: 0.95rem;
+      padding: 0.6rem 0.8rem;
+      margin: 0.3rem 0.4rem;
+    }
+  }
+
+  .hero {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('01533a8a-8605-43df-b52a-6910c3f13abc.jpg');
+    background-size: cover;
+    background-position: center;
+    padding: 5rem 2rem;
+    text-align: center;
+    color: white;
+  }
+
+  .hero h1 {
+    font-size: 3rem;
+    font-weight: bold;
+    text-shadow: 3px 3px 12px rgba(0, 0, 0, 0.8);
+    margin: 0;
+  }
+
+  .hero p {
+    font-size: 1.3rem;
+    font-weight: 600;
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.8);
+  }
+
+  /* Mobile Responsive Hero */
+  @media (max-width: 480px) {
+    .hero {
+      padding: 2rem 1rem;
+    }
+
+    .hero h1 {
+      font-size: 1.4rem;
+    }
+
+    .hero p {
+      font-size: 0.9rem;
+    }
+  }
+
+  @media (min-width: 481px) and (max-width: 768px) {
+    .hero {
+      padding: 3rem 1.5rem;
+    }
+
+    .hero h1 {
+      font-size: 2rem;
+    }
+
+    .hero p {
+      font-size: 1.1rem;
+    }
+  }
+
+  @media (min-width: 769px) and (max-width: 1024px) {
+    .hero {
+      padding: 4rem 2rem;
+    }
+
+    .hero h1 {
+      font-size: 2.5rem;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+    }
+  }
+
+  /* ============================================
+     SECTION BACKGROUND TEMPLATES
+     ============================================
+     
+     Each section below can have a background image added.
+     Replace "YOUR_IMAGE.jpg" with exact filename.
+     Adjust the rgba opacity (first number) 0-1 for darkness.
+     
+     ============================================ */
+
+  /* SHOP SECTION - BACKGROUND CUSTOMIZATION */
+  #shop {
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("African print Bag, African Bag, African Fabric….jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: #f5f5f5;
+    padding: 5rem 2rem;
+    text-align: center;
+  }
+
+  #shop h2 {
+    font-size: 2.5rem;
+    color: white;
+    margin-bottom: 2rem;
+    text-shadow: 3px 3px 12px rgba(0,0,0,0.8);
+    font-weight: bold;
+  }
+
+  #shop h3 {
+    font-weight: 600;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+  }
+
+  #shop p {
+    font-size: 1rem;
+    font-weight: 500;
+    text-shadow: 2px 2px 6px rgba(0,0,0,0.7);
+  }
+
+  /* Mobile Responsive Shop Section */
+  @media (max-width: 480px) {
+    #shop {
+      padding: 2rem 1rem;
+    }
+
+    #shop h2 {
+      font-size: 1.6rem;
+      margin-bottom: 1.5rem;
+    }
+
+    #shop h3 {
+      font-size: 0.95rem;
+    }
+
+    #shop p {
+      font-size: 0.8rem;
+    }
+  }
+
+  @media (min-width: 481px) and (max-width: 768px) {
+    #shop {
+      padding: 3rem 1.5rem;
+    }
+
+    #shop h2 {
+      font-size: 2rem;
+      margin-bottom: 1.8rem;
+    }
+
+    #shop h3 {
+      font-size: 1rem;
+    }
+
+    #shop p {
+      font-size: 0.9rem;
+    }
+  }
+
+  @media (min-width: 769px) and (max-width: 1024px) {
+    #shop {
+      padding: 4rem 2rem;
+    }
+
+    #shop h2 {
+      font-size: 2.2rem;
+    }
+  }
+
+
+  #product-list {
+    display: flex;
+    flex-wrap: wrap; /* Wraps to the next line if needed */
+    gap: 20px; /* Space between products */
+    justify-content: center; /* Center align the items */
+  }
+
+  .product-link {
+    text-decoration: none;
+  }
+
+  .product {
+    width: 250px;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.1); /* Optional: light background */
+    padding: 15px;
+    border-radius: 10px;
+  }
+
+  .product img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+  }
+
+  .product h3,
+  .product p,
+  .product button {
+    color: #fff;
+  }
+
+  .product button {
+    background-color: transparent;
+    border: 1px solid #fff;
+    padding: 5px 10px;
+    margin-top: 10px;
+    cursor: pointer;
+  }
+
+  .product button:hover {
+    background-color: #fff;
+    color: #000;
+  }
+
+
+  .product img {
+    width: 220px;
+    height: auto;
+    border-radius: 8px;
+    object-fit: cover;
+    display: block;
+    margin: 0 auto 0.5rem;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+    transition: box-shadow 0.3s ease;
+  }
+
+  .product h3 {
+    margin: 0;
+    font-size: 1.1rem;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+  }
+
+  .cart-count {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: #8a4c2c;
+    color: white;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: bold;
+    transform: translate(50%, -50%);
+  }
+
+  @media (max-width: 600px) {
+    .product img {
+      width: 100%;
+    }
+  }
+
+  /* Contact and Footer Styles */
+  #contact {
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("African Kenyan Handmade Traditional sarong  Shuka….jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: #f5f5f5;
+    padding: 3rem 2rem;
+    text-align: center;
+  }
+
+  #contact h2 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+  }
+
+  #contact p {
+    font-size: 1rem;
+    margin: 0.8rem 0;
+  }
+
+  footer {
+    background-color: #3e2f1c;
+    color: white;
+    text-align: center;
+    padding: 1.5rem;
+    font-size: 0.95rem;
+  }
+
+  /* Mobile Responsive Contact and Footer */
+  @media (max-width: 480px) {
+    #contact {
+      padding: 2rem 1rem;
+    }
+
+    #contact h2 {
+      font-size: 1.4rem;
+      margin-bottom: 1rem;
+    }
+
+    #contact p {
+      font-size: 0.9rem;
+      margin: 0.6rem 0;
+    }
+
+    footer {
+      padding: 1rem;
+      font-size: 0.85rem;
+    }
+  }
+
+  @media (min-width: 481px) and (max-width: 768px) {
+    #contact {
+      padding: 2.5rem 1.5rem;
+    }
+
+    #contact h2 {
+      font-size: 1.6rem;
+    }
+
+    #contact p {
+      font-size: 0.95rem;
+    }
+
+    footer {
+      padding: 1.2rem;
+      font-size: 0.9rem;
+    }
+  }
+</style>
+</head>
+<body>
+  <header>
+    <div class="header-top-bar">
+      <div style="flex: 1;"></div>
+      <div class="header-auth-buttons">
+        <a id="loginBtn" href="login.html" class="auth-btn login">Login</a>
+        <a id="signupBtn" href="signup.html" class="auth-btn login">Sign Up</a>
+        <a id="dashboardBtn" href="dashboard.html" class="auth-btn primary" style="display: none;">Dashboard</a>
+        <button id="logoutBtn" class="auth-btn logout" style="display: none; cursor: pointer; border: 1px solid rgba(232, 114, 44, 0.4);">Logout</button>
+      </div>
+      <a href="cart.html" class="cart-btn">
+        <span class="cart-icon">🛒</span>
+        <span id="cart-badge" class="cart-badge" style="display: none;">0</span>
+      </a>
+    </div>
+    <div class="header-content">
+      <h1>African Artifacts</h1>
+      <p>Inspired by Heritage | Crafted with Soul</p>
+    </div>
+  </header>
+
+  <nav>
+    <a href="#">Home</a>
+    <a href="#shop">Shop</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <div class="hero">
+    <h1>Explore Authentic African Artifacts</h1>
+    <p>Discover timeless pieces, crafted by local artisans.</p>
+  </div>
+
+  <!-- Shop Section -->
+<section class="section" id="shop" style="color: #fff;">
+  <style>
+    /* Shop section styling - add your background image above in CSS */
+
+    #shop h2,
+    #shop h3,
+    #shop p,
+    #shop button {
+      color: #fff;
+      font-weight: 600;
+    }
+
+    #shop h3 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.8);
+      margin: 10px 0 8px;
+    }
+
+    #shop p {
+      font-size: 0.95rem;
+      text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
+      margin: 8px 0;
+    }
+
+    #shop button {
+      background-color: rgba(0, 0, 0, 0.4);
+      border: 2px solid #fff;
+      padding: 8px 16px;
+      cursor: pointer;
+      font-weight: 700;
+      border-radius: 6px;
+      color: #fff;
+      font-size: 0.95rem;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
+      transition: all 0.3s ease;
+    }
+
+    #shop button:hover {
+      background-color: #fff;
+      color: #000;
+      text-shadow: none;
+      font-weight: bold;
+    }
+  </style>
+
+  <h2>Our Products</h2>
+  <div class="products-scroll" id="product-list">
+    <a href="shirts.html#kitenge-patchwork" class="product-link">
+      <div class="product">
+        <img src="Category_Shirt; Season_Spring,Summer….jpg" alt="Kitenge Patchwork Shirts" />
+        <h3>Kitenge Patchwork Shirts</h3>
+        <p>Sizes: S - 4XL</p>
+        <button onclick="event.stopPropagation(); window.location.href='shirts.html#kitenge-patchwork'">View More</button>
+    
+      </div>
+    </a>
+
+    <a href="shirts.html#handwoven-plain" class="product-link">
+      <div class="product">
+        <img src="🪡We’re pairing a breezy plain-woven silk-linen….jpg" alt="Handwoven Plain Shirts" />
+        <h3>Handwoven Plain Shirts</h3>
+        <p>Sizes: S - 3XL</p>
+        <button onclick="event.stopPropagation(); window.location.href='shirts.html#handwoven-plain'">View More</button>
+    
+      </div>
+    </a>
+
+    <a href="shirts.html#embroidery" class="product-link">
+      <div class="product">
+        <img src="Brand _ Comfort Colors About Fabric_ Classic….jpg" alt="Embroidery Shirts" />
+        <h3>Embroidery Shirts</h3>
+        <p>Sizes: S - 3XL</p>
+        <button onclick="event.stopPropagation(); window.location.href='shirts.html#embroidery'">View More</button>
+      
+      </div>
+    </a>
+
+    <a href="tshirts.html" class="product-link">
+      <div class="product">
+        <img src="2b660eb6-7aea-4751-a6a6-56bf2c2c5b65.jpg" alt="Printed T-shirts" />
+        <h3>Printed T-shirts</h3>
+        <p>Sizes: S - 3XL</p>
+        <button onclick="event.stopPropagation(); window.location.href='tshirts.html'">View More</button>
+      </div>
+    </a>
+
+    <a href="jerseys.html" class="product-link">
+      <div class="product">
+        <img src="Kenya NWT Soccer Jersey Adult XL Football Lions….jpg" alt="Kenyan Jerseys" />
+        <h3>Kenyan Jerseys</h3>
+        <p>Sizes: S - 4XL</p>
+        <button onclick="event.stopPropagation(); window.location.href='jerseys.html'">View More</button>
+      </div>
+    </a>
+
+    <a href="ponchos.html" class="product-link">
+      <div class="product">
+        <img src="fb941f63-b33c-45a9-824a-2fb1bf0deb1e.jpg" alt="Ponchos with Kitenge Patchwork" />
+        <h3>Ponchos with Kitenge Patchwork</h3>
+        <p>Size: F</p>
+        <button onclick="event.stopPropagation(); window.location.href='ponchos.html'">View More</button>
+      </div>
+    </a>
+
+    <a href="hoodies.html" class="product-link">
+      <div class="product">
+        <img src="Dashiki Snoodie _ Ankara Snoodie Jumper _ Africa… (2).jpg" alt="Hoodies with Kitenge Patchwork" />
+        <h3>Hoodies with Kitenge Patchwork</h3>
+        <p>Sizes: S - 3XL</p>
+        <button onclick="event.stopPropagation(); window.location.href='hoodies.html'">View More</button>
+      </div>
+    </a>
+
+    <a href="material.html" class="product-link">
+      <div class="product">
+        <img src="6eb44a35-c404-4500-9ab6-93ba6010d54d.jpg" alt="Kitenge Material" />
+        <h3>Kitenge Material</h3>
+        <p>6 Yards</p>
+        <button onclick="event.stopPropagation(); window.location.href='material.html'">View More</button>
+      </div>
+    </a>
+
+    <a href="blankets.html" class="product-link">
+      <div class="product">
+        <img src="af071c20-f00e-4b45-9689-1ebb21172d26.jpg" alt="Maasai Blankets" />
+        <h3>Maasai Blankets</h3>
+        <p>Traditional, Wool, Fleece</p>
+        <button onclick="event.stopPropagation(); window.location.href='blankets.html'">View More</button>
+      </div>
+    </a>
+
+    <a href="sandals.html" class="product-link">
+      <div class="product">
+        <img src="bd523140-1103-4a68-935f-ba5f76bce21e.jpg" alt="Sandals" />
+        <h3>Sandals</h3>
+        <p>Men & Women</p>
+        <button onclick="event.stopPropagation(); window.location.href='sandals.html'">View More</button>
+      </div>
+    </a>
+
+    <a href="womens.html" class="product-link">
+      <div class="product">
+        <img src="f2409f39-c351-4137-bd33-3e1aa8e7e614.jpg" alt="Women Vitenge Attires" />
+        <h3>Women Vitenge Attires</h3>
+        <p>Bubu, Snood, Hole Dress, Vimono, Skirts, Batik, Maxi, Chiffon, Elastic, Zipper, Jumpsuits, Embroidered, Shirt, Wrap, Tops</p>
+        <button onclick="event.stopPropagation(); window.location.href='womens.html'">View More</button>
+      </div>
+    </a>
+
+    <a href="soapstone.html" class="product-link">
+      <div class="product">
+        <img src="e0e052ff-8c51-4c30-bdb4-d588dd16071c.jpg" alt="Soapstone Products" />
+        <h3>Soapstone Products</h3>
+        <p>Plates (10", 8", 6"), Chess Boards, Coasters, Dishes, Toons, Mugs, Hippo/C Elephant, Gift Box, Maps, Soap Dish, Candle Holder, Ash Tray</p>
+        <button onclick="event.stopPropagation(); window.location.href='soapstone.html'">View More</button>
+      </div>
+    </a>
+
+    <a href="leatherbags.html" class="product-link">
+      <div class="product">
+        <img src="f902885c-2a6c-4858-b8f1-5dbbfcebe9dc.jpg?auto=format&fit=crop&w=400&q=80" alt="Leather Bags with Kitenge" />
+        <h3>Leather Bags with Kitenge</h3>
+        <button onclick="event.stopPropagation(); window.location.href='leatherbags.html'">View More</button>
+      </div>
+    </a>
+
+    <a href="handmadebags.html" class="product-link">
+      <div class="product">
+        <img src="0726d68d-4264-442a-8fb9-05c87664f7c1.jpg" alt="Handmade Bags" />
+        <h3>Handmade Bags</h3>
+        <button onclick="event.stopPropagation(); window.location.href='handmadebags.html'">View More</button>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+<!-- PHOTO GALLERY SECTION - EASY TO CUSTOMIZE -->
+<section class="section" id="photo-gallery" style="background-color: #1a1a1a; padding: 3rem 2rem;">
+  <h2 style="text-align: center; color: white; font-size: 2.5rem; margin-bottom: 3rem;">Featured Gallery</h2>
+  
+  <div class="gallery-grid">
+    <!-- PHOTO 1 - EDIT THIS -->
+    <div class="gallery-item">
+      <img src="Handcrafted Kenyan soapstone figurines designs and….jpg" alt="Gallery Item 1">
+      <div class="gallery-label">Soapstone Crafts</div>
+    </div>
+
+    <!-- PHOTO 2 - EDIT THIS -->
+    <div class="gallery-item">
+      <img src="This Wall Hangings item by JollyWorldAU has 9….jpg" alt="Gallery Item 2">
+      <div class="gallery-label">Wall Hangings</div>
+    </div>
+
+    <!-- PHOTO 3 - EDIT THIS -->
+    <div class="gallery-item">
+      <img src="f902885c-2a6c-4858-b8f1-5dbbfcebe9dc.jpg" alt="Gallery Item 3">
+      <div class="gallery-label">Leather Bags</div>
+    </div>
+
+    <!-- PHOTO 4 - EDIT THIS -->
+    <div class="gallery-item">
+      <img src="e0e052ff-8c51-4c30-bdb4-d588dd16071c.jpg" alt="Gallery Item 4">
+      <div class="gallery-label">Artwork</div>
+    </div>
+
+    <!-- TO ADD MORE PHOTOS: Copy and paste the block below -->
+    <!-- 
+    <div class="gallery-item">
+      <img src="YOUR_IMAGE_NAME.jpg" alt="Gallery Item">
+      <div class="gallery-label">Your Label</div>
+    </div>
+    -->
+  </div>
+</section>
+
+<style>
+  /* GALLERY SECTION STYLING */
+  #photo-gallery {
+    background-color: #1a1a1a;
+    /* EASY BACKGROUND SWAP:
+       background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('YOUR_IMAGE.jpg');
+       background-size: cover;
+       background-position: center;
+       background-repeat: no-repeat;
+    */
+  }
+
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .gallery-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+    cursor: pointer;
+    height: 300px;
+  }
+
+  .gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+  }
+
+  .gallery-item:hover img {
+    transform: scale(1.1);
+  }
+
+  .gallery-label {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
+    color: white;
+    padding: 1.5rem 1rem 1rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-align: center;
+    transform: translateY(100%);
+    transition: transform 0.4s ease;
+  }
+
+  .gallery-item:hover .gallery-label {
+    transform: translateY(0);
+  }
+
+  /* RESPONSIVE GALLERY */
+  @media (max-width: 480px) {
+    .gallery-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+
+    .gallery-item {
+      height: 200px;
+    }
+
+    .gallery-label {
+      font-size: 0.9rem;
+      padding: 1rem 0.8rem 0.8rem;
+    }
+  }
+
+  @media (min-width: 481px) and (max-width: 768px) {
+    .gallery-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.2rem;
+    }
+
+    .gallery-item {
+      height: 250px;
+    }
+  }
+
+  @media (min-width: 769px) and (max-width: 1024px) {
+    .gallery-grid {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.3rem;
+    }
+
+    .gallery-item {
+      height: 280px;
+    }
+  }
+</style>
+
+<style>
+  .products-scroll {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    padding: 2rem 1.5rem;
+    margin: 0 auto;
+    max-width: 1400px;
+  }
+
+  .product-link {
+    text-decoration: none;
+  }
+
+  .product {
+    text-align: center;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 1.5rem;
+    border-radius: 10px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .product:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+  }
+
+  .product img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 0.5rem;
+  }
+
+  .product h3 {
+    color: #fff;
+    font-size: 1.1rem;
+    font-weight: 700;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    margin: 12px 0 8px;
+  }
+
+  .product p {
+    color: #fff;
+    font-weight: 500;
+    font-size: 0.95rem;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+    margin: 8px 0;
+  }
+
+  .product button {
+    background-color: rgba(0, 0, 0, 0.6);
+    border: 2px solid #fff;
+    padding: 0.8rem 1.2rem;
+    margin-top: 10px;
+    cursor: pointer;
+    color: #fff;
+    font-weight: 700;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    transition: all 0.3s ease;
+  }
+
+  .product button:hover {
+    background-color: #fff;
+    color: #000;
+    text-shadow: none;
+  }
+
+  /* Mobile Responsive Grid */
+  @media (max-width: 480px) {
+    .products-scroll {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+      padding: 1.5rem 1rem;
+    }
+
+    .product {
+      padding: 0.8rem;
+    }
+
+    .product img {
+      height: 150px;
+    }
+
+    .product h3 {
+      font-size: 0.9rem;
+      margin: 8px 0 6px;
+    }
+
+    .product p {
+      font-size: 0.75rem;
+      margin: 6px 0;
+    }
+
+    .product button {
+      padding: 0.6rem 0.8rem;
+      font-size: 0.8rem;
+    }
+  }
+
+  @media (min-width: 481px) and (max-width: 768px) {
+    .products-scroll {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.2rem;
+      padding: 1.8rem 1.2rem;
+    }
+
+    .product {
+      padding: 1rem;
+    }
+
+    .product img {
+      height: 180px;
+    }
+
+    .product h3 {
+      font-size: 0.95rem;
+    }
+
+    .product p {
+      font-size: 0.85rem;
+    }
+
+    .product button {
+      padding: 0.7rem 1rem;
+      font-size: 0.85rem;
+    }
+  }
+
+  @media (min-width: 769px) and (max-width: 1024px) {
+    .products-scroll {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      padding: 2rem;
+    }
+
+    .product img {
+      height: 220px;
+    }
+  }
+</style>
+
+
+<script>
+  // Initialize cart in localStorage if it doesn't exist
+  if (!localStorage.getItem('cart')) {
+    localStorage.setItem('cart', JSON.stringify([]));
+  }
+  
+  function addToCart(productName, price = 45.99) {
+    // Get current cart
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    
+    // Add product to cart
+    const product = {
+      name: productName,
+      price: price, // Use provided price or default
+      quantity: 1,
+      image: document.querySelector(`a[href*="${productName.toLowerCase().replace(/\s+/g, '-')}"] img`).src
+    };
+    
+    // Check if product already exists in cart
+    const existingProductIndex = cart.findIndex(item => item.name === productName);
+    
+    if (existingProductIndex > -1) {
+      // Increase quantity if product already in cart
+      cart[existingProductIndex].quantity += 1;
+    } else {
+      // Add new product to cart
+      cart.push(product);
+    }
+    
+    // Save updated cart
+    localStorage.setItem('cart', JSON.stringify(cart));
+    
+    // Show notification
+    alert(productName + " has been added to your cart!");
+    
+    updateCartCount();
+  }
+  
+  function updateCartCount() {
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const count = cart.reduce((total, item) => total + item.quantity, 0);
+    
+    // Update cart badge in header
+    const cartBadge = document.getElementById('cart-badge');
+    if (cartBadge) {
+      cartBadge.textContent = count;
+      cartBadge.style.display = count > 0 ? 'flex' : 'none';
+    }
+  }
+  
+  // Initialize cart count when page loads
+  document.addEventListener('DOMContentLoaded', function() {
+    updateCartCount();
+    checkUserAuthStatus();
+  });
+
+  // Check user authentication status and update buttons
+  function checkUserAuthStatus() {
+    const token = localStorage.getItem('authToken');
+    const loginBtn = document.getElementById('loginBtn');
+    const signupBtn = document.getElementById('signupBtn');
+    const dashboardBtn = document.getElementById('dashboardBtn');
+    const logoutBtn = document.getElementById('logoutBtn');
+
+    if (token) {
+      // User is logged in - show dashboard and logout
+      if (loginBtn) loginBtn.style.display = 'none';
+      if (signupBtn) signupBtn.style.display = 'none';
+      if (dashboardBtn) dashboardBtn.style.display = 'inline-block';
+      if (logoutBtn) logoutBtn.style.display = 'inline-block';
+    } else {
+      // User is not logged in - show login and signup
+      if (loginBtn) loginBtn.style.display = 'inline-block';
+      if (signupBtn) signupBtn.style.display = 'inline-block';
+      if (dashboardBtn) dashboardBtn.style.display = 'none';
+      if (logoutBtn) logoutBtn.style.display = 'none';
+    }
+  }
+
+  // Handle logout
+  document.addEventListener('DOMContentLoaded', function() {
+    const logoutBtn = document.getElementById('logoutBtn');
+    if (logoutBtn) {
+      logoutBtn.addEventListener('click', function() {
+        localStorage.removeItem('authToken');
+        localStorage.removeItem('cart');
+        sessionStorage.removeItem('checkoutData');
+        checkUserAuthStatus();
+        window.location.href = 'index.html';
+      });
+    }
+  });
+</script>
+
+
+<style>
+  .product-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+
+  .product-link .product {
+    cursor: pointer;
+  }
+
+  .product button {
+    pointer-events: auto;
+  }
+</style>
+
+
+
+    <div id="cart">
+      <h3>Cart</h3>
+      <ul id="cart-items"></ul>
+    </div>
+  </section>
+
+  <section class="section" id="about">
+    <h2>About Us</h2>
+    <p><strong>Karibu!</strong> 🌍</p>
+    <p>
+      At <strong>African Artifacts</strong>, we say: <em>"Utamaduni wetu ni hazina yetu!"</em> (Our culture is our treasure!). 
+      Every piece you see has a heartbeat — telling stories of joy, pride, and legacy.
+    </p>
+    <p>
+      Whether it’s a handwoven shirt or a handcrafted carving, we celebrate each item with pride:
+      <em>“Kitenge si kitenge bila rangi!”</em> (A kitenge isn’t a kitenge without its colors!).
+    </p>
+    <p>
+      We work with skilled artisans from Kenya and across East Africa, ensuring each product reflects
+      authentic craftsmanship and soul. You’re not just buying — <strong>you’re preserving culture</strong>.
+    </p>
+    <p>
+      🌟 <strong>Kauli mbiu yetu:</strong> <em>“Sanaa, Upendo, Uhalisia!”</em> (Art, Love, Authenticity!)
+    </p>
+    <p>
+      Hakuna matata — we've got something for everyone. Be bold. Be proud. <strong>Wear the culture!</strong>
+    </p>
+  </section>
+
+  <section class="section" id="contact">
+    <h2>Contact Us</h2>
+    <p>Email: info@africanartifacts.com</p>
+    <p>Phone: +254 712 345678</p>
+    <p>Instagram: @africanartifacts</p>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 African Artifacts. All rights reserved.</p>
+  </footer>
+
+  <script>
+    function addToCart(productName) {
+      const cartList = document.getElementById('cart-items');
+      const listItem = document.createElement('li');
+      listItem.textContent = productName;
+      cartList.appendChild(listItem);
+    }
+  </script>
+
+  <!-- 
+  ========================================
+  ✅ QUICK CUSTOMIZATION REFERENCE
+  ========================================
+  
+  🎨 SECTIONS AND HOW TO CUSTOMIZE:
+  
+  1️⃣ HERO BANNER (Top image with text)
+     - Background image: Line ~206
+     - Change: url('image-name.jpg')
+     - Size: Full width, ~300px height
+  
+  2️⃣ SHOP SECTION (Products display area)
+     - Background: Line ~307 (currently solid dark)
+     - Add background image: Uncomment one of 3 options
+     - Overlay darkness: Choose Option 1, 2, or 3
+  
+  3️⃣ PHOTO GALLERY (Grid showcase)
+     - Section ID: #photo-gallery (Line ~695)
+     - Edit photos: Lines 750-770
+     - Edit labels: Change text in "gallery-label" divs
+     - Add more: Copy the template (Lines 762-768)
+     - Background: Line ~793 (currently solid dark)
+  
+  4️⃣ ABOUT SECTION
+     - Background: Line ~46
+     - Currently shows design pattern
+     - Change background url
+  
+  📸 HOW TO ADD/CHANGE PHOTOS:
+  
+  STEP 1: Get your image filename (exact spelling)
+  STEP 2: Find the section you want to modify
+  STEP 3: Replace the image src or url() value
+  STEP 4: Save and refresh browser
+  
+  📝 IMAGE FILENAME TIPS:
+  - Use exact filenames from your folder
+  - Windows files are in c:\Users\HP\Desktop\trm store\
+  - Examples:
+    ✓ 'Handcrafted Kenyan soapstone figurines designs and….jpg'
+    ✓ 'f902885c-2a6c-4858-b8f1-5dbbfcebe9dc.jpg'
+    ✗ Wrong: 'soapstone.jpg' (if exact name is different)
+  
+  🎯 EASY TEMPLATE TO COPY/PASTE:
+  
+  For adding new gallery items:
+  <div class="gallery-item">
+    <img src="YOUR_IMAGE.jpg" alt="Description">
+    <div class="gallery-label">Label Here</div>
+  </div>
+  
+  For adding background to any section:
+  In the CSS for that section, add:
+  background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('image.jpg');
+  background-size: cover;
+  background-position: center;
+  
+  ========================================
+  -->
+</body>
+</html>
