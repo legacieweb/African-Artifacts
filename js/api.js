@@ -5,7 +5,7 @@
  * Change API_URL to your backend location
  */
 
-const API_URL = 'http://localhost:5000/api';
+const API_URL = 'https://african-artifacts.onrender.com/api';
 
 // Store auth token in localStorage
 function getAuthToken() {
