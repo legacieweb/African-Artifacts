@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Privacy Policy | African Artifacts</title>
+  
+  <style>
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary: #c9a962;
+      --primary-dark: #a88a4a;
+      --dark: #1a1a1a;
+      --darker: #0f0f0f;
+      --light: #f5f5f5;
+      --white: #ffffff;
+      --gray: #888888;
+      --transition: all 0.3s ease;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--dark);
+      color: var(--light);
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    a {
+      text-decoration: none;
+      color: var(--primary);
+      transition: var(--transition);
+    }
+
+    a:hover {
+      color: var(--primary-dark);
+    }
+
+    /* Header */
+    .main-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background: linear-gradient(180deg, rgba(26, 26, 26, 0.98) 0%, rgba(26, 26, 26, 0.92) 100%);
+      backdrop-filter: blur(12px);
+    }
+
+    .header-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      border-bottom: 1px solid rgba(201, 169, 98, 0.15);
+    }
+
+    .logo {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--primary);
+      letter-spacing: 2px;
+    }
+
+    .logo span {
+      color: var(--white);
+    }
+
+    .back-link {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--white);
+      font-weight: 500;
+      padding: 0.6rem 1.2rem;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      transition: var(--transition);
+    }
+
+    .back-link:hover {
+      background: var(--primary);
+      color: var(--dark);
+    }
+
+    /* Main Content */
+    .page-content {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 8rem 2rem 4rem;
+    }
+
+    .page-header {
+      text-align: center;
+      margin-bottom: 3rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid rgba(201, 169, 98, 0.2);
+    }
+
+    .page-header h1 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      margin-bottom: 0.5rem;
+      color: var(--primary);
+    }
+
+    .page-header p {
+      color: var(--gray);
+      font-size: 1rem;
+    }
+
+    .content-section {
+      margin-bottom: 2.5rem;
+    }
+
+    .content-section h2 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: var(--white);
+    }
+
+    .content-section p {
+      color: rgba(255, 255, 255, 0.8);
+      margin-bottom: 1rem;
+    }
+
+    .content-section ul {
+      list-style: none;
+      margin-left: 1rem;
+    }
+
+    .content-section ul li {
+      position: relative;
+      padding-left: 1.5rem;
+      margin-bottom: 0.8rem;
+      color: rgba(255, 255, 255, 0.75);
+    }
+
+    .content-section ul li::before {
+      content: '•';
+      position: absolute;
+      left: 0;
+      color: var(--primary);
+      font-weight: bold;
+    }
+
+    .last-updated {
+      text-align: center;
+      padding: 2rem;
+      background: rgba(201, 169, 98, 0.05);
+      border: 1px solid rgba(201, 169, 98, 0.15);
+      border-radius: 12px;
+      margin-top: 3rem;
+    }
+
+    .last-updated p {
+      color: var(--gray);
+      font-size: 0.9rem;
+    }
+
+    /* Footer */
+    .main-footer {
+      background: #0a0a0a;
+      padding: 2rem;
+      border-top: 1px solid rgba(201, 169, 98, 0.15);
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .footer-logo {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: var(--primary);
+    }
+
+    .footer-tagline {
+      color: var(--gray);
+      font-size: 0.9rem;
+      margin-top: 0.5rem;
+    }
+
+    .footer-bottom {
+      max-width: 1200px;
+      margin: 1.5rem auto 0;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      text-align: center;
+      color: var(--gray);
+      font-size: 0.85rem;
+    }
+
+    @media (max-width: 768px) {
+      .header-top {
+        padding: 0.8rem 1rem;
+      }
+
+      .logo {
+        font-size: 1.2rem;
+      }
+
+      .back-link {
+        font-size: 0.85rem;
+        padding: 0.5rem 0.8rem;
+      }
+
+      .page-content {
+        padding: 7rem 1.5rem 3rem;
+      }
+
+      .page-header h1 {
+        font-size: 1.8rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="main-header">
+    <div class="header-top">
+      <a href="index.html" class="logo">AFRICAN <span>ARTIFACTS</span></a>
+      <a href="index.html" class="back-link">← Back to Shop</a>
+    </div>
+  </header>
+
+  <main class="page-content">
+    <div class="page-header">
+      <h1>Privacy Policy</h1>
+      <p>Your privacy is important to us</p>
+    </div>
+
+    <div class="content-section">
+      <h2>1. Information We Collect</h2>
+      <p>We collect information you provide directly to us, including:</p>
+      <ul>
+        <li>Name and contact information (email, phone number, shipping address)</li>
+        <li>Payment information (processed securely through PayStack)</li>
+        <li>Order history and preferences</li>
+        <li>Communication history when you contact our support team</li>
+      </ul>
+    </div>
+
+    <div class="content-section">
+      <h2>2. How We Use Your Information</h2>
+      <p>We use the information we collect to:</p>
+      <ul>
+        <li>Process and fulfill your orders</li>
+        <li>Communicate with you about your orders and inquiries</li>
+        <li>Improve our products and services</li>
+        <li>Comply with legal obligations</li>
+        <li>Send you promotional materials (with your consent)</li>
+      </ul>
+    </div>
+
+    <div class="content-section">
+      <h2>3. Information Sharing</h2>
+      <p>We do not sell, trade, or otherwise transfer your personal information to outside parties except:</p>
+      <ul>
+        <li>Trusted third parties who assist us in operating our website and conducting our business</li>
+        <li>Payment processors (PayStack) for secure transaction processing</li>
+        <li>Shipping partners to deliver your orders</li>
+        <li>When required by law or to protect our rights</li>
+      </ul>
+    </div>
+
+    <div class="content-section">
+      <h2>4. Data Security</h2>
+      <p>We implement a variety of security measures to maintain the safety of your personal information. Your payment information is encrypted and processed through PayStack's secure servers. We do not store your complete payment details on our servers.</p>
+    </div>
+
+    <div class="content-section">
+      <h2>5. Cookies</h2>
+      <p>We use cookies to enhance your shopping experience. Cookies are small files that a site or its service provider transfers to your computer's hard drive through your web browser that enables the site to recognize your browser and capture certain information.</p>
+    </div>
+
+    <div class="content-section">
+      <h2>6. Your Rights</h2>
+      <p>You have the right to:</p>
+      <ul>
+        <li>Access the personal information we hold about you</li>
+        <li>Request correction of inaccurate personal information</li>
+        <li>Request deletion of your personal information</li>
+        <li>Opt-out of marketing communications</li>
+      </ul>
+    </div>
+
+    <div class="content-section">
+      <h2>7. Contact Us</h2>
+      <p>If you have any questions about this Privacy Policy, please contact us at:</p>
+      <p><strong>Email:</strong> info@africanartifacts.com</p>
+      <p><strong>Phone:</strong> +254 712 345678</p>
+    </div>
+
+    <div class="last-updated">
+      <p>Last updated: March 2025</p>
+    </div>
+  </main>
+
+  <footer class="main-footer">
+    <div class="footer-content">
+      <span class="footer-logo">AFRICAN ARTIFACTS</span>
+      <p class="footer-tagline">Inspired by Heritage | Crafted with Soul</p>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 African Artifacts. All rights reserved.</p>
+    </div>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Returns Policy | African Artifacts</title>
+  
+  <style>
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary: #c9a962;
+      --primary-dark: #a88a4a;
+      --dark: #1a1a1a;
+      --darker: #0f0f0f;
+      --light: #f5f5f5;
+      --white: #ffffff;
+      --gray: #888888;
+      --success: #4ade80;
+      --danger: #ef4444;
+      --transition: all 0.3s ease;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--dark);
+      color: var(--light);
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    a {
+      text-decoration: none;
+      color: var(--primary);
+      transition: var(--transition);
+    }
+
+    a:hover {
+      color: var(--primary-dark);
+    }
+
+    .main-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background: linear-gradient(180deg, rgba(26, 26, 26, 0.98) 0%, rgba(26, 26, 26, 0.92) 100%);
+      backdrop-filter: blur(12px);
+    }
+
+    .header-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      border-bottom: 1px solid rgba(201, 169, 98, 0.15);
+    }
+
+    .logo {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--primary);
+      letter-spacing: 2px;
+    }
+
+    .logo span {
+      color: var(--white);
+    }
+
+    .back-link {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--white);
+      font-weight: 500;
+      padding: 0.6rem 1.2rem;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      transition: var(--transition);
+    }
+
+    .back-link:hover {
+      background: var(--primary);
+      color: var(--dark);
+    }
+
+    .page-content {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 8rem 2rem 4rem;
+    }
+
+    .page-header {
+      text-align: center;
+      margin-bottom: 3rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid rgba(201, 169, 98, 0.2);
+    }
+
+    .page-header h1 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      margin-bottom: 0.5rem;
+      color: var(--primary);
+    }
+
+    .page-header p {
+      color: var(--gray);
+      font-size: 1rem;
+    }
+
+    .process-steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin: 2.5rem 0;
+    }
+
+    .step {
+      text-align: center;
+      padding: 1.5rem;
+      background: rgba(201, 169, 98, 0.05);
+      border: 1px solid rgba(201, 169, 98, 0.15);
+      border-radius: 16px;
+    }
+
+    .step-number {
+      width: 50px;
+      height: 50px;
+      background: var(--primary);
+      color: var(--dark);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin: 0 auto 1rem;
+    }
+
+    .step h3 {
+      color: var(--white);
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .step p {
+      color: var(--gray);
+      font-size: 0.9rem;
+    }
+
+    .content-section {
+      margin-bottom: 2.5rem;
+    }
+
+    .content-section h2 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: var(--white);
+    }
+
+    .content-section p {
+      color: rgba(255, 255, 255, 0.8);
+      margin-bottom: 1rem;
+    }
+
+    .content-section ul {
+      list-style: none;
+      margin-left: 1rem;
+    }
+
+    .content-section ul li {
+      position: relative;
+      padding-left: 1.5rem;
+      margin-bottom: 0.8rem;
+      color: rgba(255, 255, 255, 0.75);
+    }
+
+    .content-section ul li::before {
+      content: '•';
+      position: absolute;
+      left: 0;
+      color: var(--primary);
+      font-weight: bold;
+    }
+
+    .eligible-items, .not-eligible {
+      background: rgba(74, 222, 128, 0.08);
+      border: 1px solid rgba(74, 222, 128, 0.25);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+    }
+
+    .not-eligible {
+      background: rgba(239, 68, 68, 0.08);
+      border-color: rgba(239, 68, 68, 0.25);
+    }
+
+    .eligible-items h3, .not-eligible h3 {
+      margin-bottom: 1rem;
+      font-size: 1.1rem;
+    }
+
+    .eligible-items h3 {
+      color: var(--success);
+    }
+
+    .not-eligible h3 {
+      color: var(--danger);
+    }
+
+    .contact-box {
+      background: linear-gradient(135deg, rgba(201, 169, 98, 0.1) 0%, rgba(201, 169, 98, 0.05) 100%);
+      border: 1px solid rgba(201, 169, 98, 0.25);
+      border-radius: 16px;
+      padding: 2rem;
+      text-align: center;
+      margin-top: 2rem;
+    }
+
+    .contact-box h3 {
+      color: var(--primary);
+      font-size: 1.3rem;
+      margin-bottom: 1rem;
+    }
+
+    .contact-box p {
+      color: rgba(255, 255, 255, 0.8);
+      margin-bottom: 0.5rem;
+    }
+
+    .main-footer {
+      background: #0a0a0a;
+      padding: 2rem;
+      border-top: 1px solid rgba(201, 169, 98, 0.15);
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .footer-logo {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: var(--primary);
+    }
+
+    .footer-tagline {
+      color: var(--gray);
+      font-size: 0.9rem;
+      margin-top: 0.5rem;
+    }
+
+    .footer-bottom {
+      max-width: 1200px;
+      margin: 1.5rem auto 0;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      text-align: center;
+      color: var(--gray);
+      font-size: 0.85rem;
+    }
+
+    @media (max-width: 768px) {
+      .header-top {
+        padding: 0.8rem 1rem;
+      }
+
+      .logo {
+        font-size: 1.2rem;
+      }
+
+      .back-link {
+        font-size: 0.85rem;
+        padding: 0.5rem 0.8rem;
+      }
+
+      .page-content {
+        padding: 7rem 1.5rem 3rem;
+      }
+
+      .page-header h1 {
+        font-size: 1.8rem;
+      }
+
+      .process-steps {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="main-header">
+    <div class="header-top">
+      <a href="index.html" class="logo">AFRICAN <span>ARTIFACTS</span></a>
+      <a href="index.html" class="back-link">← Back to Shop</a>
+    </div>
+  </header>
+
+  <main class="page-content">
+    <div class="page-header">
+      <h1>Returns Policy</h1>
+      <p>Hassle-free returns within 30 days</p>
+    </div>
+
+    <div class="process-steps">
+      <div class="step">
+        <div class="step-number">1</div>
+        <h3>Contact Us</h3>
+        <p>Email or call us within 30 days of delivery</p>
+      </div>
+      <div class="step">
+        <div class="step-number">2</div>
+        <h3>Pack Item</h3>
+        <p>Pack the item in original packaging</p>
+      </div>
+      <div class="step">
+        <div class="step-number">3</div>
+        <h3>Ship Back</h3>
+        <p>Send the item back to us</p>
+      </div>
+      <div class="step">
+        <div class="step-number">4</div>
+        <h3>Get Refund</h3>
+        <p>Receive refund within 5-7 business days</p>
+      </div>
+    </div>
+
+    <div class="eligible-items">
+      <h3>✓ Items Eligible for Return</h3>
+      <ul>
+        <li>Wrong item received</li>
+        <li>Defective or damaged items</li>
+        <li>Items not as described</li>
+        <li>Size doesn't fit (for clothing)</li>
+        <li>Color significantly different from website photos</li>
+      </ul>
+    </div>
+
+    <div class="not-eligible">
+      <h3>✗ Items Not Eligible for Return</h3>
+      <ul>
+        <li>Custom or made-to-order items</li>
+        <li>Intimate apparel for hygiene reasons</li>
+        <li>Items damaged due to misuse</li>
+        <li>Items returned after 30 days</li>
+        <li>Items without original tags or packaging</li>
+      </ul>
+    </div>
+
+    <div class="content-section">
+      <h2>Refund Process</h2>
+      <p>Once we receive your returned item, we'll inspect it and notify you of the status of your refund. If approved:</p>
+      <ul>
+        <li>Refunds are processed within 5-7 business days</li>
+        <li>Original shipping fees are non-refundable</li>
+        <li>Return shipping costs may be covered for defective items</li>
+        <li>Refunds are credited to your original payment method</li>
+      </ul>
+    </div>
+
+    <div class="content-section">
+      <h2>Exchanges</h2>
+      <p>If you'd like to exchange an item for a different size, color, or product:</p>
+      <ul>
+        <li>Contact us to request an exchange</li>
+        <li>We'll ship the new item once we receive the return</li>
+        <li>Or ship the new item first if available in stock</li>
+      </ul>
+    </div>
+
+    <div class="content-section">
+      <h2>Shipping Damage Claims</h2>
+      <p>If your item arrives damaged, please:</p>
+      <ul>
+        <li>Take photos of the damage immediately</li>
+        <li>Contact us within 48 hours of delivery</li>
+        <li>Keep all original packaging</li>
+        <li>We'll work with the carrier to resolve the issue</li>
+      </ul>
+    </div>
+
+    <div class="contact-box">
+      <h3>Need Help?</h3>
+      <p>Contact our customer service team</p>
+      <p><strong>Email:</strong> info@africanartifacts.com</p>
+      <p><strong>Phone:</strong> +254 712 345678</p>
+      <p><strong>WhatsApp:</strong> +254 712 345678</p>
+    </div>
+
+  </main>
+
+  <footer class="main-footer">
+    <div class="footer-content">
+      <span class="footer-logo">AFRICAN ARTIFACTS</span>
+      <p class="footer-tagline">Inspired by Heritage | Crafted with Soul</p>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 African Artifacts. All rights reserved.</p>
+    </div>
+  </footer>
+
+</body>
+</html>

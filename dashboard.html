@@ -389,7 +389,7 @@
       border-bottom: none;
     }
 
-    /* Modal */
+    /* Modal (keeping for fallback) */
     .modal {
       display: none;
       position: fixed;
@@ -427,6 +427,135 @@
       margin-top: 0;
       color: var(--primary-brown);
       margin-bottom: 1rem;
+    }
+
+    /* Popup Toast (replaces modals) */
+    .popup-toast-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(4px);
+      z-index: 10000;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .popup-toast-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .popup-toast {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0.9);
+      background: var(--bg-light);
+      border: 1px solid var(--primary-gold);
+      border-radius: 20px;
+      padding: 2.5rem;
+      min-width: 350px;
+      max-width: 90%;
+      text-align: center;
+      box-shadow: 0 25px 80px rgba(0, 0, 0, 0.3);
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      z-index: 10001;
+    }
+
+    .popup-toast.active {
+      opacity: 1;
+      visibility: visible;
+      transform: translate(-50%, -50%) scale(1);
+    }
+
+    .popup-toast-icon {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.5rem;
+    }
+
+    .popup-toast-icon svg {
+      width: 40px;
+      height: 40px;
+    }
+
+    .popup-toast.success .popup-toast-icon {
+      background: linear-gradient(135deg, rgba(34, 197, 94, 0.2) 0%, rgba(34, 197, 94, 0.1) 100%);
+    }
+
+    .popup-toast.success .popup-toast-icon svg {
+      fill: #22c55e;
+    }
+
+    .popup-toast.error .popup-toast-icon {
+      background: linear-gradient(135deg, rgba(239, 68, 68, 0.2) 0%, rgba(239, 68, 68, 0.1) 100%);
+    }
+
+    .popup-toast.error .popup-toast-icon svg {
+      fill: #ef4444;
+    }
+
+    .popup-toast.warning .popup-toast-icon {
+      background: linear-gradient(135deg, rgba(251, 191, 36, 0.2) 0%, rgba(251, 191, 36, 0.1) 100%);
+    }
+
+    .popup-toast.warning .popup-toast-icon svg {
+      fill: #f59e0b;
+    }
+
+    .popup-toast.confirm .popup-toast-icon {
+      background: linear-gradient(135deg, rgba(201, 169, 98, 0.2) 0%, rgba(201, 169, 98, 0.1) 100%);
+    }
+
+    .popup-toast.confirm .popup-toast-icon svg {
+      fill: var(--primary-gold);
+    }
+
+    .popup-toast.info .popup-toast-icon {
+      background: linear-gradient(135deg, rgba(59, 130, 246, 0.2) 0%, rgba(59, 130, 246, 0.1) 100%);
+    }
+
+    .popup-toast.info .popup-toast-icon svg {
+      fill: #3b82f6;
+    }
+
+    .popup-toast-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 0.5rem;
+    }
+
+    .popup-toast-message {
+      color: var(--text-light);
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+    }
+
+    .popup-toast-btn {
+      background: linear-gradient(135deg, var(--primary-gold) 0%, #a88a4a 100%);
+      color: white;
+      border: none;
+      padding: 0.8rem 2rem;
+      border-radius: 10px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .popup-toast-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(201, 169, 98, 0.4);
     }
 
     .modal-content p {
@@ -1044,9 +1173,57 @@
       window.location.href = 'index.html';
     }
 
-    // Modal Helpers
+    // Popup Toast Helpers (replaces old modals)
+    let popupCallback = null;
+
+    function showPopupToast(type, title, message, buttonText = 'OK', callback = null) {
+      const overlay = document.getElementById('popupToastOverlay');
+      const popup = document.getElementById('popupToast');
+      const icon = document.getElementById('popupToastIcon');
+      const titleEl = document.getElementById('popupToastTitle');
+      const messageEl = document.getElementById('popupToastMessage');
+      const btn = document.querySelector('.popup-toast-btn');
+      
+      const icons = {
+        success: '<path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>',
+        error: '<path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>',
+        warning: '<path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/>',
+        info: '<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>',
+        confirm: '<path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>'
+      };
+      
+      popup.className = `popup-toast ${type}`;
+      icon.innerHTML = icons[type] || icons.info;
+      titleEl.textContent = title;
+      messageEl.textContent = message;
+      btn.textContent = buttonText;
+      popupCallback = callback;
+      
+      overlay.classList.add('active');
+      popup.classList.add('active');
+    }
+
+    function closePopupToast() {
+      document.getElementById('popupToastOverlay').classList.remove('active');
+      document.getElementById('popupToast').classList.remove('active');
+      if (popupCallback) {
+        popupCallback();
+        popupCallback = null;
+      }
+    }
+
+    // Legacy Modal Helpers (for backward compatibility)
     function openModal(modalId) {
-      document.getElementById(modalId).classList.add('active');
+      // Use popup toast instead for key modals
+      if (modalId === 'logoutModal') {
+        showPopupToast('warning', 'Confirm Logout', 'Are you sure you want to log out?', 'Yes, Logout', confirmLogout);
+      } else if (modalId === 'saveProfileModal') {
+        showPopupToast('confirm', 'Save Profile?', 'Save changes to your profile?', 'Yes, Save', confirmSaveProfile);
+      } else if (modalId === 'saveAddressModal') {
+        showPopupToast('confirm', 'Save Address?', 'Save this address for faster checkout?', 'Yes, Save', confirmSaveAddress);
+      } else {
+        document.getElementById(modalId).classList.add('active');
+      }
     }
 
     function closeModal(modalId) {
@@ -1070,5 +1247,16 @@
       }, 4000);
     }
   </script>
+
+  <!-- Popup Toast -->
+  <div class="popup-toast-overlay" id="popupToastOverlay"></div>
+  <div class="popup-toast" id="popupToast">
+    <div class="popup-toast-icon">
+      <svg viewBox="0 0 24 24" id="popupToastIcon"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+    </div>
+    <h3 class="popup-toast-title" id="popupToastTitle">Success!</h3>
+    <p class="popup-toast-message" id="popupToastMessage">Operation completed</p>
+    <button class="popup-toast-btn" onclick="closePopupToast()">OK</button>
+  </div>
 </body>
 </html>

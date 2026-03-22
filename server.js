@@ -18,7 +18,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Connect to MongoDB
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/african-artifacts')
+mongoose.connect(process.env.MONGODB_URI || 'mongodb+srv://iyonicfashion:%407Switched@iyonicfashion.iaidrz5.mongodb.net/?retryWrites=true&w=majority&appName=iyonicfashion')
   .then(() => console.log('✅ MongoDB Connected'))
   .catch(err => console.log('❌ MongoDB Error:', err));
 

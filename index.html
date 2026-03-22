@@ -3,1386 +3,1822 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>African Artifacts | Home</title>
-  
-
+  <title>African Artifacts | Authentic African Products</title>
   
   <style>
-    #about {
-      background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), url("African Clothing For Women Plus Size, Ankara Top….jpg");
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      color: #1a1a1a;
-      border-radius: 12px;
-      padding: 3rem 2rem;
-      margin: 2rem;
-      margin-top: 2rem;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-      font-size: 1.1rem;
-      line-height: 1.8;
-      font-weight: 500;
-    }
-    #about h2 {
-      font-size: 2.2rem;
-      color: #2c1810;
-      font-weight: bold;
-      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
-    }
-    #about em {
-      color: #0066cc;
-      font-weight: bold;
-    }
-    #about strong {
-      color: #cc2200;
-      font-weight: bold;
+    /* ========================================
+       CSS RESET & BASE STYLES
+       ======================================== */
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
 
-    /* Mobile Responsive About Section */
-    @media (max-width: 480px) {
-      #about {
-        padding: 2rem 1rem;
-        margin: 1rem;
-        border-radius: 8px;
-      }
-
-      #about h2 {
-        font-size: 1.5rem;
-      }
-
-      #about {
-        font-size: 0.9rem;
-        line-height: 1.6;
-      }
+    :root {
+      --primary: #c9a962;
+      --primary-dark: #a88a4a;
+      --secondary: #8b5a2b;
+      --dark: #1a1a1a;
+      --darker: #0f0f0f;
+      --light: #f5f5f5;
+      --white: #ffffff;
+      --gray: #888888;
+      --transition: all 0.3s ease;
     }
 
-    @media (min-width: 481px) and (max-width: 768px) {
-      #about {
-        padding: 2.5rem 1.5rem;
-        margin: 1.5rem;
-      }
-
-      #about h2 {
-        font-size: 1.9rem;
-      }
-
-      #about {
-        font-size: 1rem;
-      }
-    }
-    
-    .cart-count {
-      position: absolute;
-      top: 0;
-      right: 0;
-      background-color: #8a4c2c;
-      color: white;
-      border-radius: 50%;
-      width: 20px;
-      height: 20px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 12px;
-      font-weight: bold;
-      transform: translate(50%, -50%);
+    html {
+      scroll-behavior: smooth;
     }
 
     body {
-    margin: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #131313;
-    color: #333;
-    font-size: 18px;
-  }
-
-  header {
-    background: linear-gradient(rgba(20, 20, 20, 0.7), rgba(20, 20, 20, 0.7)), url("Animated wallpaper.jpg");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    color: white;
-    padding: 0;
-    text-align: center;
-  }
-
-  .header-top-bar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0.8rem 1.5rem;
-    background: rgba(0, 0, 0, 0.4);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  }
-
-  .header-auth-buttons {
-    display: flex;
-    gap: 1rem;
-    align-items: center;
-  }
-
-  .auth-btn {
-    padding: 0.6rem 1.2rem;
-    border: none;
-    border-radius: 8px;
-    font-weight: 600;
-    font-size: 0.95rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    text-decoration: none;
-    display: inline-block;
-  }
-
-  .cart-btn {
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    text-decoration: none;
-    color: white;
-    cursor: pointer;
-    transition: transform 0.2s ease;
-    padding: 0.5rem;
-  }
-
-  .cart-btn:hover {
-    transform: scale(1.1);
-  }
-
-  .cart-icon {
-    font-size: 1.5rem;
-  }
-
-  .cart-badge {
-    position: absolute;
-    top: -0.5rem;
-    right: -0.5rem;
-    background: #ff6b35;
-    color: white;
-    border-radius: 50%;
-    width: 1.3rem;
-    height: 1.3rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.7rem;
-    font-weight: bold;
-    box-shadow: 0 2px 8px rgba(255, 107, 53, 0.4);
-  }
-
-  .auth-btn.login {
-    background: rgba(255, 255, 255, 0.2);
-    color: white;
-    border: 1px solid rgba(255, 255, 255, 0.4);
-  }
-
-  .auth-btn.login:hover {
-    background: rgba(255, 255, 255, 0.3);
-    border-color: rgba(255, 255, 255, 0.6);
-  }
-
-  .auth-btn.primary {
-    background: linear-gradient(135deg, #f28c44 0%, #e8722c 100%);
-    color: white;
-  }
-
-  .auth-btn.primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 25px rgba(232, 114, 44, 0.4);
-  }
-
-  .auth-btn.logout {
-    background: rgba(232, 114, 44, 0.2);
-    color: #ff9966;
-    border: 1px solid rgba(232, 114, 44, 0.4);
-  }
-
-  .auth-btn.logout:hover {
-    background: rgba(232, 114, 44, 0.3);
-  }
-
-  .header-content {
-    padding: 1.5rem;
-  }
-
-  header h1 {
-    font-size: 2.5rem;
-    font-weight: bold;
-    margin: 0;
-    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
-  }
-
-  header p {
-    font-size: 1.2rem;
-    font-weight: 600;
-    margin: 0.5rem 0 0 0;
-    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.7);
-  }
-
-  /* Mobile Responsive Header */
-  @media (max-width: 480px) {
-    .header-top-bar {
-      flex-direction: row;
-      gap: 0.5rem;
-      padding: 0.6rem 1rem;
-      justify-content: space-between;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--dark);
+      color: var(--light);
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
     }
 
-    .header-auth-buttons {
-      justify-content: flex-start;
-      flex-wrap: nowrap;
-      gap: 0.5rem;
+    a {
+      text-decoration: none;
+      color: inherit;
     }
 
-    .auth-btn {
-      padding: 0.5rem 0.8rem;
-      font-size: 0.75rem;
+    img {
+      max-width: 100%;
+      height: auto;
     }
 
-    .cart-btn {
-      padding: 0.3rem;
+    /* ========================================
+       TOAST NOTIFICATIONS
+       ======================================== */
+    .toast-container {
+      position: fixed;
+      top: 100px;
+      right: 20px;
+      z-index: 10000;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      pointer-events: none;
     }
 
-    .cart-icon {
-      font-size: 1.2rem;
+    .toast {
+      background: var(--dark-secondary);
+      border: 1px solid rgba(201, 169, 98, 0.2);
+      border-radius: 12px;
+      padding: 1rem 1.5rem;
+      min-width: 300px;
+      max-width: 400px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+      transform: translateX(120%);
+      animation: toastSlideIn 0.4s ease forwards;
+      pointer-events: auto;
     }
 
-    .cart-badge {
-      width: 1.1rem;
-      height: 1.1rem;
-      font-size: 0.6rem;
+    @keyframes toastSlideIn {
+      to { transform: translateX(0); }
     }
 
-    header {
-      padding: 0;
+    .toast.toast-exit {
+      animation: toastSlideOut 0.3s ease forwards;
     }
 
-    .header-content {
-      padding: 1rem;
+    @keyframes toastSlideOut {
+      to { transform: translateX(120%); opacity: 0; }
     }
 
-    header h1 {
-      font-size: 1.6rem;
+    .toast-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
     }
 
-    header p {
-      font-size: 0.85rem;
-    }
-  }
-
-  @media (min-width: 481px) and (max-width: 768px) {
-    .header-top-bar {
-      padding: 0.7rem 1.2rem;
+    .toast-icon svg {
+      width: 22px;
+      height: 22px;
     }
 
-    .auth-btn {
-      padding: 0.55rem 1.1rem;
-      font-size: 0.9rem;
+    .toast.success .toast-icon {
+      background: rgba(34, 197, 94, 0.15);
     }
 
-    header {
-      padding: 0;
+    .toast.success .toast-icon svg {
+      fill: #22c55e;
     }
 
-    .header-content {
-      padding: 1.2rem;
+    .toast.error .toast-icon {
+      background: rgba(239, 68, 68, 0.15);
     }
 
-    header h1 {
-      font-size: 2rem;
+    .toast.error .toast-icon svg {
+      fill: #ef4444;
     }
 
-    header p {
-      font-size: 1rem;
-    }
-  }
-
-  nav {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    background-color: #5a4228;
-    padding: 1rem 0;
-  }
-
-  nav a {
-    color: white;
-    text-decoration: none;
-    margin: 0.3rem 0.5rem;
-    font-weight: bold;
-    font-size: 1.1rem;
-    padding: 0.7rem 1rem;
-    border-radius: 4px;
-    transition: background-color 0.3s ease;
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
-
-  nav a:hover,
-  nav a:focus {
-    background-color: #7b5934;
-  }
-
-  nav a .cart-icon {
-    font-size: 1.3rem;
-  }
-
-  /* Mobile Responsive Navigation */
-  @media (max-width: 480px) {
-    nav {
-      padding: 0.6rem 0;
+    .toast.warning .toast-icon {
+      background: rgba(251, 191, 36, 0.15);
     }
 
-    nav a {
-      font-size: 0.8rem;
-      padding: 0.5rem 0.6rem;
-      margin: 0.2rem 0.3rem;
-    }
-  }
-
-  @media (min-width: 481px) and (max-width: 768px) {
-    nav {
-      padding: 0.8rem 0;
+    .toast.warning .toast-icon svg {
+      fill: #fbbf24;
     }
 
-    nav a {
-      font-size: 0.95rem;
-      padding: 0.6rem 0.8rem;
-      margin: 0.3rem 0.4rem;
-    }
-  }
-
-  .hero {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('01533a8a-8605-43df-b52a-6910c3f13abc.jpg');
-    background-size: cover;
-    background-position: center;
-    padding: 5rem 2rem;
-    text-align: center;
-    color: white;
-  }
-
-  .hero h1 {
-    font-size: 3rem;
-    font-weight: bold;
-    text-shadow: 3px 3px 12px rgba(0, 0, 0, 0.8);
-    margin: 0;
-  }
-
-  .hero p {
-    font-size: 1.3rem;
-    font-weight: 600;
-    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.8);
-  }
-
-  /* Mobile Responsive Hero */
-  @media (max-width: 480px) {
-    .hero {
-      padding: 2rem 1rem;
+    .toast.info .toast-icon {
+      background: rgba(59, 130, 246, 0.15);
     }
 
-    .hero h1 {
-      font-size: 1.4rem;
+    .toast.info .toast-icon svg {
+      fill: #3b82f6;
     }
 
-    .hero p {
-      font-size: 0.9rem;
-    }
-  }
-
-  @media (min-width: 481px) and (max-width: 768px) {
-    .hero {
-      padding: 3rem 1.5rem;
+    .toast-content {
+      flex: 1;
     }
 
-    .hero h1 {
-      font-size: 2rem;
-    }
-
-    .hero p {
-      font-size: 1.1rem;
-    }
-  }
-
-  @media (min-width: 769px) and (max-width: 1024px) {
-    .hero {
-      padding: 4rem 2rem;
-    }
-
-    .hero h1 {
-      font-size: 2.5rem;
-    }
-
-    .hero p {
-      font-size: 1.2rem;
-    }
-  }
-
-  /* ============================================
-     SECTION BACKGROUND TEMPLATES
-     ============================================
-     
-     Each section below can have a background image added.
-     Replace "YOUR_IMAGE.jpg" with exact filename.
-     Adjust the rgba opacity (first number) 0-1 for darkness.
-     
-     ============================================ */
-
-  /* SHOP SECTION - BACKGROUND CUSTOMIZATION */
-  #shop {
-    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("African print Bag, African Bag, African Fabric….jpg");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    color: #f5f5f5;
-    padding: 5rem 2rem;
-    text-align: center;
-  }
-
-  #shop h2 {
-    font-size: 2.5rem;
-    color: white;
-    margin-bottom: 2rem;
-    text-shadow: 3px 3px 12px rgba(0,0,0,0.8);
-    font-weight: bold;
-  }
-
-  #shop h3 {
-    font-weight: 600;
-    text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
-  }
-
-  #shop p {
-    font-size: 1rem;
-    font-weight: 500;
-    text-shadow: 2px 2px 6px rgba(0,0,0,0.7);
-  }
-
-  /* Mobile Responsive Shop Section */
-  @media (max-width: 480px) {
-    #shop {
-      padding: 2rem 1rem;
-    }
-
-    #shop h2 {
-      font-size: 1.6rem;
-      margin-bottom: 1.5rem;
-    }
-
-    #shop h3 {
-      font-size: 0.95rem;
-    }
-
-    #shop p {
-      font-size: 0.8rem;
-    }
-  }
-
-  @media (min-width: 481px) and (max-width: 768px) {
-    #shop {
-      padding: 3rem 1.5rem;
-    }
-
-    #shop h2 {
-      font-size: 2rem;
-      margin-bottom: 1.8rem;
-    }
-
-    #shop h3 {
-      font-size: 1rem;
-    }
-
-    #shop p {
-      font-size: 0.9rem;
-    }
-  }
-
-  @media (min-width: 769px) and (max-width: 1024px) {
-    #shop {
-      padding: 4rem 2rem;
-    }
-
-    #shop h2 {
-      font-size: 2.2rem;
-    }
-  }
-
-
-  #product-list {
-    display: flex;
-    flex-wrap: wrap; /* Wraps to the next line if needed */
-    gap: 20px; /* Space between products */
-    justify-content: center; /* Center align the items */
-  }
-
-  .product-link {
-    text-decoration: none;
-  }
-
-  .product {
-    width: 250px;
-    text-align: center;
-    background: rgba(255, 255, 255, 0.1); /* Optional: light background */
-    padding: 15px;
-    border-radius: 10px;
-  }
-
-  .product img {
-    width: 100%;
-    height: auto;
-    border-radius: 8px;
-  }
-
-  .product h3,
-  .product p,
-  .product button {
-    color: #fff;
-  }
-
-  .product button {
-    background-color: transparent;
-    border: 1px solid #fff;
-    padding: 5px 10px;
-    margin-top: 10px;
-    cursor: pointer;
-  }
-
-  .product button:hover {
-    background-color: #fff;
-    color: #000;
-  }
-
-
-  .product img {
-    width: 220px;
-    height: auto;
-    border-radius: 8px;
-    object-fit: cover;
-    display: block;
-    margin: 0 auto 0.5rem;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
-    transition: box-shadow 0.3s ease;
-  }
-
-  .product h3 {
-    margin: 0;
-    font-size: 1.1rem;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
-  }
-
-  .cart-count {
-    position: absolute;
-    top: 0;
-    right: 0;
-    background-color: #8a4c2c;
-    color: white;
-    border-radius: 50%;
-    width: 20px;
-    height: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 12px;
-    font-weight: bold;
-    transform: translate(50%, -50%);
-  }
-
-  @media (max-width: 600px) {
-    .product img {
-      width: 100%;
-    }
-  }
-
-  /* Contact and Footer Styles */
-  #contact {
-    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("African Kenyan Handmade Traditional sarong  Shuka….jpg");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    color: #f5f5f5;
-    padding: 3rem 2rem;
-    text-align: center;
-  }
-
-  #contact h2 {
-    font-size: 2rem;
-    margin-bottom: 1.5rem;
-  }
-
-  #contact p {
-    font-size: 1rem;
-    margin: 0.8rem 0;
-  }
-
-  footer {
-    background-color: #3e2f1c;
-    color: white;
-    text-align: center;
-    padding: 1.5rem;
-    font-size: 0.95rem;
-  }
-
-  /* Mobile Responsive Contact and Footer */
-  @media (max-width: 480px) {
-    #contact {
-      padding: 2rem 1rem;
-    }
-
-    #contact h2 {
-      font-size: 1.4rem;
-      margin-bottom: 1rem;
-    }
-
-    #contact p {
-      font-size: 0.9rem;
-      margin: 0.6rem 0;
-    }
-
-    footer {
-      padding: 1rem;
-      font-size: 0.85rem;
-    }
-  }
-
-  @media (min-width: 481px) and (max-width: 768px) {
-    #contact {
-      padding: 2.5rem 1.5rem;
-    }
-
-    #contact h2 {
-      font-size: 1.6rem;
-    }
-
-    #contact p {
-      font-size: 0.95rem;
-    }
-
-    footer {
-      padding: 1.2rem;
-      font-size: 0.9rem;
-    }
-  }
-</style>
-</head>
-<body>
-  <header>
-    <div class="header-top-bar">
-      <div style="flex: 1;"></div>
-      <div class="header-auth-buttons">
-        <a id="loginBtn" href="login.html" class="auth-btn login">Login</a>
-        <a id="signupBtn" href="signup.html" class="auth-btn login">Sign Up</a>
-        <a id="dashboardBtn" href="dashboard.html" class="auth-btn primary" style="display: none;">Dashboard</a>
-        <button id="logoutBtn" class="auth-btn logout" style="display: none; cursor: pointer; border: 1px solid rgba(232, 114, 44, 0.4);">Logout</button>
-      </div>
-      <a href="cart.html" class="cart-btn">
-        <span class="cart-icon">🛒</span>
-        <span id="cart-badge" class="cart-badge" style="display: none;">0</span>
-      </a>
-    </div>
-    <div class="header-content">
-      <h1>African Artifacts</h1>
-      <p>Inspired by Heritage | Crafted with Soul</p>
-    </div>
-  </header>
-
-  <nav>
-    <a href="#">Home</a>
-    <a href="#shop">Shop</a>
-    <a href="#about">About</a>
-    <a href="#contact">Contact</a>
-  </nav>
-
-  <div class="hero">
-    <h1>Explore Authentic African Artifacts</h1>
-    <p>Discover timeless pieces, crafted by local artisans.</p>
-  </div>
-
-  <!-- Shop Section -->
-<section class="section" id="shop" style="color: #fff;">
-  <style>
-    /* Shop section styling - add your background image above in CSS */
-
-    #shop h2,
-    #shop h3,
-    #shop p,
-    #shop button {
-      color: #fff;
+    .toast-title {
       font-weight: 600;
-    }
-
-    #shop h3 {
-      font-size: 1.15rem;
-      font-weight: 700;
-      text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.8);
-      margin: 10px 0 8px;
-    }
-
-    #shop p {
+      color: var(--white);
       font-size: 0.95rem;
-      text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
-      margin: 8px 0;
+      margin-bottom: 2px;
     }
 
-    #shop button {
-      background-color: rgba(0, 0, 0, 0.4);
-      border: 2px solid #fff;
-      padding: 8px 16px;
+    .toast-message {
+      color: var(--gray);
+      font-size: 0.85rem;
+    }
+
+    .toast-close {
+      background: none;
+      border: none;
+      color: var(--gray);
       cursor: pointer;
-      font-weight: 700;
-      border-radius: 6px;
-      color: #fff;
-      font-size: 0.95rem;
-      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
+      padding: 4px;
+      font-size: 18px;
+      line-height: 1;
+      transition: color 0.2s;
+    }
+
+    .toast-close:hover {
+      color: var(--white);
+    }
+
+    /* Popup Toast (centered) */
+    .popup-toast {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0.9);
+      background: var(--dark-secondary);
+      border: 1px solid rgba(201, 169, 98, 0.3);
+      border-radius: 20px;
+      padding: 2.5rem;
+      min-width: 350px;
+      max-width: 90%;
+      text-align: center;
+      box-shadow: 0 25px 80px rgba(0, 0, 0, 0.5);
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      z-index: 10001;
+    }
+
+    .popup-toast.active {
+      opacity: 1;
+      visibility: visible;
+      transform: translate(-50%, -50%) scale(1);
+    }
+
+    .popup-toast-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(4px);
+      z-index: 10000;
+      opacity: 0;
+      visibility: hidden;
       transition: all 0.3s ease;
     }
 
-    #shop button:hover {
-      background-color: #fff;
-      color: #000;
-      text-shadow: none;
-      font-weight: bold;
+    .popup-toast-overlay.active {
+      opacity: 1;
+      visibility: visible;
     }
-  </style>
 
-  <h2>Our Products</h2>
-  <div class="products-scroll" id="product-list">
-    <a href="shirts.html#kitenge-patchwork" class="product-link">
-      <div class="product">
-        <img src="Category_Shirt; Season_Spring,Summer….jpg" alt="Kitenge Patchwork Shirts" />
-        <h3>Kitenge Patchwork Shirts</h3>
-        <p>Sizes: S - 4XL</p>
-        <button onclick="event.stopPropagation(); window.location.href='shirts.html#kitenge-patchwork'">View More</button>
-    
-      </div>
-    </a>
+    .popup-toast-icon {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.5rem;
+    }
 
-    <a href="shirts.html#handwoven-plain" class="product-link">
-      <div class="product">
-        <img src="🪡We’re pairing a breezy plain-woven silk-linen….jpg" alt="Handwoven Plain Shirts" />
-        <h3>Handwoven Plain Shirts</h3>
-        <p>Sizes: S - 3XL</p>
-        <button onclick="event.stopPropagation(); window.location.href='shirts.html#handwoven-plain'">View More</button>
-    
-      </div>
-    </a>
+    .popup-toast-icon svg {
+      width: 40px;
+      height: 40px;
+    }
 
-    <a href="shirts.html#embroidery" class="product-link">
-      <div class="product">
-        <img src="Brand _ Comfort Colors About Fabric_ Classic….jpg" alt="Embroidery Shirts" />
-        <h3>Embroidery Shirts</h3>
-        <p>Sizes: S - 3XL</p>
-        <button onclick="event.stopPropagation(); window.location.href='shirts.html#embroidery'">View More</button>
-      
-      </div>
-    </a>
+    .popup-toast.success .popup-toast-icon {
+      background: linear-gradient(135deg, rgba(34, 197, 94, 0.2) 0%, rgba(34, 197, 94, 0.1) 100%);
+    }
 
-    <a href="tshirts.html" class="product-link">
-      <div class="product">
-        <img src="2b660eb6-7aea-4751-a6a6-56bf2c2c5b65.jpg" alt="Printed T-shirts" />
-        <h3>Printed T-shirts</h3>
-        <p>Sizes: S - 3XL</p>
-        <button onclick="event.stopPropagation(); window.location.href='tshirts.html'">View More</button>
-      </div>
-    </a>
+    .popup-toast.success .popup-toast-icon svg {
+      fill: #22c55e;
+    }
 
-    <a href="jerseys.html" class="product-link">
-      <div class="product">
-        <img src="Kenya NWT Soccer Jersey Adult XL Football Lions….jpg" alt="Kenyan Jerseys" />
-        <h3>Kenyan Jerseys</h3>
-        <p>Sizes: S - 4XL</p>
-        <button onclick="event.stopPropagation(); window.location.href='jerseys.html'">View More</button>
-      </div>
-    </a>
+    .popup-toast.error .popup-toast-icon {
+      background: linear-gradient(135deg, rgba(239, 68, 68, 0.2) 0%, rgba(239, 68, 68, 0.1) 100%);
+    }
 
-    <a href="ponchos.html" class="product-link">
-      <div class="product">
-        <img src="fb941f63-b33c-45a9-824a-2fb1bf0deb1e.jpg" alt="Ponchos with Kitenge Patchwork" />
-        <h3>Ponchos with Kitenge Patchwork</h3>
-        <p>Size: F</p>
-        <button onclick="event.stopPropagation(); window.location.href='ponchos.html'">View More</button>
-      </div>
-    </a>
+    .popup-toast.error .popup-toast-icon svg {
+      fill: #ef4444;
+    }
 
-    <a href="hoodies.html" class="product-link">
-      <div class="product">
-        <img src="Dashiki Snoodie _ Ankara Snoodie Jumper _ Africa… (2).jpg" alt="Hoodies with Kitenge Patchwork" />
-        <h3>Hoodies with Kitenge Patchwork</h3>
-        <p>Sizes: S - 3XL</p>
-        <button onclick="event.stopPropagation(); window.location.href='hoodies.html'">View More</button>
-      </div>
-    </a>
+    .popup-toast-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 0.5rem;
+    }
 
-    <a href="material.html" class="product-link">
-      <div class="product">
-        <img src="6eb44a35-c404-4500-9ab6-93ba6010d54d.jpg" alt="Kitenge Material" />
-        <h3>Kitenge Material</h3>
-        <p>6 Yards</p>
-        <button onclick="event.stopPropagation(); window.location.href='material.html'">View More</button>
-      </div>
-    </a>
+    .popup-toast-message {
+      color: var(--gray);
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+    }
 
-    <a href="blankets.html" class="product-link">
-      <div class="product">
-        <img src="af071c20-f00e-4b45-9689-1ebb21172d26.jpg" alt="Maasai Blankets" />
-        <h3>Maasai Blankets</h3>
-        <p>Traditional, Wool, Fleece</p>
-        <button onclick="event.stopPropagation(); window.location.href='blankets.html'">View More</button>
-      </div>
-    </a>
+    .popup-toast-btn {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      color: var(--dark);
+      border: none;
+      padding: 0.8rem 2rem;
+      border-radius: 10px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
 
-    <a href="sandals.html" class="product-link">
-      <div class="product">
-        <img src="bd523140-1103-4a68-935f-ba5f76bce21e.jpg" alt="Sandals" />
-        <h3>Sandals</h3>
-        <p>Men & Women</p>
-        <button onclick="event.stopPropagation(); window.location.href='sandals.html'">View More</button>
-      </div>
-    </a>
+    .popup-toast-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(201, 169, 98, 0.4);
+    }
 
-    <a href="womens.html" class="product-link">
-      <div class="product">
-        <img src="f2409f39-c351-4137-bd33-3e1aa8e7e614.jpg" alt="Women Vitenge Attires" />
-        <h3>Women Vitenge Attires</h3>
-        <p>Bubu, Snood, Hole Dress, Vimono, Skirts, Batik, Maxi, Chiffon, Elastic, Zipper, Jumpsuits, Embroidered, Shirt, Wrap, Tops</p>
-        <button onclick="event.stopPropagation(); window.location.href='womens.html'">View More</button>
-      </div>
-    </a>
+    /* ========================================
+       HEADER & NAVIGATION
+       ======================================== */
+    .main-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background: linear-gradient(180deg, rgba(26, 26, 26, 0.98) 0%, rgba(26, 26, 26, 0.92) 100%);
+      backdrop-filter: blur(12px);
+      transition: var(--transition);
+    }
 
-    <a href="soapstone.html" class="product-link">
-      <div class="product">
-        <img src="e0e052ff-8c51-4c30-bdb4-d588dd16071c.jpg" alt="Soapstone Products" />
-        <h3>Soapstone Products</h3>
-        <p>Plates (10", 8", 6"), Chess Boards, Coasters, Dishes, Toons, Mugs, Hippo/C Elephant, Gift Box, Maps, Soap Dish, Candle Holder, Ash Tray</p>
-        <button onclick="event.stopPropagation(); window.location.href='soapstone.html'">View More</button>
-      </div>
-    </a>
+    .header-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      border-bottom: 1px solid rgba(201, 169, 98, 0.15);
+    }
 
-    <a href="leatherbags.html" class="product-link">
-      <div class="product">
-        <img src="f902885c-2a6c-4858-b8f1-5dbbfcebe9dc.jpg?auto=format&fit=crop&w=400&q=80" alt="Leather Bags with Kitenge" />
-        <h3>Leather Bags with Kitenge</h3>
-        <button onclick="event.stopPropagation(); window.location.href='leatherbags.html'">View More</button>
-      </div>
-    </a>
+    .logo {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--primary);
+      letter-spacing: 2px;
+    }
 
-    <a href="handmadebags.html" class="product-link">
-      <div class="product">
-        <img src="0726d68d-4264-442a-8fb9-05c87664f7c1.jpg" alt="Handmade Bags" />
-        <h3>Handmade Bags</h3>
-        <button onclick="event.stopPropagation(); window.location.href='handmadebags.html'">View More</button>
-      </div>
-    </a>
+    .logo span {
+      color: var(--white);
+    }
 
-  </div>
-</section>
-
-<!-- PHOTO GALLERY SECTION - EASY TO CUSTOMIZE -->
-<section class="section" id="photo-gallery" style="background-color: #1a1a1a; padding: 3rem 2rem;">
-  <h2 style="text-align: center; color: white; font-size: 2.5rem; margin-bottom: 3rem;">Featured Gallery</h2>
-  
-  <div class="gallery-grid">
-    <!-- PHOTO 1 - EDIT THIS -->
-    <div class="gallery-item">
-      <img src="Handcrafted Kenyan soapstone figurines designs and….jpg" alt="Gallery Item 1">
-      <div class="gallery-label">Soapstone Crafts</div>
-    </div>
-
-    <!-- PHOTO 2 - EDIT THIS -->
-    <div class="gallery-item">
-      <img src="This Wall Hangings item by JollyWorldAU has 9….jpg" alt="Gallery Item 2">
-      <div class="gallery-label">Wall Hangings</div>
-    </div>
-
-    <!-- PHOTO 3 - EDIT THIS -->
-    <div class="gallery-item">
-      <img src="f902885c-2a6c-4858-b8f1-5dbbfcebe9dc.jpg" alt="Gallery Item 3">
-      <div class="gallery-label">Leather Bags</div>
-    </div>
-
-    <!-- PHOTO 4 - EDIT THIS -->
-    <div class="gallery-item">
-      <img src="e0e052ff-8c51-4c30-bdb4-d588dd16071c.jpg" alt="Gallery Item 4">
-      <div class="gallery-label">Artwork</div>
-    </div>
-
-    <!-- TO ADD MORE PHOTOS: Copy and paste the block below -->
-    <!-- 
-    <div class="gallery-item">
-      <img src="YOUR_IMAGE_NAME.jpg" alt="Gallery Item">
-      <div class="gallery-label">Your Label</div>
-    </div>
-    -->
-  </div>
-</section>
-
-<style>
-  /* GALLERY SECTION STYLING */
-  #photo-gallery {
-    background-color: #1a1a1a;
-    /* EASY BACKGROUND SWAP:
-       background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('YOUR_IMAGE.jpg');
-       background-size: cover;
-       background-position: center;
-       background-repeat: no-repeat;
-    */
-  }
-
-  .gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1.5rem;
-    max-width: 1400px;
-    margin: 0 auto;
-  }
-
-  .gallery-item {
-    position: relative;
-    overflow: hidden;
-    border-radius: 12px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
-    cursor: pointer;
-    height: 300px;
-  }
-
-  .gallery-item img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.4s ease;
-  }
-
-  .gallery-item:hover img {
-    transform: scale(1.1);
-  }
-
-  .gallery-label {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
-    color: white;
-    padding: 1.5rem 1rem 1rem;
-    font-size: 1.2rem;
-    font-weight: bold;
-    text-align: center;
-    transform: translateY(100%);
-    transition: transform 0.4s ease;
-  }
-
-  .gallery-item:hover .gallery-label {
-    transform: translateY(0);
-  }
-
-  /* RESPONSIVE GALLERY */
-  @media (max-width: 480px) {
-    .gallery-grid {
-      grid-template-columns: repeat(2, 1fr);
+    .header-actions {
+      display: flex;
+      align-items: center;
       gap: 1rem;
     }
 
-    .gallery-item {
-      height: 200px;
+    .header-btn {
+      padding: 0.6rem 1.2rem;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: var(--transition);
+      border: none;
     }
 
-    .gallery-label {
-      font-size: 0.9rem;
-      padding: 1rem 0.8rem 0.8rem;
-    }
-  }
-
-  @media (min-width: 481px) and (max-width: 768px) {
-    .gallery-grid {
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1.2rem;
+    .header-btn.login {
+      background: transparent;
+      color: var(--white);
+      border: 1px solid rgba(255, 255, 255, 0.25);
     }
 
-    .gallery-item {
-      height: 250px;
-    }
-  }
-
-  @media (min-width: 769px) and (max-width: 1024px) {
-    .gallery-grid {
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.3rem;
+    .header-btn.login:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: var(--primary);
+      color: var(--primary);
     }
 
-    .gallery-item {
-      height: 280px;
-    }
-  }
-</style>
-
-<style>
-  .products-scroll {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 2rem;
-    padding: 2rem 1.5rem;
-    margin: 0 auto;
-    max-width: 1400px;
-  }
-
-  .product-link {
-    text-decoration: none;
-  }
-
-  .product {
-    text-align: center;
-    background: rgba(0, 0, 0, 0.5);
-    padding: 1.5rem;
-    border-radius: 10px;
-    border: 2px solid rgba(255, 255, 255, 0.3);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-
-  .product:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
-  }
-
-  .product img {
-    width: 100%;
-    height: 250px;
-    object-fit: cover;
-    border-radius: 8px;
-    margin-bottom: 0.5rem;
-  }
-
-  .product h3 {
-    color: #fff;
-    font-size: 1.1rem;
-    font-weight: 700;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-    margin: 12px 0 8px;
-  }
-
-  .product p {
-    color: #fff;
-    font-weight: 500;
-    font-size: 0.95rem;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
-    margin: 8px 0;
-  }
-
-  .product button {
-    background-color: rgba(0, 0, 0, 0.6);
-    border: 2px solid #fff;
-    padding: 0.8rem 1.2rem;
-    margin-top: 10px;
-    cursor: pointer;
-    color: #fff;
-    font-weight: 700;
-    border-radius: 6px;
-    font-size: 0.95rem;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-    transition: all 0.3s ease;
-  }
-
-  .product button:hover {
-    background-color: #fff;
-    color: #000;
-    text-shadow: none;
-  }
-
-  /* Mobile Responsive Grid */
-  @media (max-width: 480px) {
-    .products-scroll {
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1rem;
-      padding: 1.5rem 1rem;
+    .header-btn.signup {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      color: #1a1a1a;
     }
 
-    .product {
-      padding: 0.8rem;
+    .header-btn.signup:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(201, 169, 98, 0.35);
     }
 
-    .product img {
-      height: 150px;
+    .header-btn.dashboard {
+      background: var(--secondary);
+      color: var(--white);
+      display: none;
     }
 
-    .product h3 {
-      font-size: 0.9rem;
-      margin: 8px 0 6px;
+    .header-btn.logout {
+      background: rgba(200, 50, 50, 0.2);
+      color: #ff6b6b;
+      border: 1px solid rgba(200, 50, 50, 0.3);
+      display: none;
     }
 
-    .product p {
-      font-size: 0.75rem;
-      margin: 6px 0;
+    .cart-icon-btn {
+      position: relative;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      padding: 0.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
-    .product button {
-      padding: 0.6rem 0.8rem;
+    .cart-icon-btn svg {
+      width: 22px;
+      height: 22px;
+      fill: var(--white);
+      transition: var(--transition);
+    }
+
+    .cart-icon-btn:hover svg {
+      fill: var(--primary);
+    }
+
+    .cart-badge {
+      position: absolute;
+      top: -2px;
+      right: -2px;
+      background: var(--primary);
+      color: #1a1a1a;
+      font-size: 0.65rem;
+      font-weight: 800;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      display: none;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Main Navigation */
+    .main-nav {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 0.7rem 2rem;
+      background: rgba(0, 0, 0, 0.25);
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 2.5rem;
+    }
+
+    .nav-links a {
+      color: rgba(255, 255, 255, 0.85);
+      font-weight: 500;
+      font-size: 0.95rem;
+      padding: 0.4rem 0.8rem;
+      border-radius: 6px;
+      transition: var(--transition);
+      position: relative;
+    }
+
+    .nav-links a:hover {
+      color: var(--primary);
+    }
+
+    /* Mobile Menu Toggle */
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 5px;
+    }
+
+    .menu-toggle span {
+      width: 24px;
+      height: 2px;
+      background: var(--white);
+      transition: var(--transition);
+    }
+
+    /* ========================================
+       HERO SECTION
+       ======================================== */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      background: linear-gradient(135deg, rgba(0, 0, 0, 0.7) 0%, rgba(26, 26, 26, 0.8) 100%), 
+                  url('01533a8a-8605-43df-b52a-6910c3f13abc.jpg');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      padding: 7rem 2rem 4rem;
+    }
+
+    .hero-content {
+      text-align: center;
+      max-width: 750px;
+      animation: fadeInUp 1s ease-out;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(35px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: rgba(201, 169, 98, 0.15);
+      border: 1px solid var(--primary);
+      color: var(--primary);
+      padding: 0.5rem 1.5rem;
+      border-radius: 30px;
       font-size: 0.8rem;
-    }
-  }
-
-  @media (min-width: 481px) and (max-width: 768px) {
-    .products-scroll {
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1.2rem;
-      padding: 1.8rem 1.2rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
     }
 
-    .product {
-      padding: 1rem;
+    .hero h1 {
+      font-size: 3.2rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
+      line-height: 1.15;
+      text-shadow: 2px 2px 30px rgba(0, 0, 0, 0.6);
     }
 
-    .product img {
-      height: 180px;
+    .hero h1 span {
+      color: var(--primary);
     }
 
-    .product h3 {
+    .hero p {
+      font-size: 1.2rem;
+      margin-bottom: 2.2rem;
+      color: rgba(255, 255, 255, 0.85);
+      text-shadow: 1px 1px 15px rgba(0, 0, 0, 0.5);
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      display: inline-block;
+      padding: 0.9rem 2.5rem;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      color: #1a1a1a;
+      font-weight: 700;
+      font-size: 0.95rem;
+      border-radius: 50px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: var(--transition);
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 35px rgba(201, 169, 98, 0.45);
+    }
+
+    .btn-secondary {
+      display: inline-block;
+      padding: 0.9rem 2.5rem;
+      background: transparent;
+      color: var(--white);
+      font-weight: 700;
+      font-size: 0.95rem;
+      border-radius: 50px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: var(--transition);
+      border: 2px solid rgba(255, 255, 255, 0.5);
+      cursor: pointer;
+    }
+
+    .btn-secondary:hover {
+      background: var(--white);
+      color: #1a1a1a;
+      border-color: var(--white);
+    }
+
+    /* ========================================
+       CATEGORY PILLS
+       ======================================== */
+    .categories {
+      padding: 2.5rem 2rem;
+      background: var(--darker);
+      border-top: 1px solid rgba(201, 169, 98, 0.1);
+      border-bottom: 1px solid rgba(201, 169, 98, 0.1);
+    }
+
+    .categories-grid {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .category-pill {
+      padding: 0.7rem 1.6rem;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 30px;
+      color: rgba(255, 255, 255, 0.75);
+      font-weight: 500;
+      font-size: 0.9rem;
+      transition: var(--transition);
+      cursor: pointer;
+    }
+
+    .category-pill:hover,
+    .category-pill.active {
+      background: var(--primary);
+      color: #1a1a1a;
+      border-color: var(--primary);
+    }
+
+    /* ========================================
+       FEATURED PRODUCT SECTION
+       ======================================== */
+    .featured-section {
+      padding: 5rem 2rem;
+      background: var(--dark);
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 3.5rem;
+    }
+
+    .section-header h2 {
+      font-size: 2.3rem;
+      margin-bottom: 0.6rem;
+      font-weight: 700;
+    }
+
+    .section-header p {
+      color: var(--gray);
+      font-size: 1.05rem;
+    }
+
+    .featured-product {
+      max-width: 950px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      background: linear-gradient(135deg, rgba(201, 169, 98, 0.08) 0%, rgba(139, 90, 43, 0.06) 100%);
+      border: 1px solid rgba(201, 169, 98, 0.25);
+      border-radius: 20px;
+      overflow: hidden;
+      transition: var(--transition);
+    }
+
+    .featured-product:hover {
+      transform: translateY(-6px);
+      border-color: var(--primary);
+      box-shadow: 0 25px 60px rgba(201, 169, 98, 0.15);
+    }
+
+    .featured-image {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .featured-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      min-height: 380px;
+      transition: var(--transition);
+    }
+
+    .featured-product:hover .featured-image img {
+      transform: scale(1.06);
+    }
+
+    .featured-badge {
+      position: absolute;
+      top: 18px;
+      left: 18px;
+      background: var(--primary);
+      color: #1a1a1a;
+      padding: 0.45rem 1.1rem;
+      border-radius: 20px;
+      font-weight: 700;
+      font-size: 0.8rem;
+      letter-spacing: 0.5px;
+    }
+
+    .featured-details {
+      padding: 2.8rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .featured-details h3 {
+      font-size: 1.8rem;
+      margin-bottom: 0.8rem;
+      font-weight: 700;
+    }
+
+    .featured-details .description {
+      color: var(--gray);
+      margin-bottom: 1.2rem;
+      line-height: 1.7;
       font-size: 0.95rem;
     }
 
-    .product p {
+    .featured-price {
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: var(--primary);
+      margin-bottom: 0.4rem;
+    }
+
+    .featured-sizes {
+      color: var(--gray);
+      margin-bottom: 1.5rem;
+      font-size: 0.9rem;
+    }
+
+    .featured-details .btn-primary {
+      align-self: flex-start;
+      padding: 0.8rem 2rem;
+    }
+
+    /* ========================================
+       PRODUCTS GRID
+       ======================================== */
+    .products-section {
+      padding: 5rem 2rem;
+      background: linear-gradient(180deg, var(--dark) 0%, #141414 100%);
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 1.8rem;
+      max-width: 1350px;
+      margin: 0 auto;
+    }
+
+    .product-card {
+      background: rgba(255, 255, 255, 0.025);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 14px;
+      overflow: hidden;
+      transition: var(--transition);
+      cursor: pointer;
+    }
+
+    .product-card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(201, 169, 98, 0.4);
+      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.35);
+    }
+
+    .product-image {
+      position: relative;
+      overflow: hidden;
+      height: 260px;
+    }
+
+    .product-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: var(--transition);
+    }
+
+    .product-card:hover .product-image img {
+      transform: scale(1.08);
+    }
+
+    .product-info {
+      padding: 1.3rem;
+    }
+
+    .product-info h3 {
+      font-size: 1.05rem;
+      margin-bottom: 0.4rem;
+      font-weight: 600;
+      color: var(--white);
+    }
+
+    .product-info .price {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .product-info .sizes {
+      font-size: 0.8rem;
+      color: var(--gray);
+      margin-top: 0.3rem;
+    }
+
+    /* ========================================
+       GALLERY SECTION
+       ======================================== */
+    .gallery-section {
+      padding: 5rem 2rem;
+      background: #0f0f0f;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.2rem;
+      max-width: 1300px;
+      margin: 0 auto;
+    }
+
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
+      border-radius: 12px;
+      height: 280px;
+      cursor: pointer;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: var(--transition);
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.12);
+    }
+
+    .gallery-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 1.5rem;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.85), transparent);
+      transform: translateY(100%);
+      transition: var(--transition);
+    }
+
+    .gallery-item:hover .gallery-overlay {
+      transform: translateY(0);
+    }
+
+    .gallery-overlay span {
+      color: var(--white);
+      font-weight: 600;
+      font-size: 1rem;
+    }
+
+    /* ========================================
+       ABOUT SECTION
+       ======================================== */
+    .about-section {
+      padding: 6rem 2rem;
+      background: var(--dark);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .about-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: 
+        radial-gradient(ellipse at 20% 30%, rgba(201, 169, 98, 0.06) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 70%, rgba(201, 169, 98, 0.04) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    .about-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .about-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .about-header h2 {
+      font-size: 3rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .about-header .subtitle {
+      font-size: 1.2rem;
+      color: var(--gray);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
+    }
+
+    .about-card {
+      background: var(--dark-secondary);
+      border: 1px solid rgba(201, 169, 98, 0.12);
+      border-radius: 20px;
+      padding: 2.5rem;
+      transition: all 0.3s ease;
+    }
+
+    .about-card:hover {
+      border-color: rgba(201, 169, 98, 0.3);
+      transform: translateY(-5px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    .about-card-icon {
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(135deg, rgba(201, 169, 98, 0.15) 0%, rgba(201, 169, 98, 0.05) 100%);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .about-card-icon svg {
+      width: 30px;
+      height: 30px;
+      fill: var(--primary);
+    }
+
+    .about-card h3 {
+      font-size: 1.4rem;
+      color: var(--white);
+      margin-bottom: 1rem;
+      font-weight: 600;
+    }
+
+    .about-card p {
+      font-size: 1rem;
+      line-height: 1.7;
+      color: var(--gray);
+    }
+
+    .about-card .swahili-quote {
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(201, 169, 98, 0.1);
+      font-style: italic;
+      color: var(--primary);
+      font-size: 0.95rem;
+    }
+
+    .about-card .swahili-quote span {
+      color: var(--gray-light);
       font-size: 0.85rem;
     }
 
-    .product button {
-      padding: 0.7rem 1rem;
-      font-size: 0.85rem;
-    }
-  }
-
-  @media (min-width: 769px) and (max-width: 1024px) {
-    .products-scroll {
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.5rem;
+    .about-motto {
+      text-align: center;
+      margin-top: 3rem;
       padding: 2rem;
+      background: linear-gradient(135deg, rgba(201, 169, 98, 0.1) 0%, rgba(201, 169, 98, 0.02) 100%);
+      border-radius: 16px;
+      border: 1px solid rgba(201, 169, 98, 0.15);
     }
 
-    .product img {
-      height: 220px;
+    .about-motto h4 {
+      font-size: 1.5rem;
+      color: var(--white);
+      margin-bottom: 0.5rem;
     }
-  }
-</style>
 
-
-<script>
-  // Initialize cart in localStorage if it doesn't exist
-  if (!localStorage.getItem('cart')) {
-    localStorage.setItem('cart', JSON.stringify([]));
-  }
-  
-  function addToCart(productName, price = 45.99) {
-    // Get current cart
-    let cart = JSON.parse(localStorage.getItem('cart')) || [];
-    
-    // Add product to cart
-    const product = {
-      name: productName,
-      price: price, // Use provided price or default
-      quantity: 1,
-      image: document.querySelector(`a[href*="${productName.toLowerCase().replace(/\s+/g, '-')}"] img`).src
-    };
-    
-    // Check if product already exists in cart
-    const existingProductIndex = cart.findIndex(item => item.name === productName);
-    
-    if (existingProductIndex > -1) {
-      // Increase quantity if product already in cart
-      cart[existingProductIndex].quantity += 1;
-    } else {
-      // Add new product to cart
-      cart.push(product);
+    .about-motto .motto-text {
+      font-size: 1.1rem;
+      color: var(--primary);
+      font-style: italic;
     }
-    
-    // Save updated cart
-    localStorage.setItem('cart', JSON.stringify(cart));
-    
-    // Show notification
-    alert(productName + " has been added to your cart!");
-    
-    updateCartCount();
-  }
-  
-  function updateCartCount() {
-    const cart = JSON.parse(localStorage.getItem('cart')) || [];
-    const count = cart.reduce((total, item) => total + item.quantity, 0);
-    
-    // Update cart badge in header
-    const cartBadge = document.getElementById('cart-badge');
-    if (cartBadge) {
-      cartBadge.textContent = count;
-      cartBadge.style.display = count > 0 ? 'flex' : 'none';
+
+    /* ========================================
+       CONTACT SECTION
+       ======================================== */
+    .contact-section {
+      padding: 6rem 2rem;
+      background: var(--dark-secondary);
+      position: relative;
     }
-  }
-  
-  // Initialize cart count when page loads
-  document.addEventListener('DOMContentLoaded', function() {
-    updateCartCount();
-    checkUserAuthStatus();
-  });
 
-  // Check user authentication status and update buttons
-  function checkUserAuthStatus() {
-    const token = localStorage.getItem('authToken');
-    const loginBtn = document.getElementById('loginBtn');
-    const signupBtn = document.getElementById('signupBtn');
-    const dashboardBtn = document.getElementById('dashboardBtn');
-    const logoutBtn = document.getElementById('logoutBtn');
-
-    if (token) {
-      // User is logged in - show dashboard and logout
-      if (loginBtn) loginBtn.style.display = 'none';
-      if (signupBtn) signupBtn.style.display = 'none';
-      if (dashboardBtn) dashboardBtn.style.display = 'inline-block';
-      if (logoutBtn) logoutBtn.style.display = 'inline-block';
-    } else {
-      // User is not logged in - show login and signup
-      if (loginBtn) loginBtn.style.display = 'inline-block';
-      if (signupBtn) signupBtn.style.display = 'inline-block';
-      if (dashboardBtn) dashboardBtn.style.display = 'none';
-      if (logoutBtn) logoutBtn.style.display = 'none';
+    .contact-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(201, 169, 98, 0.3), transparent);
     }
-  }
 
-  // Handle logout
-  document.addEventListener('DOMContentLoaded', function() {
-    const logoutBtn = document.getElementById('logoutBtn');
-    if (logoutBtn) {
-      logoutBtn.addEventListener('click', function() {
-        localStorage.removeItem('authToken');
-        localStorage.removeItem('cart');
-        sessionStorage.removeItem('checkoutData');
-        checkUserAuthStatus();
-        window.location.href = 'index.html';
-      });
+    .contact-content {
+      max-width: 700px;
+      margin: 0 auto;
+      text-align: center;
     }
-  });
-</script>
 
+    .contact-content h2 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: var(--white);
+    }
 
-<style>
-  .product-link {
-    text-decoration: none;
-    color: inherit;
-    display: block;
-  }
+    .contact-content .contact-subtitle {
+      color: var(--gray);
+      margin-bottom: 2.5rem;
+      font-size: 1.1rem;
+    }
 
-  .product-link .product {
-    cursor: pointer;
-  }
+    .contact-info {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
 
-  .product button {
-    pointer-events: auto;
-  }
-</style>
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      padding: 1rem 1.5rem;
+      background: var(--dark);
+      border: 1px solid rgba(201, 169, 98, 0.15);
+      border-radius: 12px;
+      transition: all 0.3s ease;
+    }
 
+    .contact-item:hover {
+      border-color: var(--primary);
+      transform: translateY(-3px);
+    }
 
+    .contact-item svg {
+      width: 22px;
+      height: 22px;
+      fill: var(--primary);
+    }
 
-    <div id="cart">
-      <h3>Cart</h3>
-      <ul id="cart-items"></ul>
+    .contact-item span {
+      color: var(--white);
+      font-weight: 500;
+    }
+
+    /* ========================================
+       FOOTER
+       ======================================== */
+    .main-footer {
+      background: #0a0a0a;
+      padding: 3rem 2rem;
+      border-top: 1px solid rgba(201, 169, 98, 0.15);
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+
+    .footer-brand {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .footer-logo {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: var(--primary);
+    }
+
+    .footer-tagline {
+      color: var(--gray);
+      font-size: 0.9rem;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 2rem;
+    }
+
+    .footer-links a {
+      color: var(--gray);
+      font-size: 0.9rem;
+      transition: var(--transition);
+    }
+
+    .footer-links a:hover {
+      color: var(--primary);
+    }
+
+    .footer-social {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .social-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition);
+    }
+
+    .social-icon:hover {
+      background: var(--primary);
+      border-color: var(--primary);
+    }
+
+    .social-icon svg {
+      width: 18px;
+      height: 18px;
+      fill: var(--white);
+      transition: var(--transition);
+    }
+
+    .social-icon:hover svg {
+      fill: #1a1a1a;
+    }
+
+    .footer-bottom {
+      max-width: 1200px;
+      margin: 2rem auto 0;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      text-align: center;
+      color: var(--gray);
+      font-size: 0.85rem;
+    }
+
+    /* ========================================
+       RESPONSIVE STYLES
+       ======================================== */
+    @media (max-width: 900px) {
+      .featured-product {
+        grid-template-columns: 1fr;
+      }
+      
+      .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .header-top {
+        padding: 0.8rem 1rem;
+      }
+
+      .header-actions .header-btn {
+        padding: 0.5rem 0.8rem;
+        font-size: 0.75rem;
+      }
+
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        background: rgba(26, 26, 26, 0.98);
+        padding: 1rem;
+        gap: 0.5rem;
+      }
+
+      .nav-links.active {
+        display: flex;
+      }
+
+      .nav-links a {
+        padding: 0.8rem 1rem;
+        border-radius: 8px;
+      }
+
+      .menu-toggle {
+        display: flex;
+      }
+
+      .hero {
+        padding: 6rem 1.5rem 3rem;
+      }
+
+      .hero h1 {
+        font-size: 2.2rem;
+      }
+
+      .hero p {
+        font-size: 1rem;
+      }
+
+      .hero-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .btn-primary, .btn-secondary {
+        width: 100%;
+        max-width: 280px;
+        text-align: center;
+      }
+
+      .section-header h2 {
+        font-size: 1.8rem;
+      }
+
+      .featured-details {
+        padding: 2rem;
+      }
+
+      .featured-details h3 {
+        font-size: 1.5rem;
+      }
+
+      .featured-price {
+        font-size: 1.8rem;
+      }
+
+      .products-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+      }
+
+      .gallery-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+      }
+
+      .gallery-item {
+        height: 220px;
+      }
+
+      .footer-content {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .footer-links {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .header-actions {
+        gap: 0.5rem;
+      }
+
+      .header-btn.login,
+      .header-btn.signup {
+        display: none;
+      }
+
+      .hero h1 {
+        font-size: 1.8rem;
+      }
+
+      .hero-badge {
+        font-size: 0.7rem;
+        padding: 0.4rem 1rem;
+      }
+
+      .categories {
+        padding: 1.5rem 1rem;
+      }
+
+      .category-pill {
+        padding: 0.5rem 1rem;
+        font-size: 0.8rem;
+      }
+
+      .products-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .product-image {
+        height: 220px;
+      }
+
+      .gallery-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .about-content h2,
+      .contact-content h2,
+      .section-header h2 {
+        font-size: 1.6rem;
+      }
+
+      .about-content p,
+      .contact-item {
+        font-size: 0.95rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="main-header">
+    <div class="header-top">
+      <a href="index.html" class="logo">AFRICAN <span>ARTIFACTS</span></a>
+      
+      <div class="header-actions">
+        <a href="login.html" class="header-btn login" id="loginBtn">Login</a>
+        <a href="signup.html" class="header-btn signup" id="signupBtn">Sign Up</a>
+        <a href="dashboard.html" class="header-btn dashboard" id="dashboardBtn">Dashboard</a>
+        <button class="header-btn logout" id="logoutBtn">Logout</button>
+        <a href="cart.html" class="cart-icon-btn">
+          <svg viewBox="0 0 24 24"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>
+          <span class="cart-badge" id="cartBadge">0</span>
+        </a>
+      </div>
+
+      <div class="menu-toggle" onclick="toggleMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+
+    <nav class="main-nav">
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#">Home</a></li>
+        <li><a href="#shop">Shop</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <span class="hero-badge">Authentic African Craftsmanship</span>
+      <h1>Discover <span>Timeless</span> African Artifacts</h1>
+      <p>Handcrafted treasures celebrating the rich heritage of Kenya and East Africa. Every piece tells a story.</p>
+      <div class="hero-buttons">
+        <a href="#shop" class="btn-primary">Shop Now</a>
+        <a href="#about" class="btn-secondary">Learn More</a>
+      </div>
     </div>
   </section>
 
-  <section class="section" id="about">
-    <h2>About Us</h2>
-    <p><strong>Karibu!</strong> 🌍</p>
-    <p>
-      At <strong>African Artifacts</strong>, we say: <em>"Utamaduni wetu ni hazina yetu!"</em> (Our culture is our treasure!). 
-      Every piece you see has a heartbeat — telling stories of joy, pride, and legacy.
-    </p>
-    <p>
-      Whether it’s a handwoven shirt or a handcrafted carving, we celebrate each item with pride:
-      <em>“Kitenge si kitenge bila rangi!”</em> (A kitenge isn’t a kitenge without its colors!).
-    </p>
-    <p>
-      We work with skilled artisans from Kenya and across East Africa, ensuring each product reflects
-      authentic craftsmanship and soul. You’re not just buying — <strong>you’re preserving culture</strong>.
-    </p>
-    <p>
-      🌟 <strong>Kauli mbiu yetu:</strong> <em>“Sanaa, Upendo, Uhalisia!”</em> (Art, Love, Authenticity!)
-    </p>
-    <p>
-      Hakuna matata — we've got something for everyone. Be bold. Be proud. <strong>Wear the culture!</strong>
-    </p>
+
+  <!-- Featured Product -->
+  <section class="featured-section" id="shop">
+    <div class="section-header">
+      <h2>Featured Product</h2>
+      <p>Our most popular authentic African piece</p>
+    </div>
+
+    <div class="featured-product">
+      <div class="featured-image">
+        <img src="A authentic rugged rare mustard Women King  mud….jpg" alt="Featured Product">
+        <span class="featured-badge">⭐ Featured</span>
+      </div>
+      <div class="featured-details">
+        <h3>Ankara Evening Dress</h3>
+        <p class="description">Elegant traditional Ankara dress perfect for special occasions. Handcrafted with authentic African prints, featuring vibrant colors and premium quality fabric.</p>
+        <div class="featured-price">KSh 4,800</div>
+        <div class="featured-sizes">Sizes: S - XL</div>
+        <a href="product-details.html?product=kitenge-shirt" class="btn-primary">Shop Now</a>
+      </div>
+    </div>
   </section>
 
-  <section class="section" id="contact">
-    <h2>Contact Us</h2>
-    <p>Email: info@africanartifacts.com</p>
-    <p>Phone: +254 712 345678</p>
-    <p>Instagram: @africanartifacts</p>
+  <!-- Products Grid -->
+  <section class="products-section">
+    <div class="section-header">
+      <h2>Our Collection</h2>
+      <p>Explore our wide range of authentic African products</p>
+    </div>
+
+    <div class="products-grid">
+      <!-- Product 1: Kitenge Patchwork Shirt -->
+      <a href="product-details.html?product=kitenge-shirt" class="product-card">
+        <div class="product-image">
+          <img src="Category_Shirt; Season_Spring,Summer….jpg" alt="Kitenge Patchwork Shirt">
+        </div>
+        <div class="product-info">
+          <h3>Kitenge Patchwork Shirt</h3>
+          <div class="price">KSh 2,500</div>
+          <div class="sizes">Sizes: S - 4XL</div>
+        </div>
+      </a>
+
+      <!-- Product 2: Handwoven Silk-Linen Shirt -->
+      <a href="product-details.html?product=silk-linen-shirt" class="product-card">
+        <div class="product-image">
+          <img src="DESCRIPTION Woven on a traditional frame loom in….jpg" alt="Handwoven Silk-Linen Shirt">
+        </div>
+        <div class="product-info">
+          <h3>Handwoven Silk-Linen Shirt</h3>
+          <div class="price">KSh 3,200</div>
+          <div class="sizes">Sizes: S - 3XL</div>
+        </div>
+      </a>
+
+      <!-- Product 3: Embroidery Shirt -->
+      <a href="product-details.html?product=embroidery-shirt" class="product-card">
+        <div class="product-image">
+          <img src="Brand _ Comfort Colors About Fabric_ Classic….jpg" alt="Embroidery Shirt">
+        </div>
+        <div class="product-info">
+          <h3>Embroidery Shirt</h3>
+          <div class="price">KSh 2,800</div>
+          <div class="sizes">Sizes: S - 3XL</div>
+        </div>
+      </a>
+
+      <!-- Product 4: Kenya Pride T-Shirt -->
+      <a href="product-details.html?product=kenya-tshirt" class="product-card">
+        <div class="product-image">
+          <img src="2b660eb6-7aea-4751-a6a6-56bf2c2c5b65.jpg" alt="Kenya Pride T-Shirt">
+        </div>
+        <div class="product-info">
+          <h3>Kenya Pride T-Shirt</h3>
+          <div class="price">KSh 1,200</div>
+          <div class="sizes">Sizes: S - 3XL</div>
+        </div>
+      </a>
+
+      <!-- Product 5: Kenya Harambee Stars Jersey -->
+      <a href="product-details.html?product=kenya-jersey" class="product-card">
+        <div class="product-image">
+          <img src="Kenya NWT Soccer Jersey Adult XL Football Lions….jpg" alt="Kenya Harambee Stars Jersey">
+        </div>
+        <div class="product-info">
+          <h3>Kenya Harambee Stars Jersey</h3>
+          <div class="price">KSh 2,800</div>
+          <div class="sizes">Sizes: S - 4XL</div>
+        </div>
+      </a>
+
+      <!-- Product 6: Kitenge Poncho -->
+      <a href="product-details.html?product=kitenge-poncho" class="product-card">
+        <div class="product-image">
+          <img src="fb941f63-b33c-45a9-824a-2fb1bf0deb1e.jpg" alt="Kitenge Poncho">
+        </div>
+        <div class="product-info">
+          <h3>Kitenge Poncho</h3>
+          <div class="price">KSh 4,500</div>
+          <div class="sizes">One Size Fits All</div>
+        </div>
+      </a>
+
+      <!-- Product 7: Dashiki Ankara Hoodie -->
+      <a href="product-details.html?product=dashiki-hoodie" class="product-card">
+        <div class="product-image">
+          <img src="Dashiki Snoodie _ Ankara Snoodie Jumper _ Africa… (2).jpg" alt="Dashiki Ankara Hoodie">
+        </div>
+        <div class="product-info">
+          <h3>Dashiki Ankara Hoodie</h3>
+          <div class="price">KSh 3,800</div>
+          <div class="sizes">Sizes: S - 3XL</div>
+        </div>
+      </a>
+
+      <!-- Product 8: Premium Kitenge Fabric -->
+      <a href="product-details.html?product=kitenge-fabric" class="product-card">
+        <div class="product-image">
+          <img src="6eb44a35-c404-4500-9ab6-93ba6010d54d.jpg" alt="Premium Kitenge Fabric">
+        </div>
+        <div class="product-info">
+          <h3>Premium Kitenge Fabric</h3>
+          <div class="price">KSh 1,800</div>
+          <div class="sizes">Per 6 Yards</div>
+        </div>
+      </a>
+
+      <!-- Product 9: Maasai Shuka Blanket -->
+      <a href="product-details.html?product=maasai-blanket" class="product-card">
+        <div class="product-image">
+          <img src="af071c20-f00e-4b45-9689-1ebb21172d26.jpg" alt="Maasai Shuka Blanket">
+        </div>
+        <div class="product-info">
+          <h3>Maasai Shuka Blanket</h3>
+          <div class="price">KSh 2,200</div>
+          <div class="sizes">100% Wool</div>
+        </div>
+      </a>
+
+      <!-- Product 10: Maasai Leather Sandals -->
+      <a href="product-details.html?product=maasai-sandals" class="product-card">
+        <div class="product-image">
+          <img src="bd523140-1103-4a68-935f-ba5f76bce21e.jpg" alt="Maasai Leather Sandals">
+        </div>
+        <div class="product-info">
+          <h3>Maasai Leather Sandals</h3>
+          <div class="price">KSh 1,500</div>
+          <div class="sizes">Men & Women</div>
+        </div>
+      </a>
+
+      <!-- Product 11: Women Vitenge Dress -->
+      <a href="product-details.html?product=women-vitenge" class="product-card">
+        <div class="product-image">
+          <img src="f2409f39-c351-4137-bd33-3e1aa8e7e614.jpg" alt="Women Vitenge Dress">
+        </div>
+        <div class="product-info">
+          <h3>Women Vitenge Dress</h3>
+          <div class="price">KSh 3,500</div>
+          <div class="sizes">Multiple Styles</div>
+        </div>
+      </a>
+
+      <!-- Product 12: Kenyan Soapstone Art -->
+      <a href="product-details.html?product=soapstone-art" class="product-card">
+        <div class="product-image">
+          <img src="e0e052ff-8c51-4c30-bdb4-d588dd16071c.jpg" alt="Kenyan Soapstone Art">
+        </div>
+        <div class="product-info">
+          <h3>Kenyan Soapstone Art</h3>
+          <div class="price">KSh 800 - 5,000</div>
+          <div class="sizes">Handcrafted</div>
+        </div>
+      </a>
+
+      <!-- Product 13: Kente Pattern Hoodie -->
+      <a href="product-details.html?product=kente-hoodie" class="product-card">
+        <div class="product-image">
+          <img src="Kente hoodie African Dashiki Ankara shirt Rasta….jpg" alt="Kente Pattern Hoodie">
+        </div>
+        <div class="product-info">
+          <h3>Kente Pattern Hoodie</h3>
+          <div class="price">KSh 3,200</div>
+          <div class="sizes">Sizes: S - 3XL</div>
+        </div>
+      </a>
+
+      <!-- Product 14: Leather Kitenge Bag -->
+      <a href="product-details.html?product=leather-bag" class="product-card">
+        <div class="product-image">
+          <img src="f902885c-2a6c-4858-b8f1-5dbbfcebe9dc.jpg" alt="Leather Kitenge Bag">
+        </div>
+        <div class="product-info">
+          <h3>Leather Kitenge Bag</h3>
+          <div class="price">KSh 4,200</div>
+          <div class="sizes">One Size</div>
+        </div>
+      </a>
+
+    </div>
   </section>
 
-  <footer>
-    <p>&copy; 2025 African Artifacts. All rights reserved.</p>
+  <!-- Gallery Section -->
+  <section class="gallery-section">
+    <div class="section-header">
+      <h2>Artisan Gallery</h2>
+      <p>Explore our handcrafted collection</p>
+    </div>
+
+    <div class="gallery-grid">
+      <div class="gallery-item">
+        <img src="Handcrafted Kenyan soapstone figurines designs and….jpg" alt="Soapstone Crafts">
+        <div class="gallery-overlay"><span>Soapstone Crafts</span></div>
+      </div>
+      <div class="gallery-item">
+        <img src="f902885c-2a6c-4858-b8f1-5dbbfcebe9dc.jpg" alt="Leather Bags">
+        <div class="gallery-overlay"><span>Leather Bags</span></div>
+      </div>
+      <div class="gallery-item">
+        <img src="e0e052ff-8c51-4c30-bdb4-d588dd16071c.jpg" alt="Artwork">
+        <div class="gallery-overlay"><span>Artwork</span></div>
+      </div>
+      <div class="gallery-item">
+        <img src="African print Bag, African Bag, African Fabric….jpg" alt="African Fabrics">
+        <div class="gallery-overlay"><span>African Fabrics</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section class="about-section" id="about">
+    <div class="about-container">
+      <div class="about-header">
+        <h2>About Us</h2>
+        <p class="subtitle">Celebrating the rich heritage of East African craftsmanship</p>
+      </div>
+      
+      <div class="about-grid">
+        <div class="about-card">
+          <div class="about-card-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+          </div>
+          <h3>Karibu! Welcome</h3>
+          <p>Welcome to African Artifacts, where every piece tells a story. We believe shopping should be an experience that connects you to the heart of African artistry.</p>
+          <div class="swahili-quote">
+            "Utamaduni wetu ni hazina yetu!"<br>
+            <span>Our culture is our treasure!</span>
+          </div>
+        </div>
+
+        <div class="about-card">
+          <div class="about-card-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 3L1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17h2V9L12 3zm6.82 6L12 12.72 5.18 9 12 5.28 18.82 9zM17 15.99l-5 2.73-5-2.73v-3.72L12 15l5-2.73v3.72z"/></svg>
+          </div>
+          <h3>Authentic Craftsmanship</h3>
+          <p>Every product reflects the skilled hands of artisans from Kenya and across East Africa. We celebrate the beauty of handwoven textiles, handcrafted carvings, and traditional designs.</p>
+          <div class="swahili-quote">
+            "Kitenge si kitenge bila rangi!"<br>
+            <span>A kitenge isn't a kitenge without its colors!</span>
+          </div>
+        </div>
+
+        <div class="about-card">
+          <div class="about-card-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+          </div>
+          <h3>Preserving Culture</h3>
+          <p>When you shop with us, you're not just buying — you're preserving a legacy. Every purchase supports artisan communities and keeps traditional craftsmanship alive.</p>
+          <div class="swahili-quote">
+            "Sanaa, Upendo, Uhalisia!"<br>
+            <span>Art, Love, Authenticity!</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="about-motto">
+        <h4>🌟 Our Promise</h4>
+        <p class="motto-text">Hakuna matata — we've got something for everyone. Be bold. Be proud. <strong>Wear the culture!</strong></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="contact-section" id="contact">
+    <div class="contact-content">
+      <h2>Get In Touch</h2>
+      <p class="contact-subtitle">Have questions? We'd love to hear from you!</p>
+      <div class="contact-info">
+        <a href="mailto:info@africanartifacts.com" class="contact-item">
+          <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+          <span>info@africanartifacts.com</span>
+        </a>
+        <a href="tel:+254712345678" class="contact-item">
+          <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+          <span>+254 712 345678</span>
+        </a>
+        <div class="contact-item">
+          <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+          <span>@africanartifacts</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="main-footer">
+    <div class="footer-content">
+      <div class="footer-brand">
+        <span class="footer-logo">AFRICAN ARTIFACTS</span>
+        <span class="footer-tagline">Inspired by Heritage | Crafted with Soul</span>
+      </div>
+      
+      <div class="footer-links">
+        <a href="privacy-policy.html">Privacy Policy</a>
+        <a href="terms.html">Terms of Service</a>
+        <a href="shipping.html">Shipping Info</a>
+        <a href="returns.html">Returns</a>
+      </div>
+
+      <div class="footer-social">
+        <a href="#" class="social-icon" title="Instagram">
+          <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+        </a>
+        <a href="#" class="social-icon" title="Facebook">
+          <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+        </a>
+        <a href="#" class="social-icon" title="Twitter">
+          <svg viewBox="0 0 24 24"><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/></svg>
+        </a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 African Artifacts. All rights reserved.</p>
+    </div>
   </footer>
 
+  <!-- JavaScript -->
   <script>
-    function addToCart(productName) {
-      const cartList = document.getElementById('cart-items');
-      const listItem = document.createElement('li');
-      listItem.textContent = productName;
-      cartList.appendChild(listItem);
+    // Initialize cart
+    if (!localStorage.getItem('cart')) {
+      localStorage.setItem('cart', JSON.stringify([]));
     }
+
+    // Update cart count
+    function updateCartCount() {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const count = cart.reduce((total, item) => total + item.quantity, 0);
+      const badge = document.getElementById('cartBadge');
+      if (badge) {
+        badge.textContent = count;
+        badge.style.display = count > 0 ? 'flex' : 'none';
+      }
+    }
+
+    // Check auth status
+    function checkAuthStatus() {
+      const token = localStorage.getItem('authToken');
+      const loginBtn = document.getElementById('loginBtn');
+      const signupBtn = document.getElementById('signupBtn');
+      const dashboardBtn = document.getElementById('dashboardBtn');
+      const logoutBtn = document.getElementById('logoutBtn');
+
+      if (token) {
+        if (loginBtn) loginBtn.style.display = 'none';
+        if (signupBtn) signupBtn.style.display = 'none';
+        if (dashboardBtn) dashboardBtn.style.display = 'block';
+        if (logoutBtn) logoutBtn.style.display = 'block';
+      }
+    }
+
+    // Logout
+    document.getElementById('logoutBtn')?.addEventListener('click', function() {
+      localStorage.removeItem('authToken');
+      localStorage.removeItem('cart');
+      sessionStorage.removeItem('checkoutData');
+      checkAuthStatus();
+      window.location.href = 'index.html';
+    });
+
+    // Mobile menu toggle
+    function toggleMenu() {
+      const navLinks = document.getElementById('navLinks');
+      navLinks.classList.toggle('active');
+    }
+
+    // Initialize
+    document.addEventListener('DOMContentLoaded', function() {
+      updateCartCount();
+      checkAuthStatus();
+    });
   </script>
 
-  <!-- 
-  ========================================
-  ✅ QUICK CUSTOMIZATION REFERENCE
-  ========================================
+  <!-- Toast Notification System -->
+  <div class="toast-container" id="toastContainer"></div>
   
-  🎨 SECTIONS AND HOW TO CUSTOMIZE:
-  
-  1️⃣ HERO BANNER (Top image with text)
-     - Background image: Line ~206
-     - Change: url('image-name.jpg')
-     - Size: Full width, ~300px height
-  
-  2️⃣ SHOP SECTION (Products display area)
-     - Background: Line ~307 (currently solid dark)
-     - Add background image: Uncomment one of 3 options
-     - Overlay darkness: Choose Option 1, 2, or 3
-  
-  3️⃣ PHOTO GALLERY (Grid showcase)
-     - Section ID: #photo-gallery (Line ~695)
-     - Edit photos: Lines 750-770
-     - Edit labels: Change text in "gallery-label" divs
-     - Add more: Copy the template (Lines 762-768)
-     - Background: Line ~793 (currently solid dark)
-  
-  4️⃣ ABOUT SECTION
-     - Background: Line ~46
-     - Currently shows design pattern
-     - Change background url
-  
-  📸 HOW TO ADD/CHANGE PHOTOS:
-  
-  STEP 1: Get your image filename (exact spelling)
-  STEP 2: Find the section you want to modify
-  STEP 3: Replace the image src or url() value
-  STEP 4: Save and refresh browser
-  
-  📝 IMAGE FILENAME TIPS:
-  - Use exact filenames from your folder
-  - Windows files are in c:\Users\HP\Desktop\trm store\
-  - Examples:
-    ✓ 'Handcrafted Kenyan soapstone figurines designs and….jpg'
-    ✓ 'f902885c-2a6c-4858-b8f1-5dbbfcebe9dc.jpg'
-    ✗ Wrong: 'soapstone.jpg' (if exact name is different)
-  
-  🎯 EASY TEMPLATE TO COPY/PASTE:
-  
-  For adding new gallery items:
-  <div class="gallery-item">
-    <img src="YOUR_IMAGE.jpg" alt="Description">
-    <div class="gallery-label">Label Here</div>
+  <div class="popup-toast-overlay" id="popupToastOverlay"></div>
+  <div class="popup-toast" id="popupToast">
+    <div class="popup-toast-icon">
+      <svg viewBox="0 0 24 24" id="popupToastIcon"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+    </div>
+    <h3 class="popup-toast-title" id="popupToastTitle">Success!</h3>
+    <p class="popup-toast-message" id="popupToastMessage">Item added to cart</p>
+    <button class="popup-toast-btn" onclick="closePopupToast()">OK</button>
   </div>
-  
-  For adding background to any section:
-  In the CSS for that section, add:
-  background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('image.jpg');
-  background-size: cover;
-  background-position: center;
-  
-  ========================================
-  -->
+
+  <script>
+    // Toast Notification Functions
+    function showToast(type, title, message, duration = 4000) {
+      const container = document.getElementById('toastContainer');
+      const toast = document.createElement('div');
+      toast.className = `toast ${type}`;
+      
+      const icons = {
+        success: '<path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>',
+        error: '<path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>',
+        warning: '<path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/>',
+        info: '<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>'
+      };
+      
+      toast.innerHTML = `
+        <div class="toast-icon">
+          <svg viewBox="0 0 24 24">${icons[type] || icons.info}</svg>
+        </div>
+        <div class="toast-content">
+          <div class="toast-title">${title}</div>
+          <div class="toast-message">${message}</div>
+        </div>
+        <button class="toast-close" onclick="this.parentElement.remove()">&times;</button>
+      `;
+      
+      container.appendChild(toast);
+      
+      setTimeout(() => {
+        toast.classList.add('toast-exit');
+        setTimeout(() => toast.remove(), 300);
+      }, duration);
+    }
+
+    // Popup Toast (centered modal-like toast)
+    function showPopupToast(type, title, message, buttonText = 'OK') {
+      const overlay = document.getElementById('popupToastOverlay');
+      const popup = document.getElementById('popupToast');
+      const icon = document.getElementById('popupToastIcon');
+      const titleEl = document.getElementById('popupToastTitle');
+      const messageEl = document.getElementById('popupToastMessage');
+      const btn = document.querySelector('.popup-toast-btn');
+      
+      const icons = {
+        success: '<path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>',
+        error: '<path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>',
+        warning: '<path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/>',
+        info: '<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>'
+      };
+      
+      popup.className = `popup-toast ${type}`;
+      icon.innerHTML = icons[type] || icons.success;
+      titleEl.textContent = title;
+      messageEl.textContent = message;
+      btn.textContent = buttonText;
+      
+      overlay.classList.add('active');
+      popup.classList.add('active');
+    }
+
+    function closePopupToast() {
+      document.getElementById('popupToastOverlay').classList.remove('active');
+      document.getElementById('popupToast').classList.remove('active');
+    }
+
+    // Close popup toast on overlay click
+    document.getElementById('popupToastOverlay').addEventListener('click', closePopupToast);
+  </script>
 </body>
 </html>
