@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { verifyToken } = require('../middleware/auth');
-const Product = require('../models/Product');
+const { Product } = require('../models/sequelize');
 
 // Note: Cart is stored in browser localStorage/sessionStorage
 // These endpoints are for cart validation and totals calculation
@@ -19,7 +19,7 @@ router.post('/validate', verifyToken, async (req, res) => {
     let totalPrice = 0;
 
     for (const item of items) {
-      const product = await Product.findById(item.productId);
+      const product = await Product.findByPk(item.productId);
 
       if (!product) {
         continue; // Skip product if not found
@@ -32,7 +32,7 @@ router.post('/validate', verifyToken, async (req, res) => {
         });
       } else {
         validatedItems.push(item);
-        totalPrice += product.price * item.quantity;
+        totalPrice += parseFloat(product.price) * item.quantity;
       }
     }
 

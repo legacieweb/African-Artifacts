@@ -1,8 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { verifyToken } = require('../middleware/auth');
-const Order = require('../models/Order');
-const Product = require('../models/Product');
+const { Order, Product } = require('../models/sequelize');
 
 // Create Order
 router.post('/', verifyToken, async (req, res) => {
@@ -42,13 +41,8 @@ router.post('/', verifyToken, async (req, res) => {
       };
     });
 
-    // Validate payment method
-    if (!['full', 'partial', 'card', 'paystack', 'cash'].includes(paymentMethod)) {
-      return res.status(400).json({ error: 'Invalid payment method' });
-    }
-
     // Create order
-    const order = new Order({
+    const order = await Order.create({
       userId: req.userId,
       items: parsedItems,
       total: parsedTotal,
@@ -59,8 +53,6 @@ router.post('/', verifyToken, async (req, res) => {
       status: status || 'confirmed',
       shippingAddress
     });
-
-    await order.save();
 
     res.status(201).json({
       message: 'Order created successfully',
@@ -75,7 +67,10 @@ router.post('/', verifyToken, async (req, res) => {
 // Get User Orders
 router.get('/user', verifyToken, async (req, res) => {
   try {
-    const orders = await Order.find({ userId: req.userId }).sort({ createdAt: -1 });
+    const orders = await Order.findAll({ 
+      where: { userId: req.userId },
+      order: [['createdAt', 'DESC']]
+    });
     res.json(orders);
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -85,14 +80,14 @@ router.get('/user', verifyToken, async (req, res) => {
 // Get Order Details
 router.get('/:id', verifyToken, async (req, res) => {
   try {
-    const order = await Order.findById(req.params.id);
+    const order = await Order.findByPk(req.params.id);
 
     if (!order) {
       return res.status(404).json({ error: 'Order not found' });
     }
 
     // Check if order belongs to user
-    if (order.userId.toString() !== req.userId) {
+    if (order.userId !== req.userId) {
       return res.status(403).json({ error: 'Unauthorized' });
     }
 
@@ -107,12 +102,12 @@ router.put('/:id/status', async (req, res) => {
   try {
     const { status } = req.body;
 
-    const order = await Order.findByIdAndUpdate(
-      req.params.id,
-      { status, updatedAt: Date.now() },
-      { new: true }
+    await Order.update(
+      { status },
+      { where: { id: req.params.id } }
     );
-
+    
+    const order = await Order.findByPk(req.params.id);
     res.json(order);
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -122,13 +117,13 @@ router.put('/:id/status', async (req, res) => {
 // Cancel Order
 router.put('/:id/cancel', verifyToken, async (req, res) => {
   try {
-    const order = await Order.findById(req.params.id);
+    const order = await Order.findByPk(req.params.id);
 
     if (!order) {
       return res.status(404).json({ error: 'Order not found' });
     }
 
-    if (order.userId.toString() !== req.userId) {
+    if (order.userId !== req.userId) {
       return res.status(403).json({ error: 'Unauthorized' });
     }
 
@@ -147,5 +142,7 @@ router.put('/:id/cancel', verifyToken, async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
+
+module.exports = router;
 
 module.exports = router;

@@ -4,6 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Product Details | African Artifacts</title>
+  <script src="js/preloader.js"></script>
+  <script src="js/notifications.js"></script>
   
   <style>
     /* ========================================
@@ -369,42 +371,56 @@
       font-weight: normal;
     }
 
-    /* Color Options */
-    .color-options {
+    /* Variant Image Options */
+    .variant-options {
       display: flex;
       gap: 0.8rem;
       flex-wrap: wrap;
     }
 
-    .color-option {
-      width: 45px;
-      height: 45px;
-      border-radius: 50%;
+    .variant-option {
+      width: 60px;
+      height: 60px;
+      border-radius: 12px;
       cursor: pointer;
-      border: 3px solid transparent;
+      border: 2px solid rgba(255, 255, 255, 0.1);
       transition: var(--transition);
       position: relative;
+      overflow: hidden;
+      background: var(--darker);
     }
 
-    .color-option:hover {
-      transform: scale(1.12);
+    .variant-option img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
 
-    .color-option.selected {
+    .variant-option:hover {
+      transform: translateY(-3px);
+      border-color: rgba(201, 169, 98, 0.5);
+    }
+
+    .variant-option.selected {
       border-color: var(--primary);
-      box-shadow: 0 0 20px rgba(201, 169, 98, 0.5);
+      box-shadow: 0 0 15px rgba(201, 169, 98, 0.4);
     }
 
-    .color-option.selected::after {
+    .variant-option.selected::after {
       content: '✓';
       position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      color: white;
-      font-weight: bold;
-      font-size: 0.9rem;
-      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+      top: 5px;
+      right: 5px;
+      background: var(--primary);
+      color: #1a1a1a;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      font-weight: 900;
     }
 
     /* Size Options */
@@ -632,6 +648,41 @@
       }
     }
 
+    /* Drawer Style for Size Guide */
+    .popup-drawer .popup-container {
+      position: absolute;
+      top: 0;
+      right: -100%;
+      height: 100%;
+      max-width: 500px;
+      border-radius: 0;
+      border-left: 1px solid rgba(201, 169, 98, 0.2);
+      animation: drawerSlideIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      display: flex;
+      flex-direction: column;
+    }
+
+    @keyframes drawerSlideIn {
+      from { right: -100%; }
+      to { right: 0; }
+    }
+
+    .popup-drawer.active .popup-container {
+      right: 0;
+    }
+
+    .popup-drawer .popup-body {
+      padding: 2.5rem;
+      height: 100%;
+      overflow-y: auto;
+    }
+
+    .popup-drawer .popup-close {
+      top: 1.5rem;
+      right: 1.5rem;
+      background: rgba(255, 255, 255, 0.05);
+    }
+
     .popup-container.popup-success {
       border-color: rgba(74, 222, 128, 0.3);
     }
@@ -698,10 +749,103 @@
       display: flex;
       align-items: center;
       gap: 1rem;
-      background: rgba(255, 255, 255, 0.03);
-      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.04);
       padding: 1rem;
-      margin-bottom: 1rem;
+      border-radius: 12px;
+      margin-top: 1rem;
+      text-align: left;
+    }
+
+    .size-guide-link {
+      color: var(--primary);
+      text-decoration: underline;
+      cursor: pointer;
+      font-size: 0.85rem;
+      margin-left: 1rem;
+      font-weight: 500;
+      transition: var(--transition);
+    }
+
+    .size-guide-link:hover {
+      color: var(--white);
+    }
+
+    .popup-large {
+      max-width: 600px;
+    }
+
+    .size-guide-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+      color: var(--white);
+      text-align: left;
+    }
+
+    .size-guide-table th {
+      background: rgba(201, 169, 98, 0.15);
+      color: var(--primary);
+      padding: 1rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      font-size: 0.8rem;
+      letter-spacing: 1px;
+    }
+
+    .size-guide-table td {
+      padding: 1rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      font-size: 0.95rem;
+    }
+
+    .size-guide-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .size-guide-table tr:hover td {
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .popup-close {
+      position: absolute;
+      right: 1.5rem;
+      top: 1.5rem;
+      background: rgba(255, 255, 255, 0.05);
+      border: none;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: var(--transition);
+      z-index: 10;
+    }
+
+    .popup-close:hover {
+      background: rgba(239, 68, 68, 0.2);
+      transform: rotate(90deg);
+    }
+
+    .popup-close svg {
+      width: 20px;
+      height: 20px;
+      fill: var(--white);
+    }
+
+    .item-details-content {
+      flex: 1;
+    }
+
+    .popup-title {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--primary);
+      margin-bottom: 1.5rem;
+      text-align: center;
+      display: block;
+      width: 100%;
     }
 
     .popup-body .item-details img {
@@ -1065,12 +1209,12 @@
         Loading product details...
       </p>
 
-      <!-- Color Selection -->
+      <!-- Style Selection -->
       <div class="option-section">
         <div class="option-label">
-          Select Color: <span id="selected-color-name">Multicolor</span>
+          Select Style: <span id="selected-variant-name">Default</span>
         </div>
-        <div class="color-options" id="color-options"></div>
+        <div class="variant-options" id="variant-options"></div>
       </div>
 
       <!-- Size Selection -->
@@ -1106,79 +1250,7 @@
     </div>
   </div>
 
-  <!-- Custom Popup - Size Guide -->
-  <div class="custom-popup" id="size-guide-popup">
-    <div class="popup-overlay" onclick="closePopup('size-guide-popup')"></div>
-    <div class="popup-container">
-      <div class="popup-header">
-        <h3>Size Guide</h3>
-        <button class="popup-close" onclick="closePopup('size-guide-popup')">
-          <svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
-        </button>
-      </div>
-      <div class="popup-body">
-        <table class="size-guide-table">
-          <thead>
-            <tr>
-              <th>Size</th>
-              <th>Chest</th>
-              <th>Length</th>
-              <th>Fit</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr><td>S</td><td>36-38"</td><td>26"</td><td>Regular</td></tr>
-            <tr><td>M</td><td>38-40"</td><td>27"</td><td>Regular</td></tr>
-            <tr><td>L</td><td>40-42"</td><td>28"</td><td>Regular</td></tr>
-            <tr><td>XL</td><td>42-44"</td><td>29"</td><td>Regular</td></tr>
-            <tr><td>2XL</td><td>44-46"</td><td>30"</td><td>Relaxed</td></tr>
-            <tr><td>3XL</td><td>46-48"</td><td>31"</td><td>Relaxed</td></tr>
-            <tr><td>4XL</td><td>48-50"</td><td>32"</td><td>Relaxed</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div>
-
-  <!-- Custom Popup - Added to Cart -->
-  <div class="custom-popup" id="cart-popup">
-    <div class="popup-overlay" onclick="closePopup('cart-popup')"></div>
-    <div class="popup-container popup-success">
-      <div class="popup-icon">
-        <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-      </div>
-      <div class="popup-header">
-        <h3>Added to Cart!</h3>
-      </div>
-      <div class="popup-body" id="cart-popup-content">
-        <!-- Dynamic content -->
-      </div>
-      <div class="popup-footer">
-        <button class="popup-btn secondary" onclick="closePopup('cart-popup')">Continue Shopping</button>
-        <button class="popup-btn primary" onclick="window.location.href='cart.html'">View Cart</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Custom Popup - Added to Wishlist -->
-  <div class="custom-popup" id="wishlist-popup">
-    <div class="popup-overlay" onclick="closePopup('wishlist-popup')"></div>
-    <div class="popup-container popup-info">
-      <div class="popup-icon">
-        <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
-      </div>
-      <div class="popup-header">
-        <h3>Added to Wishlist!</h3>
-      </div>
-      <div class="popup-body">
-        <p>Item has been saved to your wishlist for later.</p>
-      </div>
-      <div class="popup-footer">
-        <button class="popup-btn secondary" onclick="closePopup('wishlist-popup')">Close</button>
-      </div>
-    </div>
-  </div>
-
+  <!-- Global Notifications and Popups are handled by js/notifications.js -->
   <script>
     // ========================================
     // PRODUCT DATABASE
@@ -1193,8 +1265,6 @@
         description: 'This beautiful Kitenge Patchwork Shirt is handcrafted by skilled Kenyan artisans using traditional techniques. Each piece features unique African patterns and vibrant colors that showcase the rich cultural heritage of East Africa. Made from premium cotton fabric for maximum comfort and durability.',
         images: [
           'Category_Shirt; Season_Spring,Summer….jpg',
-          'A authentic rugged rare mustard Women King  mud….jpg',
-          'Brand _ Comfort Colors About Fabric_ Classic….jpg'
         ],
         colors: [
           { name: 'Multicolor', gradient: 'linear-gradient(135deg, #ff6b6b, #feca57, #48dbfb)' },
@@ -1222,7 +1292,7 @@
         originalPrice: 6000,
         description: 'Elegant traditional Ankara dress perfect for special occasions. Handcrafted with authentic African prints, featuring vibrant colors and premium quality fabric. Perfect for weddings, parties, and cultural events.',
         images: [
-          'A authentic rugged rare mustard Women King  mud….jpg',
+          '04356685-feb5-4748-a4d3-1bbcf855785e.jpg',
           'f2409f39-c351-4137-bd33-3e1aa8e7e614.jpg',
           'African Clothing For Women Plus Size, Ankara Top….jpg'
         ],
@@ -1251,8 +1321,8 @@
         description: 'Official Kenya Harambee Stars football jersey. Show your pride for the Kenyan national team with this authentic replica jersey. Made with breathable fabric for maximum comfort during games.',
         images: [
           'Kenya NWT Soccer Jersey Adult XL Football Lions….jpg',
-          'Football #kenya.jpg',
-          'Kenya Baseball Jersey Flag & Coat Of Arms Leather….jpg'
+       'IMG-20251118-WA0069.jpg',
+       'IMG-20251118-WA0068.jpg'
         ],
         colors: [
           { name: 'Home (Black/Red)', gradient: 'linear-gradient(135deg, #000000, #CC0000)' },
@@ -1384,9 +1454,8 @@
         originalPrice: 2800,
         description: 'Traditional Maasai Shuka blanket made from 100% wool. Authentic Kenyan product traditionally worn by Maasai warriors. Perfect for cold nights or as a decorative piece.',
         images: [
-          'af071c20-f00e-4b45-9689-1ebb21172d26.jpg',
-          'African Kenyan Handmade Traditional sarong  Shuka….jpg',
-          'IMG-20251118-WA0003.jpg'
+                 'd9ab72b8-a588-4d98-a3ab-5b38d69fa6aa.jpg',
+                 'IMG-20251118-WA0074.jpg'
         ],
         colors: [
           { name: 'Red Check', gradient: 'linear-gradient(135deg, #8B0000, #FFFFFF, #8B0000)' },
@@ -1411,8 +1480,7 @@
         originalPrice: 2000,
         description: 'Handcrafted Maasai leather sandals made by skilled artisans. Traditional design with modern comfort. Perfect for casual wear or cultural events.',
         images: [
-          'bd523140-1103-4a68-935f-ba5f76bce21e.jpg',
-          "Brown father's day giftMen sandalsmaasai….jpg",
+
           'Age Range_ AdultUpper Material_ CowhideSole….jpg'
         ],
         colors: [
@@ -1466,7 +1534,8 @@
         description: 'Premium handwoven shirt made from silk-linen blend. Features intricate patterns and superior craftsmanship. Lightweight and breathable for ultimate comfort.',
         images: [
           'DESCRIPTION Woven on a traditional frame loom in….jpg',
-          'Born out of New York City in 2009, Saturdays NYC….jpg'
+          'DescriptionProduct Details_Product….jpg',
+          'Here\'s a photo of the best photo shoot I did for….jpg'
         ],
         colors: [
           { name: 'Natural', gradient: 'linear-gradient(135deg, #F5F5DC, #FAF0E6)' },
@@ -1491,9 +1560,7 @@
         originalPrice: 5500,
         description: 'Stylish leather bag featuring authentic Kitenge fabric. Handcrafted by Kenyan artisans combining leather quality with vibrant African prints. Perfect for everyday use.',
         images: [
-          'f902885c-2a6c-4858-b8f1-5dbbfcebe9dc.jpg',
-          'African print Bag, African Bag, African Fabric….jpg',
-          'Ankara bags.jpg'
+          'f902885c-2a6c-4858-b8f1-5dbbfcebe9dc.jpg'
         ],
         colors: [
           { name: 'Leather Black', gradient: 'linear-gradient(135deg, #1a1a1a, #333333)' },
@@ -1545,8 +1612,6 @@
         originalPrice: 1500,
         description: 'Show your Kenya pride with this comfortable cotton t-shirt. Features unique Kenyan-inspired designs. Perfect for everyday wear.',
         images: [
-          '2b660eb6-7aea-4751-a6a6-56bf2c2c5b65.jpg',
-          'Good Karma T-Shirt Fast Shipping $25 Lowest I Can….jpg',
           "Bulldog Gym Training Top Bodybuilding Mens T-Shirt….jpg"
         ],
         colors: [
@@ -1600,9 +1665,9 @@
         originalPrice: 5500,
         description: 'Stylish leather bag featuring authentic Kitenge fabric. Handcrafted by Kenyan artisans combining leather quality with vibrant African prints. Perfect for everyday use.',
         images: [
-          'f902885c-2a6c-4858-b8f1-5dbbfcebe9dc.jpg',
-          'African print Bag, African Bag, African Fabric….jpg',
-          'Ankara bags.jpg'
+           'letherbag.jpg',
+          'c061c2a9-2fe9-40c4-a3bf-bbdef1f816cf.jpg',
+          'African print Bag, African Bag, African Fabric….jpg'
         ],
         colors: [
           { name: 'Leather Black', gradient: 'linear-gradient(135deg, #1a1a1a, #333333)' },
@@ -1620,15 +1685,15 @@
         ]
       },
 
-      'embroidery-shirt': {
-        id: 'embroidery-shirt',
-        name: 'Embroidery Shirt',
-        category: 'Shirts',
+      'embroidery-tshirt': {
+        id: 'embroidery-tshirt',
+        name: 'Embroidery T-Shirt',
+        category: 'T-Shirts',
         price: 2800,
         originalPrice: 3500,
-        description: 'Elegant shirt with intricate African embroidery. Handcrafted details showcase the skill of Kenyan artisans. Perfect for formal occasions.',
+        description: 'Hand-embroidered t-shirt featuring intricate African designs. Made from premium cotton for comfort and durability. Perfect for casual wear or as a statement piece.',
         images: [
-          'Brand _ Comfort Colors About Fabric_ Classic….jpg',
+          'IMG-20251118-WA0096.jpg',
           "Look stylish and stay comfortable with this cherry….jpg",
           'Brand Name_ Aonga Applicable Scene_ shopping….jpg'
         ],
@@ -1646,6 +1711,294 @@
           'Gift Ready',
           'Artisan Made'
         ]
+      },
+      'tanzanian-handbag': {
+        id: 'tanzanian-handbag',
+        name: 'Tanzanian Handbag',
+        category: 'Bags',
+        price: 3800,
+        originalPrice: 4500,
+        description: 'Authentic Tanzanian Africanprint handbag, handmade with precision. Features vibrant colors and a durable design, perfect for carrying your essentials with style.',
+        images: [
+          'Authentic Tanzanian Africanprint handbag handmade….jpg',
+          'f902885c-2a6c-4858-b8f1-5dbbfcebe9dc.jpg'
+        ],
+        colors: [
+          { name: 'Multi', gradient: 'linear-gradient(135deg, #FF6B6B, #4ECDC4, #FFE66D)' },
+          { name: 'Blue Mix', gradient: 'linear-gradient(135deg, #1e3c72, #2a5298)' }
+        ],
+        sizes: ['One Size'],
+        features: [
+          'Handmade in Tanzania',
+          'Authentic Print',
+          'Spacious Interior',
+          'Durable Handles',
+          'Cultural Statement',
+          'Eco-friendly Materials'
+        ]
+      },
+      'mudcloth-vest': {
+        id: 'mudcloth-vest',
+        name: 'Mudcloth African Long Vest',
+        category: 'Shirts',
+        price: 4500,
+        originalPrice: 5800,
+        description: 'A stunning long vest made from authentic African mudcloth. This piece combines traditional textile art with modern silhouette, making it a versatile addition to any wardrobe.',
+        images: [
+          'Mudcloth African Long Vest.jpg',
+          'A authentic rugged rare mustard Women King  mud..jpg'
+        ],
+        colors: [
+          { name: 'Mustard', gradient: 'linear-gradient(135deg, #E1AD01, #B8860B)' },
+          { name: 'Black/White', gradient: 'linear-gradient(135deg, #000000, #FFFFFF)' }
+        ],
+        sizes: ['L', 'XL', 'XXL'],
+        features: [
+          'Authentic Mudcloth',
+          'Hand-dyed Fabric',
+          'Versatile Style',
+          'Breathable Cotton',
+          'Artisan Crafted',
+          'Unique Patterns'
+        ]
+      },
+
+      'baseball-jersey': {
+        id: 'baseball-jersey',
+        name: 'Kenya Baseball Jersey',
+        category: 'T-Shirts',
+        price: 2900,
+        originalPrice: 3500,
+        description: 'Modern baseball jersey featuring Kenyan national symbols. High-quality print and breathable fabric make it perfect for sports or casual wear.',
+        images: [
+          'Kenya Baseball Jersey Flag & Coat Of Arms Leather..jpg',
+          'Kenya Baseball Jersey Flag & Coat Of Arms Skull..jpg'
+        ],
+        colors: [
+          { name: 'National Red', gradient: 'linear-gradient(135deg, #CC0000, #000000)' },
+          { name: 'Black Pride', gradient: 'linear-gradient(135deg, #000000, #333333)' }
+        ],
+        sizes: ['S', 'M', 'L', 'XL', '2XL', '3XL'],
+        features: [
+          'Breathable Fabric',
+          'Quality Embroidery',
+          'National Symbols',
+          'Comfort Fit',
+          'Durable Print',
+          'Sports Inspired'
+        ]
+      },
+      'rugged-mustard': {
+        id: 'rugged-mustard',
+        name: 'Rugged mustard',
+        category: 'T-Shirts',
+        price: 2200,
+        originalPrice: 2800,
+        description: 'Authentic rugged rare mustard Women King mudcloth, handwoven by skilled artisans. This unique piece adds a touch of African heritage to your home decor. Perfect for throws, wall hangings, or as a statement piece.',
+        images: ['A authentic rugged rare mustard Women King  mud….jpg'],
+        colors: [{ name: 'Mustard', gradient: 'linear-gradient(135deg, #E1AD01, #B8860B)' }],
+        sizes: ['One Size'],
+        features: [
+          'Handwoven by Artisans',
+          'Authentic Mudcloth',
+          'Unique Design',
+          'Versatile Use',
+          'Cultural Heritage',
+          'Durable & Long-lasting'
+        ]
+      },
+      'african-print-bag': {
+        id: 'african-print-bag',
+        name: 'African Print Bag',
+        category: 'Bags',
+        price: 3200,
+        originalPrice: 4000,
+        description: 'Exquisite bag made with high-quality African print fabric. Handcrafted with attention to detail, featuring internal pockets and a stylish silhouette.',
+        images: ['African print Bag, African Bag, African Fabric….jpg','0726d68d-4264-442a-8fb9-05c87664f7c1.jpg'],
+        colors: [{ name: 'Vibrant Mix', gradient: 'linear-gradient(135deg, #FF6B6B, #4ECDC4)' }],
+        sizes: ['Handmade'],
+        features: ['Premium Fabric', 'Handcrafted', 'Internal Pockets', 'Stylish Design', 'Unique Patterns', 'Lightweight']
+      },
+      'ankara-bags': {
+        id: 'ankara-bags',
+        name: 'Ankara Bag Collection',
+        category: 'Bags',
+        price: 3500,
+        originalPrice: 4500,
+        description: 'A collection of beautiful Ankara bags in various designs. Perfect for adding a pop of color to any outfit while supporting local artisans.',
+        images: ['Ankara bags.jpg'],
+        colors: [{ name: 'Assorted', gradient: 'linear-gradient(135deg, #FFD700, #FF6347)' }],
+        sizes: ['Various Sizes'],
+        features: ['Multiple Designs', 'Authentic Ankara', 'Artisan Made', 'Gift Ready', 'Durable Build', 'Vibrant Colors']
+      },
+      'cowrie-earrings': {
+        id: 'cowrie-earrings',
+        name: 'Cowrie Shell Earrings',
+        category: 'Art',
+        price: 1200,
+        originalPrice: 1500,
+        description: 'Beautifully handcrafted earrings featuring natural cowrie shells and beads. A perfect blend of traditional African aesthetics and modern jewelry design.',
+        images: ['Cowrie.jpg'],
+        colors: [{ name: 'Earth Tones', gradient: 'linear-gradient(135deg, #8B4513, #CD853F)' }],
+        sizes: ['One Size'],
+        features: ['Natural Shells', 'Handcrafted', 'Unique Design', 'Lightweight', 'Cultural Symbolism', 'Eco-friendly']
+      },
+      'men-sandals': {
+        id: 'men-sandals',
+        name: 'Men\'s Heritage Sandals',
+        category: 'Footwear',
+        price: 2400,
+        originalPrice: 3200,
+        description: 'Comfortable and durable Maasai-inspired sandals for men. Handcrafted using quality leather and traditional beadwork techniques.',
+        images: ['Style _ Classics Occasion _ Beach Outsole Material….jpg','Brown father\'s day giftMen sandalsmaasai….jpg'],
+        colors: [{ name: 'Classic Brown', gradient: 'linear-gradient(135deg, #8B4513, #5D4037)' }],
+        sizes: ['40', '41', '42', '43', '44', '45'],
+        features: ['Genuine Leather', 'Hand-beaded', 'Maasai Inspired', 'Durable Sole', 'Comfort Fit', 'Traditional Craft']
+      },
+      'dashiki-snoodie': {
+        id: 'dashiki-snoodie',
+        name: 'Dashiki Jumper Snoodie',
+        category: 'Hoodies',
+        price: 4200,
+        originalPrice: 5500,
+        description: 'A cozy and stylish snoodie featuring vibrant Dashiki prints. Perfect for chilly days, combining the comfort of a hoodie with the elegance of African patterns.',
+        images: ['Dashiki Snoodie _ Ankara Snoodie Jumper _ Africa..jpg'],
+        colors: [{ name: 'Royal Blue', gradient: 'linear-gradient(135deg, #1e3c72, #2a5298)' }],
+        sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+        features: ['Dashiki Print', 'Soft Fabric', 'Integrated Snood', 'Warm & Stylish', 'Premium Quality', 'Unisex']
+      },
+      'mud-cloth-earrings': {
+        id: 'mud-cloth-earrings',
+        name: 'Mud Cloth Tribal Earrings',
+        category: 'Art',
+        price: 1500,
+        originalPrice: 2000,
+        description: 'Tribal-inspired earrings featuring authentic Mud Cloth patterns. Handcrafted by skilled artisans to create a unique and meaningful accessory.',
+        images: ['Mud Cloth Earrings African Earrings Tribal Ethnic….jpg'],
+        colors: [{ name: 'Tribal Black', gradient: 'linear-gradient(135deg, #1a1a1a, #333333)' }],
+        sizes: ['One Size'],
+        features: ['Authentic Patterns', 'Handmade', 'Lightweight', 'Symbolic Meanings', 'Statement Piece', 'Sustainable Art']
+      },
+      'patchwork-poncho': {
+        id: 'patchwork-poncho',
+        name: 'Boho Patchwork Poncho',
+        category: 'Dresses',
+        price: 4800,
+        originalPrice: 6000,
+        description: 'Handcrafted Boho-style patchwork poncho. Each piece is unique, featuring a combination of different African textiles for a truly one-of-a-kind look.',
+        images: ['Patchwork Poncho im Boho Stil Handgefertigt aus….jpg'],
+        colors: [{ name: 'Boho Mix', gradient: 'linear-gradient(135deg, #A52A2A, #DEB887)' }],
+        sizes: ['One Size Fits All'],
+        features: ['Handcrafted', 'Unique Patchwork', 'Boho Style', 'Versatile Wear', 'Premium Textiles', 'Fair Trade']
+      },
+      'tuareg-bracelet': {
+        id: 'tuareg-bracelet',
+        name: 'Tuareg Tribal Bracelet',
+        category: 'Art',
+        price: 2200,
+        originalPrice: 3000,
+        description: 'Stunning tribal bracelet inspired by Tuareg craftsmanship. Features intricate engravings and a timeless design that celebrates nomadic heritage.',
+        images: ['Pattern People Bracelets __ African Tuareg..jpg'],
+        colors: [{ name: 'Silver/Metal', gradient: 'linear-gradient(135deg, #C0C0C0, #808080)' }],
+        sizes: ['Adjustable'],
+        features: ['Tuareg Inspired', 'Intricate Engravings', 'Tribal Design', 'Adjustable Fit', 'Durable Material', 'Cultural Heritage']
+      },
+      'soapstone-collection': {
+        id: 'soapstone-collection',
+        name: 'Soapstone Collection',
+        category: 'Art',
+        price: 1500,
+        originalPrice: 2000,
+        description: 'Hand-carved soapstone candlestick featuring a unique twisted fish design. A beautiful piece of functional art for your home decor.',
+        images: ['553b51d9-7faf-4e45-9f72-793c9abaf67a.jpg',],
+        colors: [{ name: 'Natural Grey', gradient: 'linear-gradient(135deg, #808080, #555555)' }],
+        sizes: ['Standard'],
+        features: ['Hand-carved', 'Natural Soapstone', 'Unique Fish Design', 'Decorative & Functional', 'Artisan Made', 'Eco-friendly']
+      },
+      'kente-patchwork': {
+        id: 'kente-patchwork',
+        name: 'Kente Printed Patchwork Shirt',
+        category: 'Shirts',
+        price: 2800,
+        originalPrice: 3500,
+        description: 'Modern patchwork shirt featuring authentic Kente prints. A vibrant and stylish choice for casual outings, showcasing cultural heritage with a contemporary fit.',
+        images: ['LucMatton Men\'s African Kente Printed Patchwork..jpg'],
+        colors: [{ name: 'Kente Mix', gradient: 'linear-gradient(135deg, #FFD700, #CC0000)' }],
+        sizes: ['S', 'M', 'L', 'XL', '2XL', '3XL'],
+        features: ['Kente Prints', 'Modern Fit', 'Patchwork Design', 'Breathable Cotton', 'Vibrant Colors', 'Artisan Style']
+      },
+      'zika-shirt': {
+        id: 'zika-shirt',
+        name: 'Zika Effortless Shirt',
+        category: 'Shirts',
+        price: 3200,
+        originalPrice: 4200,
+        description: 'The Zika Shirt is your new go-to for effortless style. Lightweight, breathable, and featuring subtle African-inspired details, it\'s perfect for all-day comfort.',
+        images: ['PRICES MAY VARY_ Washing_ Hand wash water….jpg'],
+        colors: [{ name: 'Classic White', gradient: 'linear-gradient(135deg, #FFFFFF, #F5F5F5)' }],
+        sizes: ['M', 'L', 'XL'],
+        features: ['Effortless Style', 'Lightweight Fabric', 'Breathable', 'Subtle Details', 'Premium Quality', 'Versatile']
+      },
+      'summer-flats': {
+        id: 'summer-flats',
+        name: 'Summer Flat Shoes Set',
+        category: 'Footwear',
+        price: 1800,
+        originalPrice: 2500,
+        description: 'Elegant and comfortable summer flat shoes for women. A complete set featuring beautiful patterns and durable soles, ideal for the warm season.',
+        images: ['de583291-792c-42da-8da7-108fc2151cc1.jpg','Elevate your beach style with our Summer Vibes….jpg','bd523140-1103-4a68-935f-ba5f76bce21e.jpg'],
+        colors: [{ name: 'Floral Mix', gradient: 'linear-gradient(135deg, #FF69B4, #87CEEB)' }],
+        sizes: ['36', '37', '38', '39', '40', '41'],
+        features: ['Summer Ready', 'Flat & Comfortable', 'Durable Soles', 'Beautiful Patterns', 'Women\'s Collection', 'Lightweight']
+      },
+      'afrohemien-jewelry': {
+        id: 'afrohemien-jewelry',
+        name: 'Afrohemien Jewelry Collection',
+        category: 'Jewelry',
+        price: 3500,
+        originalPrice: 4800,
+        description: 'Exquisite jewelry sets from the Afrohemien collection. Handcrafted using traditional techniques combined with bohemian flair. Each set is a unique statement piece.',
+        images: ['Jewelry – Afrohemien_com.jpg'],
+        colors: [{ name: 'Artisan Mix', gradient: 'linear-gradient(135deg, #FFD700, #8B4513)' }],
+        sizes: ['One Size'],
+        features: ['Handcrafted', 'Afro-Bohemian Style', 'Premium Materials', 'Statement Jewelry', 'Artisan Made', 'Complete Sets']
+      },
+      'soapstone-bowl': {
+        id: 'soapstone-bowl',
+        name: 'soapstone-bowl',
+        category: 'Art',
+        price: 1500,
+        originalPrice: 2500,
+        description: 'Beautifully hand-carved soapstone bowls from Kenya. Each piece is unique, showcasing traditional patterns and the natural beauty of the stone. Perfect for decor or functional use.',
+        images: [
+          'Natural andinkra Belt Soapstone Bowl - 10 cm….jpg',
+          'Vintage MCM Hand Carved Elephants & Zebras Heavy….jpg',
+          'Natural bogolan Belt Soapstone Bowl - 30 cm….jpg',
+          'IMG-20251118-WA0023.jpg',
+          'Duka La Jiwe African Art (Shop of Rocks)….jpg',
+          'IMG-20251118-WA0018.jpg'
+        ],
+        colors: [
+          { name: 'Figurines Set', gradient: 'linear-gradient(135deg, #e0e0e0, #bdbdbd)' },
+          { name: 'Fish Candlestick', gradient: 'linear-gradient(135deg, #808080, #424242)' },
+          { name: 'Indigo Bowl', gradient: 'linear-gradient(135deg, #3f51b5, #1a237e)' },
+          { name: 'Bogolan Bowl', gradient: 'linear-gradient(135deg, #795548, #3e2723)' },
+          { name: 'Elephant Sculpture', gradient: 'linear-gradient(135deg, #9e9e9e, #616161)' }
+        ],
+        sizes: ['Small (10cm)', 'Medium (15cm)', 'Large (30cm)'],
+        features: ['Hand-Carved', 'Authentic Soapstone', 'Kenyan Artistry', 'Unique Textures', 'Eco-friendly', 'Traditional Designs']
+      },
+      'royal-beaded-earrings': {
+        id: 'royal-beaded-earrings',
+        name: 'Royal Beaded Earrings',
+        category: 'Jewelry',
+        price: 1200,
+        originalPrice: 1800,
+        description: 'Traditional Maasai craftsmanship meets modern elegance. Each bead is meticulously placed to create a vibrant story of heritage and sophisticated style.',
+        images: ['Mud Cloth Earrings African Earrings Tribal Ethnic….jpg'],
+        colors: [{ name: 'Royal Blue/Multi', gradient: 'linear-gradient(135deg, #0000ff, #ff0000)' }],
+        sizes: ['One Size'],
+        features: ['Hand-beaded', 'Maasai Heritage', 'Lightweight', 'Surgical Steel Hooks', 'Vibrant Colors', 'Authentic Design']
       }
     };
 
@@ -1654,29 +2007,46 @@
     // ========================================
     let currentProduct = null;
     let currentImageIndex = 0;
-    let selectedColor = null;
+    let selectedVariantIndex = 0;
     let selectedSize = null;
     let quantity = 1;
 
     // ========================================
     // URL PARAMETER PARSING
     // ========================================
-    function getProductIdFromURL() {
+    function getProductParams() {
       const params = new URLSearchParams(window.location.search);
-      return params.get('product') || 'kitenge-shirt';
+      return {
+        id: params.get('product') || 'kitenge-shirt',
+        price: params.get('price'),
+        image: params.get('image')
+      };
     }
 
     // ========================================
     // LOAD PRODUCT
     // ========================================
     function loadProduct(productId) {
-      const product = products[productId];
+      const params = getProductParams();
+      let product = products[productId];
       
       if (!product) {
         // Use default product if not found
-        currentProduct = products['kitenge-shirt'];
-      } else {
-        currentProduct = product;
+        product = products['kitenge-shirt'];
+      }
+
+      // Clone product to avoid modifying original
+      currentProduct = JSON.parse(JSON.stringify(product));
+
+      // Override with URL parameters if present
+      if (params.price) {
+        currentProduct.price = parseInt(params.price);
+      }
+      if (params.image) {
+        // Add URL image to the beginning of images array if not already there
+        if (!currentProduct.images.includes(params.image)) {
+          currentProduct.images.unshift(params.image);
+        }
       }
 
       // Update page title
@@ -1703,8 +2073,8 @@
       // Load images
       loadImages();
 
-      // Load colors
-      loadColors();
+      // Load variants (formerly colors)
+      loadVariants();
 
       // Load sizes
       loadSizes();
@@ -1713,7 +2083,7 @@
       loadFeatures();
 
       // Set defaults
-      selectedColor = currentProduct.colors[0];
+      selectedVariantIndex = 0;
       selectedSize = currentProduct.sizes[Math.floor(currentProduct.sizes.length / 2)];
       updateSelectedOptions();
     }
@@ -1755,27 +2125,38 @@
     }
 
     // ========================================
-    // COLOR SELECTION
+    // STYLE/VARIANT SELECTION
     // ========================================
-    function loadColors() {
-      const colorOptions = document.getElementById('color-options');
-      colorOptions.innerHTML = '';
+    function loadVariants() {
+      const variantOptions = document.getElementById('variant-options');
+      if (!variantOptions) return;
+      variantOptions.innerHTML = '';
 
-      currentProduct.colors.forEach((color, index) => {
-        const colorEl = document.createElement('div');
-        colorEl.className = `color-option ${index === 0 ? 'selected' : ''}`;
-        colorEl.style.background = color.gradient;
-        colorEl.dataset.color = color.name;
-        colorEl.onclick = () => selectColor(colorEl, color.name);
-        colorOptions.appendChild(colorEl);
+      // We'll use the product images as variants
+      currentProduct.images.forEach((img, index) => {
+        const variantEl = document.createElement('div');
+        variantEl.className = `variant-option ${index === 0 ? 'selected' : ''}`;
+        variantEl.innerHTML = `<img src="${img}" alt="Style ${index + 1}">`;
+        variantEl.onclick = () => selectVariant(variantEl, index);
+        variantOptions.appendChild(variantEl);
       });
+
+      // Set initial variant name
+      document.getElementById('selected-variant-name').textContent = `Style 0${1}`;
     }
 
-    function selectColor(element, colorName) {
-      document.querySelectorAll('.color-option').forEach(el => el.classList.remove('selected'));
+    function selectVariant(element, index) {
+      document.querySelectorAll('.variant-option').forEach(el => el.classList.remove('selected'));
       element.classList.add('selected');
-      selectedColor = currentProduct.colors.find(c => c.name === colorName);
-      document.getElementById('selected-color-name').textContent = colorName;
+      
+      // Update selected variant name
+      document.getElementById('selected-variant-name').textContent = `Style 0${index + 1}`;
+      
+      // Update main image to selected variant
+      changeImageTo(index);
+      
+      // Save selected variant index
+      selectedVariantIndex = index;
     }
 
     // ========================================
@@ -1803,10 +2184,9 @@
     }
 
     function updateSelectedOptions() {
-      // Update color display
-      if (selectedColor) {
-        document.getElementById('selected-color-name').textContent = selectedColor.name;
-      }
+      // Update variant display
+      document.getElementById('selected-variant-name').textContent = `Style 0${selectedVariantIndex + 1}`;
+      
       // Update size display
       if (selectedSize) {
         document.getElementById('selected-size').textContent = selectedSize;
@@ -1841,6 +2221,9 @@
     // ADD TO CART
     // ========================================
     function addToCart() {
+      const btn = document.querySelector('.add-to-cart-btn');
+      setLoading(btn, true);
+
       // Initialize cart if not exists
       if (!localStorage.getItem('cart')) {
         localStorage.setItem('cart', JSON.stringify([]));
@@ -1848,18 +2231,21 @@
 
       const cart = JSON.parse(localStorage.getItem('cart'));
       
+      const selectedImage = currentProduct.images[selectedVariantIndex];
+      const selectedVariantName = `Style 0${selectedVariantIndex + 1}`;
+
       const cartItem = {
         id: currentProduct.id,
         name: currentProduct.name,
         price: currentProduct.price,
         quantity: quantity,
-        image: currentProduct.images[0],
-        color: selectedColor ? selectedColor.name : 'Default',
+        image: selectedImage,
+        variant: selectedVariantName,
         size: selectedSize || 'One Size'
       };
 
       // Check if product exists
-      const existingIndex = cart.findIndex(item => item.id === cartItem.id && item.color === cartItem.color && item.size === cartItem.size);
+      const existingIndex = cart.findIndex(item => item.id === cartItem.id && item.variant === cartItem.variant && item.size === cartItem.size);
       
       if (existingIndex > -1) {
         cart[existingIndex].quantity += quantity;
@@ -1870,25 +2256,65 @@
       localStorage.setItem('cart', JSON.stringify(cart));
       updateCartCount();
       
-      // Show success toast notification (slides in from right)
-      if (typeof showToast === 'function') {
-        showToast('success', 'Added to Cart!', `${currentProduct.name} has been added to your cart.`);
-      } else if (typeof showPopupToast === 'function') {
-        showPopupToast('success', 'Added to Cart!', `${currentProduct.name} has been added to your cart.`, 'Continue Shopping');
-      } else {
-        alert(`${currentProduct.name} added to cart!`);
-      }
+      setTimeout(() => {
+        setLoading(btn, false);
+        
+        showPopup({
+          title: 'Added to Cart',
+          subtitle: 'Your item has been successfully added to the shopping cart.',
+          content: `
+            <div style="display: flex; gap: 1rem; align-items: center; background: rgba(255,255,255,0.03); padding: 1rem; border-radius: 12px; border: 1px solid rgba(201,169,98,0.2);">
+              <img src="${selectedImage}" style="width: 70px; height: 70px; border-radius: 8px; object-fit: cover;">
+              <div>
+                <div style="font-weight: 700; color: #fff; font-size: 1rem; margin-bottom: 4px;">${currentProduct.name}</div>
+                <div style="font-size: 0.85rem; color: #888;">${selectedSize} | ${selectedVariantName} | Qty: ${quantity}</div>
+                <div style="font-weight: 600; color: #c9a962; margin-top: 4px;">KSh ${(currentProduct.price * quantity).toLocaleString()}</div>
+              </div>
+            </div>
+          `,
+          confirmText: 'Checkout Now',
+          cancelText: 'Continue Shopping',
+          onConfirm: () => {
+            window.location.href = 'cart.html';
+          }
+        });
+      }, 600);
     }
 
     // ========================================
     // ADD TO WISHLIST
     // ========================================
     function addToWishlist() {
-      if (typeof showPopupToast === 'function') {
-        showPopupToast('success', 'Added to Wishlist!', `${currentProduct.name} has been added to your wishlist.`, 'View Wishlist');
-      } else {
-        alert(`${currentProduct.name} added to wishlist!`);
+      const btn = document.querySelector('.wishlist-btn');
+      setLoading(btn, true);
+
+      // Initialize wishlist if not exists
+      if (!localStorage.getItem('wishlist')) {
+        localStorage.setItem('wishlist', JSON.stringify([]));
       }
+
+      const wishlist = JSON.parse(localStorage.getItem('wishlist'));
+      
+      const wishlistItem = {
+        id: currentProduct.id,
+        name: currentProduct.name,
+        price: currentProduct.price,
+        image: currentProduct.images[0]
+      };
+
+      // Check if product exists
+      const exists = wishlist.some(item => item.id === wishlistItem.id);
+      
+      setTimeout(() => {
+        setLoading(btn, false);
+        if (!exists) {
+          wishlist.push(wishlistItem);
+          localStorage.setItem('wishlist', JSON.stringify(wishlist));
+          showToast('Wishlist', 'Product added to wishlist', 'success');
+        } else {
+          showToast('Wishlist', 'Product already in wishlist', 'info');
+        }
+      }, 600);
     }
 
     // ========================================
@@ -1905,22 +2331,156 @@
     }
 
     // ========================================
-    // SIZE GUIDE - Show as toast info
+    // SIZE GUIDE
     // ========================================
     function openSizeGuide() {
-      if (typeof showPopupToast === 'function') {
-        showPopupToast('info', 'Size Guide', 'Size guide information varies by product. Please refer to the product description for specific measurements.', 'Got it');
+      if (!currentProduct) return;
+
+      let guideContent = '';
+      const category = currentProduct.category || '';
+
+      if (category === 'Art' || category === 'Jewelry') {
+        // Simple guide for art/jewelry (soapstone/earrings as requested to be different/simple)
+        guideContent = `
+          <div style="margin-bottom: 2rem;">
+            <p style="margin-bottom: 1.5rem; color: rgba(255,255,255,0.7); line-height: 1.6;">Our ${category.toLowerCase()} pieces are handcrafted, making each item unique in its dimensions.</p>
+            <div style="background: rgba(201, 169, 98, 0.05); padding: 1.5rem; border-radius: 16px; border: 1px solid rgba(201, 169, 98, 0.1);">
+              <h4 style="color: #c9a962; margin-bottom: 0.5rem; font-size: 1rem;">Dimensions</h4>
+              <p style="color: #888; font-size: 0.9rem;">Please refer to the specific product description for the dimensions of this piece.</p>
+            </div>
+          </div>
+        `;
+      } else if (category === 'Footwear') {
+        guideContent = `
+          <div style="margin-bottom: 2rem;">
+            <p style="margin-bottom: 1.5rem; color: rgba(255,255,255,0.7); line-height: 1.6;">Our leather sandals follow standard European sizing. For the best fit, measure your foot length.</p>
+            
+            <table class="size-guide-table-custom">
+              <thead>
+                <tr>
+                  <th>EU Size</th>
+                  <th>US Men</th>
+                  <th>US Women</th>
+                  <th>Length (cm)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>36</td><td>-</td><td>5.5</td><td>23.0</td></tr>
+                <tr><td>37</td><td>-</td><td>6.5</td><td>23.5</td></tr>
+                <tr><td>38</td><td>5.0</td><td>7.5</td><td>24.0</td></tr>
+                <tr><td>39</td><td>6.0</td><td>8.5</td><td>24.5</td></tr>
+                <tr><td>40</td><td>7.0</td><td>9.5</td><td>25.5</td></tr>
+                <tr><td>41</td><td>8.0</td><td>10.5</td><td>26.5</td></tr>
+                <tr><td>42</td><td>9.0</td><td>11.5</td><td>27.0</td></tr>
+                <tr><td>43</td><td>10.0</td><td>-</td><td>28.0</td></tr>
+                <tr><td>44</td><td>11.0</td><td>-</td><td>28.5</td></tr>
+                <tr><td>45</td><td>12.0</td><td>-</td><td>29.5</td></tr>
+              </tbody>
+            </table>
+          </div>
+        `;
+      } else if (category === 'Fabrics' || category === 'Home') {
+        guideContent = `
+          <div style="margin-bottom: 2rem;">
+            <p style="margin-bottom: 1.5rem; color: rgba(255,255,255,0.7); line-height: 1.6;">Authentic African textiles and home products are measured in standard yards or meters.</p>
+            
+            <table class="size-guide-table-custom">
+              <thead>
+                <tr>
+                  <th>Type</th>
+                  <th>Width</th>
+                  <th>Length</th>
+                  <th>Unit</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>Kitenge Fabric</td><td>45"</td><td>6</td><td>Yards</td></tr>
+                <tr><td>Maasai Shuka</td><td>1.5</td><td>2.0</td><td>Meters</td></tr>
+                <tr><td>Kente Cloth</td><td>5.0"</td><td>2.0</td><td>Yards</td></tr>
+                <tr><td>Mudcloth</td><td>40"</td><td>1.8</td><td>Meters</td></tr>
+              </tbody>
+            </table>
+          </div>
+        `;
       } else {
-        alert('Size: S - Chest: 36", M - Chest: 38", L - Chest: 40", XL - Chest: 42"');
+        // Default Apparel Guide (Shirts, T-Shirts, Hoodies, Dresses)
+        guideContent = `
+          <div style="margin-bottom: 2rem;">
+            <p style="margin-bottom: 1.5rem; color: rgba(255,255,255,0.7); line-height: 1.6;">Our garments are handcrafted, so slight variations may occur. Please use this guide as a reference for the best fit.</p>
+            
+            <table class="size-guide-table-custom">
+              <thead>
+                <tr>
+                  <th>Size</th>
+                  <th>Chest (in)</th>
+                  <th>Waist (in)</th>
+                  <th>Length (in)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>S</td><td>34 - 36</td><td>28 - 30</td><td>27.5</td></tr>
+                <tr><td>M</td><td>38 - 40</td><td>32 - 34</td><td>28.5</td></tr>
+                <tr><td>L</td><td>42 - 44</td><td>36 - 38</td><td>29.5</td></tr>
+                <tr><td>XL</td><td>46 - 48</td><td>40 - 42</td><td>30.5</td></tr>
+                <tr><td>2XL</td><td>50 - 52</td><td>44 - 46</td><td>31.5</td></tr>
+                <tr><td>3XL</td><td>54 - 56</td><td>48 - 50</td><td>32.5</td></tr>
+              </tbody>
+            </table>
+          </div>
+        `;
       }
+
+      showPopup({
+        title: `${category} Size Guide`,
+        subtitle: 'Find your perfect fit',
+        content: `
+          ${guideContent}
+
+          <div style="background: rgba(201, 169, 98, 0.05); padding: 1.5rem; border-radius: 16px; border: 1px solid rgba(201, 169, 98, 0.1);">
+            <h4 style="color: #c9a962; margin-bottom: 1rem; font-size: 1rem;">Measurement Tips</h4>
+            <div style="display: grid; gap: 1rem; font-size: 0.85rem;">
+                <div style="display: flex; gap: 10px;">
+                    <span style="color: #c9a962; font-weight: bold;">01. Accuracy:</span>
+                    <span style="color: #888;">Keep the tape firm, but not tight.</span>
+                </div>
+                <div style="display: flex; gap: 10px;">
+                    <span style="color: #c9a962; font-weight: bold;">02. Comfort:</span>
+                    <span style="color: #888;">If you're between sizes, we recommend sizing up.</span>
+                </div>
+            </div>
+          </div>
+          <style>
+            .size-guide-table-custom {
+              width: 100%;
+              border-collapse: collapse;
+              color: #fff;
+              font-size: 0.9rem;
+            }
+            .size-guide-table-custom th {
+              text-align: left;
+              padding: 12px;
+              border-bottom: 1px solid rgba(201, 169, 98, 0.3);
+              color: #c9a962;
+              text-transform: uppercase;
+              font-size: 0.75rem;
+            }
+            .size-guide-table-custom td {
+              padding: 12px;
+              border-bottom: 1px solid rgba(255,255,255,0.05);
+            }
+          </style>
+        `,
+        confirmText: 'Got it',
+        showCancel: false
+      });
     }
 
     // ========================================
     // INITIALIZE
     // ========================================
     document.addEventListener('DOMContentLoaded', function() {
-      const productId = getProductIdFromURL();
-      loadProduct(productId);
+      const params = getProductParams();
+      loadProduct(params.id);
       updateCartCount();
     });
   </script>

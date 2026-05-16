@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Dashboard | African Artifacts</title>
+  <script src="js/preloader.js"></script>
+  <script src="js/notifications.js"></script>
+  <script src="js/api.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --primary: #6B4423;
+      --secondary: #8B5A2B;
+      --accent: #E8722C;
+      --gold: #D4A574;
+      --light: #F5E6D3;
+      --dark: #2d1810;
+      --white: #ffffff;
+      --gray: #666;
+      --sidebar-width: 260px;
+    }
+    body { font-family: 'Segoe UI', system-ui, sans-serif; background: #f8f9fa; color: var(--dark); display: flex; min-height: 100vh; }
+    
+    /* Sidebar */
+    .sidebar { width: var(--sidebar-width); background: var(--dark); color: white; padding: 2rem 1rem; position: fixed; height: 100vh; transition: 0.3s; z-index: 1000; }
+    .sidebar-brand { font-size: 1.5rem; font-weight: 800; color: var(--gold); margin-bottom: 3rem; text-align: center; }
+    .nav-links { list-style: none; }
+    .nav-item { margin-bottom: 0.5rem; }
+    .nav-link { display: flex; align-items: center; gap: 1rem; padding: 0.8rem 1rem; color: #ccc; text-decoration: none; border-radius: 8px; transition: 0.3s; cursor: pointer; }
+    .nav-link:hover, .nav-link.active { background: rgba(255,255,255,0.1); color: var(--gold); }
+    .logout-btn { margin-top: auto; color: #ff6b6b; }
+
+    /* Main Content */
+    .main-content { flex: 1; margin-left: var(--sidebar-width); padding: 2rem; transition: 0.3s; }
+    header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; gap: 1rem; flex-wrap: wrap; }
+    .page-title { font-size: 1.8rem; font-weight: 700; flex: 1; min-width: 200px; }
+
+    /* Stats Cards */
+    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; margin-bottom: 2rem; }
+    .stat-card { background: white; padding: 1.5rem; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border-left: 5px solid var(--accent); }
+    .stat-card h3 { font-size: 0.85rem; color: var(--gray); text-transform: uppercase; margin-bottom: 0.5rem; }
+    .stat-card .value { font-size: 1.6rem; font-weight: 800; color: var(--primary); }
+
+    /* Charts */
+    .charts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-bottom: 2rem; }
+    .chart-container { background: white; padding: 1.5rem; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); overflow: hidden; }
+
+    /* Tables & Sections */
+    .section { display: none; }
+    .section.active { display: block; animation: fadeIn 0.3s ease; }
+    .section-actions { margin-bottom: 1.5rem; display: flex; justify-content: flex-end; gap: 1rem; }
+    @media (max-width: 576px) { .section-actions { flex-direction: column; } .section-actions .btn { width: 100%; } }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    
+    .card { background: white; border-radius: 15px; padding: 1.5rem; box-shadow: 0 4px 15px rgba(0,0,0,0.05); margin-bottom: 2rem; }
+    .table-container { overflow-x: auto; margin: 0 -1rem; padding: 0 1rem; }
+    table { width: 100%; border-collapse: collapse; margin-top: 1rem; min-width: 600px; }
+    th { text-align: left; padding: 1rem; background: var(--light); color: var(--primary); font-weight: 700; border-radius: 4px; }
+    td { padding: 1rem; border-bottom: 1px solid #eee; }
+    .text-nowrap { white-space: nowrap; }
+
+    .responsive-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    @media (max-width: 576px) {
+      .responsive-grid, .form-row {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+    }
+    
+    /* Badges & Buttons */
+    .badge { padding: 0.4rem 0.8rem; border-radius: 20px; font-size: 0.8rem; font-weight: 700; }
+    .badge-pending { background: #fff3cd; color: #856404; }
+    .badge-confirmed { background: #d1ecf1; color: #0c5460; }
+    .badge-shipped { background: #e2e3e5; color: #383d41; }
+    .badge-delivered { background: #d4edda; color: #155724; }
+    .badge-partially_paid { background: #e0f2f1; color: #00695c; }
+    .badge-paid { background: #e8f5e9; color: #2e7d32; }
+    .badge-cancelled { background: #ffebee; color: #c62828; }
+    
+    .btn { padding: 0.6rem 1.2rem; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; transition: 0.2s; }
+    .btn-primary { background: var(--accent); color: white; }
+    .btn-outline { border: 1px solid var(--accent); color: var(--accent); background: none; }
+    .btn-sm { padding: 0.4rem 0.8rem; font-size: 0.85rem; }
+
+    /* Modal */
+    .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 2000; justify-content: center; align-items: center; backdrop-filter: blur(4px); padding: 1rem; }
+    .modal-content { background: white; padding: 2rem; border-radius: 20px; width: 100%; max-width: 600px; max-height: 90vh; overflow-y: auto; position: relative; }
+    @media (max-width: 576px) { .modal-content { padding: 1.5rem 1rem; border-radius: 15px; } }
+    .close-modal { position: absolute; right: 1.5rem; top: 1.5rem; cursor: pointer; font-size: 1.5rem; }
+
+    /* Forms */
+    .form-group { margin-bottom: 1.2rem; }
+    .form-group label { display: block; margin-bottom: 0.5rem; font-weight: 600; }
+    .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 0.8rem; border: 1px solid #ddd; border-radius: 8px; outline: none; }
+    .form-group input:focus { border-color: var(--accent); }
+
+    /* Responsive */
+    @media (max-width: 992px) {
+      .sidebar { transform: translateX(-100%); width: 280px; }
+      .sidebar.open { transform: translateX(0); box-shadow: 10px 0 30px rgba(0,0,0,0.2); }
+      .main-content { margin-left: 0; padding: 1rem; }
+      .charts-grid { grid-template-columns: 1fr; }
+      .stat-card .value { font-size: 1.5rem; }
+      .page-title { font-size: 1.4rem; min-width: 0; }
+      .header-right { font-size: 0.9rem; }
+    }
+
+    @media (max-width: 576px) {
+      header { margin-bottom: 1.5rem; }
+      .stats-grid { grid-template-columns: 1fr; }
+      .charts-grid { min-width: 0; }
+      .chart-container { padding: 1rem; }
+      .btn { padding: 0.5rem 1rem; font-size: 0.85rem; }
+      .section-actions { gap: 0.5rem; }
+      .modal-content { padding: 1.5rem 1rem; }
+      table { font-size: 0.85rem; }
+      th, td { padding: 0.6rem; }
+    }
+
+    .sidebar-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 999; backdrop-filter: blur(2px); }
+    .sidebar-overlay.active { display: block; }
+
+    .menu-toggle { display: none; background: none; border: none; font-size: 1.5rem; cursor: pointer; padding: 0.5rem; }
+    @media (max-width: 992px) { 
+      .menu-toggle { display: block; } 
+      #closeSidebar { display: block !important; }
+    }
+  </style>
+</head>
+<body>
+  <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 3rem;">
+      <div class="sidebar-brand" style="margin-bottom: 0;">AA ADMIN</div>
+      <button class="menu-toggle" style="color: white; display: none;" id="closeSidebar" onclick="toggleSidebar()">&times;</button>
+    </div>
+    <ul class="nav-links">
+      <li class="nav-item"><a class="nav-link active" onclick="showSection('dashboard', this)">📊 Dashboard</a></li>
+      <li class="nav-item"><a class="nav-link" onclick="showSection('orders', this)">📋 Orders</a></li>
+      <li class="nav-item"><a class="nav-link" onclick="showSection('products', this)">📦 Products</a></li>
+      <li class="nav-item"><a class="nav-link" onclick="showSection('coupons', this)">🎟️ Coupons</a></li>
+      <li class="nav-item"><a class="nav-link" onclick="showSection('users', this)">👥 Users</a></li>
+      <li class="nav-item" style="margin-top: 2rem;"><a class="nav-link logout-btn" onclick="logout()">🚪 Logout</a></li>
+    </ul>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <header>
+      <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
+      <h1 class="page-title" id="pageTitle">Analytics Overview</h1>
+      <div class="header-right" id="adminName">Admin</div>
+    </header>
+
+    <!-- Dashboard Section -->
+    <section id="dashboard" class="section active">
+      <div class="stats-grid">
+        <div class="stat-card">
+          <h3>Total Revenue</h3>
+          <div id="statRevenue" class="value">KSh 0</div>
+        </div>
+        <div class="stat-card">
+          <h3>Total Orders</h3>
+          <div id="statOrders" class="value">0</div>
+        </div>
+        <div class="stat-card">
+          <h3>Active Users</h3>
+          <div id="statUsers" class="value">0</div>
+        </div>
+      </div>
+
+      <div class="charts-grid">
+        <div class="chart-container">
+          <h3>Revenue Trend (Last 7 Days)</h3>
+          <canvas id="revenueChart"></canvas>
+        </div>
+        <div class="chart-container">
+          <h3>Order Volume</h3>
+          <canvas id="ordersChart"></canvas>
+        </div>
+      </div>
+    </section>
+
+    <!-- Orders Section -->
+    <section id="orders" class="section">
+      <div class="card">
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th class="text-nowrap">Order ID</th>
+                <th>Customer</th>
+                <th>Date</th>
+                <th class="text-nowrap">Total</th>
+                <th class="text-nowrap">Status</th>
+                <th>Tracking</th>
+                <th class="text-nowrap">Action</th>
+              </tr>
+            </thead>
+            <tbody id="ordersTable"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- Products Section -->
+    <section id="products" class="section">
+      <div class="section-actions">
+        <button class="btn btn-primary" onclick="showProductModal()">+ Add New Product</button>
+      </div>
+      <div class="card">
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Image</th>
+                <th>Name</th>
+                <th>Category</th>
+                <th class="text-nowrap">Price</th>
+                <th class="text-nowrap">Stock</th>
+                <th class="text-nowrap">Action</th>
+              </tr>
+            </thead>
+            <tbody id="productsTable"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- Users Section -->
+    <section id="users" class="section">
+      <div class="card">
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th class="text-nowrap">Joined Date</th>
+                <th class="text-nowrap">Role</th>
+              </tr>
+            </thead>
+            <tbody id="usersTable"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- Coupons Section -->
+    <section id="coupons" class="section">
+      <div class="section-actions">
+        <button class="btn btn-primary" onclick="showCouponModal()">+ Create Coupon</button>
+      </div>
+      <div class="card">
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th class="text-nowrap">Code</th>
+                <th class="text-nowrap">Discount</th>
+                <th class="text-nowrap">Min Order</th>
+                <th class="text-nowrap">Expires</th>
+                <th class="text-nowrap">Usage</th>
+                <th class="text-nowrap">Status</th>
+                <th class="text-nowrap">Action</th>
+              </tr>
+            </thead>
+            <tbody id="couponsTable"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    let currentOrderId = null;
+    let charts = {};
+
+    // UI Navigation
+    function showSection(id, el) {
+      document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+      document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+      el.classList.add('active');
+      
+      const title = el.textContent.trim().replace(/[^\w\s]/gi, '').trim();
+      document.getElementById('pageTitle').textContent = title + ' Overview';
+      
+      if (id === 'dashboard') loadStats();
+      if (id === 'orders') loadOrders();
+      if (id === 'products') loadProducts();
+      if (id === 'coupons') loadCoupons();
+      if (id === 'users') loadUsers();
+      
+      if (window.innerWidth < 992) toggleSidebar();
+    }
+
+    function toggleSidebar() {
+      document.getElementById('sidebar').classList.toggle('open');
+      document.getElementById('sidebarOverlay').classList.toggle('active');
+    }
+
+    // Modal Control
+    function closeModal(id) { document.getElementById(id).style.display = 'none'; }
+
+    // Dashboard & Charts
+    async function loadStats() {
+      const res = await fetch(`${api.BASE_URL}/admin/stats`, {
+        headers: { 'Authorization': `Bearer ${localStorage.getItem('authToken')}` }
+      });
+      const data = await res.json();
+      document.getElementById('statRevenue').textContent = `KSh ${parseFloat(data.totalRevenue || 0).toLocaleString()}`;
+      document.getElementById('statOrders').textContent = data.totalOrders || 0;
+      document.getElementById('statUsers').textContent = data.totalUsers || 0;
+
+      updateCharts(data.dailyStats);
+    }
+
+    function updateCharts(dailyStats) {
+      if (!dailyStats || !Array.isArray(dailyStats)) return;
+      const labels = dailyStats.map(s => s.date);
+      const revenueData = dailyStats.map(s => s.revenue);
+      const ordersData = dailyStats.map(s => s.count);
+
+      if (charts.revenue) charts.revenue.destroy();
+      if (charts.orders) charts.orders.destroy();
+
+      charts.revenue = new Chart(document.getElementById('revenueChart'), {
+        type: 'line',
+        data: {
+          labels,
+          datasets: [{ label: 'Revenue', data: revenueData, borderColor: '#E8722C', tension: 0.3, fill: true, backgroundColor: 'rgba(232, 114, 44, 0.1)' }]
+        }
+      });
+
+      charts.orders = new Chart(document.getElementById('ordersChart'), {
+        type: 'bar',
+        data: {
+          labels,
+          datasets: [{ label: 'Orders', data: ordersData, backgroundColor: '#6B4423' }]
+        }
+      });
+    }
+
+    // Orders
+    async function loadOrders() {
+      const res = await fetch(`${api.BASE_URL}/admin/orders`, {
+        headers: { 'Authorization': `Bearer ${localStorage.getItem('authToken')}` }
+      });
+      const orders = await res.json();
+      const tbody = document.getElementById('ordersTable');
+      tbody.innerHTML = orders.map(o => `
+        <tr>
+          <td class="text-nowrap">#${o.id.substring(0,8)}</td>
+          <td>${o.shippingAddress.firstName} ${o.shippingAddress.lastName}</td>
+          <td class="text-nowrap">${new Date(o.createdAt).toLocaleDateString()}</td>
+          <td class="text-nowrap">KSh ${parseFloat(o.total).toLocaleString()}</td>
+          <td><span class="badge badge-${o.status}">${o.status}</span></td>
+          <td class="text-nowrap">${o.trackingNumber || '<em style="color:#aaa">Not set</em>'}</td>
+          <td class="text-nowrap"><button class="btn btn-sm btn-outline" onclick="viewOrder('${o.id}', this)">View</button></td>
+        </tr>
+      `).join('');
+    }
+
+    async function viewOrder(id, btn) {
+      try {
+        if (btn) setLoading(btn, true);
+        currentOrderId = id;
+        const res = await fetch(`${api.BASE_URL}/admin/orders/${id}`, {
+          headers: { 'Authorization': `Bearer ${localStorage.getItem('authToken')}` }
+        });
+        if (!res.ok) throw new Error('Failed to fetch order details');
+        const o = await res.json();
+        
+        const addr = o.shippingAddress || {};
+        const items = o.items || [];
+        
+        const content = `
+          <div id="orderDetails" style="margin: 1.5rem 0;">
+            <div class="responsive-grid" style="font-size: 0.9rem;">
+              <div>
+                <strong>Customer:</strong><br>${addr.firstName || ''} ${addr.lastName || ''}<br>${addr.email || ''}<br>${addr.phone || ''}
+              </div>
+              <div>
+                <strong>Shipping:</strong><br>${addr.street || addr.address || 'N/A'}, ${addr.city || ''}<br>${addr.state || ''}, ${addr.country || ''}
+              </div>
+            </div>
+            <div style="margin-top: 1rem;">
+              <strong>Payment Info:</strong><br>
+              Method: ${o.paymentMethod || 'N/A'}<br>
+              Paid: KSh ${parseFloat(o.amountPaid || 0).toLocaleString()}<br>
+              Balance: KSh ${parseFloat(o.balanceRemaining || 0).toLocaleString()}
+            </div>
+            <div style="margin-top: 1rem;">
+              <strong>Items:</strong>
+              <ul style="padding-left: 1.2rem; margin-top: 0.5rem;">
+                ${items.map(i => `<li>${i.name} (${i.size || 'N/A'}) x ${i.quantity} @ KSh ${parseFloat(i.price).toLocaleString()}</li>`).join('')}
+              </ul>
+            </div>
+          </div>
+          <hr style="margin-bottom: 1.5rem;">
+          <div class="form-group">
+            <label>Update Status</label>
+            <select id="updateStatus">
+              <option value="pending" ${o.status === 'pending' ? 'selected' : ''}>Pending</option>
+              <option value="partially_paid" ${o.status === 'partially_paid' ? 'selected' : ''}>Partially Paid</option>
+              <option value="paid" ${o.status === 'paid' ? 'selected' : ''}>Paid</option>
+              <option value="confirmed" ${o.status === 'confirmed' ? 'selected' : ''}>Confirmed</option>
+              <option value="processing" ${o.status === 'processing' ? 'selected' : ''}>Processing</option>
+              <option value="shipped" ${o.status === 'shipped' ? 'selected' : ''}>Shipped</option>
+              <option value="delivered" ${o.status === 'delivered' ? 'selected' : ''}>Delivered</option>
+              <option value="cancelled" ${o.status === 'cancelled' ? 'selected' : ''}>Cancelled</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Tracking Number</label>
+            <input type="text" id="updateTracking" value="${o.trackingNumber || ''}" placeholder="Enter tracking number">
+          </div>
+        `;
+
+        showPopup({
+          title: 'Order Details',
+          content: content,
+          confirmText: 'Update Order',
+          onConfirm: () => {
+            const saveBtn = document.querySelector('.popup-btn-primary');
+            saveOrderUpdate(saveBtn);
+          }
+        });
+      } catch (err) {
+        console.error(err);
+        showToast('Error', 'Failed to load order details', 'error');
+      } finally {
+        if (btn) setLoading(btn, false);
+      }
+    }
+
+    async function saveOrderUpdate(btn) {
+      try {
+        setLoading(btn, true);
+        const status = document.getElementById('updateStatus').value;
+        const trackingNumber = document.getElementById('updateTracking').value;
+        const res = await fetch(`${api.BASE_URL}/admin/orders/${currentOrderId}/status`, {
+          method: 'PUT',
+          headers: { 
+            'Authorization': `Bearer ${localStorage.getItem('authToken')}`, 
+            'Content-Type': 'application/json' 
+          },
+          body: JSON.stringify({ status, trackingNumber })
+        });
+        if (!res.ok) throw new Error('Failed to update order');
+        hidePopup();
+        showToast('Success', 'Order updated successfully', 'success');
+        loadOrders();
+      } catch (err) {
+        console.error(err);
+        showToast('Error', 'Failed to update order', 'error');
+      } finally {
+        setLoading(btn, false);
+      }
+    }
+
+    // Coupons
+    async function loadCoupons() {
+      const res = await fetch(`${api.BASE_URL}/coupons`, {
+        headers: { 'Authorization': `Bearer ${localStorage.getItem('authToken')}` }
+      });
+      const coupons = await res.json();
+      const tbody = document.getElementById('couponsTable');
+      tbody.innerHTML = coupons.map(c => `
+        <tr>
+          <td class="text-nowrap"><strong>${c.code}</strong></td>
+          <td class="text-nowrap">${c.discountType === 'percentage' ? c.discountValue + '%' : 'KSh ' + parseFloat(c.discountValue).toLocaleString()}</td>
+          <td class="text-nowrap">KSh ${parseFloat(c.minOrderAmount).toLocaleString()}</td>
+          <td class="text-nowrap">${new Date(c.expiryDate).toLocaleDateString()}</td>
+          <td class="text-nowrap">${c.usedCount} / ${c.usageLimit || '∞'}</td>
+          <td><span class="badge ${c.isActive ? 'badge-confirmed' : 'badge-pending'}">${c.isActive ? 'Active' : 'Inactive'}</span></td>
+          <td class="text-nowrap">
+            <button class="btn btn-sm btn-outline" style="color:#ff6b6b; border-color:#ff6b6b;" onclick="deleteCoupon('${c.id}', this)">Delete</button>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    function showCouponModal() {
+      const content = `
+        <form id="couponForm">
+          <div class="form-group">
+            <label>Coupon Code</label>
+            <input type="text" id="cCode" placeholder="e.g. SAVE20" required>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Discount Type</label>
+              <select id="cType" required>
+                <option value="percentage">Percentage (%)</option>
+                <option value="fixed">Fixed Amount (KSh)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Value</label>
+              <input type="number" id="cValue" step="0.01" required>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Min Order Amount (KSh)</label>
+              <input type="number" id="cMinAmount" step="0.01" value="0">
+            </div>
+            <div class="form-group">
+              <label>Usage Limit</label>
+              <input type="number" id="cLimit" placeholder="Optional">
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Expiry Date</label>
+            <input type="date" id="cExpiry" required>
+          </div>
+        </form>
+      `;
+
+      showPopup({
+        title: 'Create New Coupon',
+        content: content,
+        confirmText: 'Create Coupon',
+        onConfirm: () => {
+          const form = document.getElementById('couponForm');
+          if (form.checkValidity()) {
+            const saveBtn = document.querySelector('.popup-btn-primary');
+            handleCouponSubmit(saveBtn);
+          } else {
+            form.reportValidity();
+          }
+        }
+      });
+    }
+
+    async function handleCouponSubmit(btn) {
+      try {
+        setLoading(btn, true);
+        const data = {
+          code: document.getElementById('cCode').value.trim().toUpperCase(),
+          discountType: document.getElementById('cType').value,
+          discountValue: parseFloat(document.getElementById('cValue').value),
+          minOrderAmount: parseFloat(document.getElementById('cMinAmount').value || 0),
+          expiryDate: document.getElementById('cExpiry').value,
+          usageLimit: document.getElementById('cLimit').value ? parseInt(document.getElementById('cLimit').value) : null
+        };
+        
+        const res = await fetch(`${api.BASE_URL}/coupons`, {
+          method: 'POST',
+          headers: { 'Authorization': `Bearer ${localStorage.getItem('authToken')}`, 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
+        
+        if (res.ok) { 
+          hidePopup(); 
+          showToast('Success', 'Coupon created successfully', 'success');
+          loadCoupons(); 
+        } else { 
+          const err = await res.json(); 
+          showToast('Error', err.error || 'Failed to create coupon', 'error');
+        }
+      } catch (err) {
+        console.error(err);
+        showToast('Error', 'An error occurred', 'error');
+      } finally {
+        setLoading(btn, false);
+      }
+    }
+
+    async function deleteCoupon(id, btn) {
+      showPopup({
+        title: 'Delete Coupon',
+        content: '<p>Are you sure you want to delete this coupon?</p>',
+        confirmText: 'Delete',
+        confirmVariant: 'danger',
+        onConfirm: async () => {
+          const confirmBtn = document.querySelector('.popup-btn-danger');
+          try {
+            setLoading(confirmBtn, true);
+            const res = await fetch(`${api.BASE_URL}/coupons/${id}`, {
+              method: 'DELETE',
+              headers: { 'Authorization': `Bearer ${localStorage.getItem('authToken')}` }
+            });
+            if (res.ok) {
+              hidePopup();
+              showToast('Deleted', 'Coupon has been deleted', 'success');
+              loadCoupons();
+            } else {
+              showToast('Error', 'Failed to delete coupon', 'error');
+            }
+          } catch (err) {
+            console.error(err);
+            showToast('Error', 'An error occurred', 'error');
+          } finally {
+            setLoading(confirmBtn, false);
+          }
+        }
+      });
+    }
+
+    // Products
+    async function loadProducts() {
+      const res = await fetch(`${api.BASE_URL}/admin/products`, {
+        headers: { 'Authorization': `Bearer ${localStorage.getItem('authToken')}` }
+      });
+      const products = await res.json();
+      const tbody = document.getElementById('productsTable');
+      tbody.innerHTML = products.map(p => `
+        <tr>
+          <td><img src="${p.image || 'placeholder.jpg'}" style="width:40px;height:40px;object-fit:cover;border-radius:4px;"></td>
+          <td>${p.name}</td>
+          <td>${p.category}</td>
+          <td class="text-nowrap">KSh ${parseFloat(p.price).toLocaleString()}</td>
+          <td>${p.stock}</td>
+          <td class="text-nowrap">
+            <button class="btn btn-sm btn-outline" onclick="showProductModal('${p.id}', this)">Edit</button>
+            <button class="btn btn-sm btn-outline" style="color:#ff6b6b; border-color:#ff6b6b;" onclick="deleteProduct('${p.id}', this)">Delete</button>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    async function showProductModal(id = null, btn = null) {
+      document.getElementById('productId').value = id || '';
+      let product = { name: '', category: 'shirts', price: 0, stock: 0, image: '', description: '' };
+      
+      if (id) {
+        try {
+          if (btn) setLoading(btn, true);
+          const res = await fetch(`${api.BASE_URL}/products/${id}`);
+          product = await res.json();
+        } catch (err) {
+          console.error(err);
+          showToast('Error', 'Failed to load product', 'error');
+          return;
+        } finally {
+          if (btn) setLoading(btn, false);
+        }
+      }
+
+      const content = `
+        <form id="productForm">
+          <input type="hidden" id="productId" value="${id || ''}">
+          <div class="form-group">
+            <label>Product Name</label>
+            <input type="text" id="pName" value="${product.name}" required>
+          </div>
+          <div class="form-group">
+            <label>Category</label>
+            <select id="pCategory" required>
+              ${['shirts', 'tshirts', 'jerseys', 'ponchos', 'hoodies', 'material', 'blankets', 'sandals', 'womens', 'soapstone', 'leatherbags', 'handmadebags'].map(c => `
+                <option value="${c}" ${product.category === c ? 'selected' : ''}>${c.charAt(0).toUpperCase() + c.slice(1)}</option>
+              `).join('')}
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Price (KSh)</label>
+            <input type="number" id="pPrice" step="0.01" value="${product.price}" required>
+          </div>
+          <div class="form-group">
+            <label>Stock</label>
+            <input type="number" id="pStock" value="${product.stock}" required>
+          </div>
+          <div class="form-group">
+            <label>Image URL</label>
+            <input type="text" id="pImage" value="${product.image || ''}">
+          </div>
+          <div class="form-group">
+            <label>Description</label>
+            <textarea id="pDesc" rows="3">${product.description || ''}</textarea>
+          </div>
+        </form>
+      `;
+
+      showPopup({
+        title: id ? 'Edit Product' : 'Add New Product',
+        content: content,
+        confirmText: 'Save Product',
+        onConfirm: () => {
+          const form = document.getElementById('productForm');
+          if (form.checkValidity()) {
+            const saveBtn = document.querySelector('.popup-btn-primary');
+            handleProductSubmit(saveBtn);
+          } else {
+            form.reportValidity();
+          }
+        }
+      });
+    }
+
+    async function handleProductSubmit(btn) {
+      try {
+        setLoading(btn, true);
+        const id = document.getElementById('productId').value;
+        const data = {
+          name: document.getElementById('pName').value,
+          category: document.getElementById('pCategory').value,
+          price: document.getElementById('pPrice').value,
+          stock: document.getElementById('pStock').value,
+          image: document.getElementById('pImage').value,
+          description: document.getElementById('pDesc').value
+        };
+        
+        const method = id ? 'PUT' : 'POST';
+        const url = id ? `${api.BASE_URL}/admin/products/${id}` : `${api.BASE_URL}/admin/products`;
+        
+        const res = await fetch(url, {
+          method,
+          headers: { 'Authorization': `Bearer ${localStorage.getItem('authToken')}`, 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
+        
+        if (res.ok) { 
+          hidePopup(); 
+          showToast('Success', 'Product saved successfully', 'success');
+          loadProducts(); 
+        } else { 
+          const err = await res.json(); 
+          showToast('Error', err.error || 'Failed to save product', 'error'); 
+        }
+      } catch (err) {
+        console.error(err);
+        showToast('Error', 'An error occurred', 'error');
+      } finally {
+        setLoading(btn, false);
+      }
+    }
+
+    async function deleteProduct(id, btn) {
+      showPopup({
+        title: 'Delete Product',
+        content: '<p>Are you sure you want to delete this product? This action cannot be undone.</p>',
+        confirmText: 'Delete',
+        confirmVariant: 'danger',
+        onConfirm: async () => {
+          const confirmBtn = document.querySelector('.popup-btn-danger');
+          try {
+            setLoading(confirmBtn, true);
+            const res = await fetch(`${api.BASE_URL}/admin/products/${id}`, {
+              method: 'DELETE',
+              headers: { 'Authorization': `Bearer ${localStorage.getItem('authToken')}` }
+            });
+            if (res.ok) {
+              hidePopup();
+              showToast('Deleted', 'Product has been deleted', 'success');
+              loadProducts();
+            } else {
+              showToast('Error', 'Failed to delete product', 'error');
+            }
+          } catch (err) {
+            console.error(err);
+            showToast('Error', 'An error occurred', 'error');
+          } finally {
+            setLoading(confirmBtn, false);
+          }
+        }
+      });
+    }
+
+    // Users
+    async function loadUsers() {
+      const res = await fetch(`${api.BASE_URL}/admin/users`, {
+        headers: { 'Authorization': `Bearer ${localStorage.getItem('authToken')}` }
+      });
+      const users = await res.json();
+      const tbody = document.getElementById('usersTable');
+      tbody.innerHTML = users.map(u => `
+        <tr>
+          <td>${u.name}</td>
+          <td>${u.email}</td>
+          <td class="text-nowrap">${new Date(u.createdAt).toLocaleDateString()}</td>
+          <td><span class="badge" style="background:#eee">${u.role}</span></td>
+        </tr>
+      `).join('');
+    }
+
+    function logout() {
+      localStorage.removeItem('authToken');
+      window.location.href = 'index.html';
+    }
+
+    // Init
+    checkAuth().then(() => {
+      loadStats();
+    });
+  </script>
+</body>
+</html>

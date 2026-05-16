@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { verifyToken } = require('../middleware/auth');
 const paystackSecret = process.env.PAYSTACK_SECRET_KEY;
-const Order = require('../models/Order');
+const { Order } = require('../models/sequelize');
 
 // Initialize Transaction (Paystack)
 router.post('/initialize-transaction', verifyToken, async (req, res) => {
@@ -18,13 +18,13 @@ router.post('/initialize-transaction', verifyToken, async (req, res) => {
     }
 
     // Find order
-    const order = await Order.findById(orderId);
+    const order = await Order.findByPk(orderId);
     if (!order) {
       return res.status(404).json({ error: 'Order not found' });
     }
 
     // Check if order belongs to user
-    if (order.userId.toString() !== req.userId) {
+    if (order.userId !== req.userId) {
       return res.status(403).json({ error: 'Unauthorized' });
     }
 
@@ -70,12 +70,12 @@ router.post('/verify-payment', verifyToken, async (req, res) => {
       return res.status(400).json({ error: 'Missing required fields: orderId and reference' });
     }
 
-    const order = await Order.findById(orderId);
+    const order = await Order.findByPk(orderId);
     if (!order) {
       return res.status(404).json({ error: 'Order not found' });
     }
 
-    if (order.userId.toString() !== req.userId) {
+    if (order.userId !== req.userId) {
       return res.status(403).json({ error: 'Unauthorized' });
     }
 

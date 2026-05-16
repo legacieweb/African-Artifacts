@@ -1,7 +1,7 @@
 const express = require('express');
-const mongoose = require('mongoose');
 const cors = require('cors');
 const dotenv = require('dotenv');
+const { connectDB, sequelize } = require('./config/database');
 
 // Load environment variables
 dotenv.config();
@@ -11,16 +11,19 @@ const app = express();
 
 // Middleware
 app.use(cors({
-  origin: ['http://localhost:3000', 'http://127.0.0.1:3000', 'null', "https://africanartifacts.iyonicorp.com"],
+  origin: ['http://localhost:3000', 'http://127.0.0.1:3000', 'null', "https://africanartifacts.iyonicorp.com", "http://127.0.0.1:5500"],
   credentials: true
 }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Connect to MongoDB
-mongoose.connect(process.env.MONGODB_URI || 'mongodb+srv://iyonicfashion:%407Switched@iyonicfashion.iaidrz5.mongodb.net/?retryWrites=true&w=majority&appName=iyonicfashion')
-  .then(() => console.log('✅ MongoDB Connected'))
-  .catch(err => console.log('❌ MongoDB Error:', err));
+// Connect to Neon PostgreSQL
+connectDB().then(() => {
+  // Sync models
+  sequelize.sync({ alter: true })
+    .then(() => console.log('✅ Database models synchronized'))
+    .catch(err => console.log('❌ Database synchronization error:', err));
+});
 
 // Routes
 app.use('/api/auth', require('./routes/auth'));
@@ -28,6 +31,8 @@ app.use('/api/products', require('./routes/products'));
 app.use('/api/cart', require('./routes/cart'));
 app.use('/api/orders', require('./routes/orders'));
 app.use('/api/payment', require('./routes/payment'));
+app.use('/api/admin', require('./routes/admin'));
+app.use('/api/coupons', require('./routes/coupons'));
 
 // Health Check
 app.get('/api/health', (req, res) => {

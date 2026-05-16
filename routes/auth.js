@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const User = require('../models/User');
+const { User } = require('../models/sequelize');
 const { generateToken, verifyToken } = require('../middleware/auth');
 
 // Register
@@ -18,23 +18,25 @@ router.post('/register', async (req, res) => {
     }
 
     // Check if user exists
-    const existingUser = await User.findOne({ email });
+    const existingUser = await User.findOne({ where: { email } });
     if (existingUser) {
       return res.status(400).json({ error: 'Email already registered' });
     }
 
+    // Assign admin role if email matches ADMIN_EMAIL
+    const role = email === process.env.ADMIN_EMAIL ? 'admin' : 'user';
+
     // Create user
-    const user = new User({ name, email, password });
-    await user.save();
+    const user = await User.create({ name, email, password, role });
 
     // Generate token
-    const token = generateToken(user._id);
+    const token = generateToken(user.id);
 
     res.status(201).json({
       message: 'User registered successfully',
       token,
       user: {
-        id: user._id,
+        id: user.id,
         name: user.name,
         email: user.email
       }
@@ -54,8 +56,22 @@ router.post('/login', async (req, res) => {
       return res.status(400).json({ error: 'Email and password required' });
     }
 
+    // Auto-create admin if it doesn't exist and matches .env credentials
+    if (email === process.env.ADMIN_EMAIL && password === process.env.ADMIN_PASSWORD) {
+      const existingAdmin = await User.findOne({ where: { email } });
+      if (!existingAdmin) {
+        await User.create({
+          name: 'System Admin',
+          email: process.env.ADMIN_EMAIL,
+          password: process.env.ADMIN_PASSWORD,
+          role: 'admin'
+        });
+        console.log('✅ System Admin auto-created');
+      }
+    }
+
     // Find user
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ where: { email } });
     if (!user) {
       return res.status(401).json({ error: 'Invalid credentials' });
     }
@@ -67,15 +83,16 @@ router.post('/login', async (req, res) => {
     }
 
     // Generate token
-    const token = generateToken(user._id);
+    const token = generateToken(user.id);
 
     res.json({
       message: 'Login successful',
       token,
       user: {
-        id: user._id,
+        id: user.id,
         name: user.name,
-        email: user.email
+        email: user.email,
+        role: user.role
       }
     });
   } catch (err) {
@@ -86,7 +103,9 @@ router.post('/login', async (req, res) => {
 // Get User Profile
 router.get('/profile', verifyToken, async (req, res) => {
   try {
-    const user = await User.findById(req.userId).select('-password');
+    const user = await User.findByPk(req.userId, {
+      attributes: { exclude: ['password'] }
+    });
     res.json(user);
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -97,15 +116,20 @@ router.get('/profile', verifyToken, async (req, res) => {
 router.put('/profile', verifyToken, async (req, res) => {
   try {
     const { name, phone, address } = req.body;
-    const user = await User.findByIdAndUpdate(
-      req.userId,
+    await User.update(
       { name, phone, address },
-      { new: true }
-    ).select('-password');
+      { where: { id: req.userId } }
+    );
+    
+    const user = await User.findByPk(req.userId, {
+      attributes: { exclude: ['password'] }
+    });
     res.json(user);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 });
+
+module.exports = router;
 
 module.exports = router;

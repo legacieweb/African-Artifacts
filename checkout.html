@@ -4,6 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Checkout | African Artifacts</title>
+  <script src="js/preloader.js"></script>
+  <script src="js/notifications.js"></script>
+  <script src="js/api.js"></script>
   <script src="https://js.paystack.co/v1/inline.js"></script>
   
   <style>
@@ -278,6 +281,16 @@
       color: var(--primary);
     }
 
+    #balanceRow {
+      animation: highlightPulse 2s infinite;
+    }
+
+    @keyframes highlightPulse {
+      0% { background: rgba(201, 169, 98, 0); }
+      50% { background: rgba(201, 169, 98, 0.05); }
+      100% { background: rgba(201, 169, 98, 0); }
+    }
+
     /* Payment Methods */
     .payment-methods {
       display: flex;
@@ -289,10 +302,10 @@
       display: flex;
       align-items: center;
       gap: 1rem;
-      padding: 1rem;
+      padding: 1.2rem;
       background: rgba(255, 255, 255, 0.03);
       border: 2px solid rgba(255, 255, 255, 0.1);
-      border-radius: 12px;
+      border-radius: 16px;
       cursor: pointer;
       transition: var(--transition);
     }
@@ -333,10 +346,10 @@
     }
 
     .payment-icon {
-      width: 40px;
-      height: 40px;
-      background: rgba(201, 169, 98, 0.15);
-      border-radius: 8px;
+      width: 48px;
+      height: 48px;
+      background: rgba(201, 169, 98, 0.1);
+      border-radius: 12px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -354,13 +367,42 @@
 
     .payment-info h4 {
       color: var(--white);
-      font-size: 1rem;
+      font-size: 1.1rem;
       margin-bottom: 0.2rem;
     }
 
     .payment-info p {
       color: var(--gray);
-      font-size: 0.85rem;
+      font-size: 0.9rem;
+    }
+
+    /* Save Info Checkbox */
+    .save-info {
+      margin-top: 1.5rem;
+      display: none; /* Hidden by default, shown for logged in users */
+      align-items: center;
+      gap: 0.8rem;
+      cursor: pointer;
+      user-select: none;
+      padding: 0.5rem;
+      border-radius: 8px;
+      transition: var(--transition);
+    }
+
+    .save-info:hover {
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .save-info input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+      accent-color: var(--primary);
+      cursor: pointer;
+    }
+
+    .save-info span {
+      font-size: 0.95rem;
+      color: rgba(255, 255, 255, 0.8);
     }
 
     /* Checkout Button */
@@ -476,11 +518,16 @@
     @media (max-width: 1024px) {
       .checkout-container {
         grid-template-columns: 1fr;
+        padding: 1rem;
       }
 
       .order-summary {
         position: static;
-        order: -1;
+        order: 2; /* Move below on small screens */
+      }
+      
+      .checkout-form {
+        order: 1;
       }
     }
 
@@ -578,6 +625,11 @@
             </select>
           </div>
         </div>
+
+        <label class="save-info" id="saveInfoWrapper">
+          <input type="checkbox" id="saveForNextTime" checked>
+          <span>Save my information for next time</span>
+        </label>
       </div>
 
       <!-- Payment Method -->
@@ -591,34 +643,31 @@
               <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z"/></svg>
             </div>
             <div class="payment-info">
-              <h4>Pay with Card</h4>
-              <p>Visa, Mastercard, M-Pesa</p>
+              <h4>Full Online Payment</h4>
+              <p>Pay full amount now via Paystack</p>
             </div>
           </label>
 
-          <label class="payment-option" onclick="selectPayment(this, 'mpesa')">
-            <input type="radio" name="payment" value="mpesa">
+          <label class="payment-option" id="podOption" style="display: none;" onclick="selectPayment(this, 'pod')">
+            <input type="radio" name="payment" value="pod">
             <div class="payment-radio"></div>
             <div class="payment-icon">
-              <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+              <svg viewBox="0 0 24 24"><path d="M20 8h-3V4H3v12h2v4h14v-4h1V8zm-1 7H5V6h12v9zm-5 4H7v-2h7v2z"/></svg>
             </div>
             <div class="payment-info">
-              <h4>M-Pesa</h4>
-              <p>Pay directly from your M-Pesa account</p>
+              <h4>Pay on Delivery</h4>
+              <p>Pay delivery fee now, <span style="color: var(--primary); font-weight: 700;">balance when delivered</span></p>
             </div>
           </label>
+        </div>
 
-          <label class="payment-option" onclick="selectPayment(this, 'bank')">
-            <input type="radio" name="payment" value="bank">
-            <div class="payment-radio"></div>
-            <div class="payment-icon">
-              <svg viewBox="0 0 24 24"><path d="M4 10v7h3v-7H4zm6 0v7h3v-7h-3zM2 22h19v-3H2v3zm14-12v7h3v-7h-3zm-4.5-9L2 6v2h19V6l-9.5-5z"/></svg>
-            </div>
-            <div class="payment-info">
-              <h4>Bank Transfer</h4>
-              <p>Direct bank transfer</p>
-            </div>
-          </label>
+        <!-- Pro Tip -->
+        <div class="pro-tip" style="margin-top: 1.5rem; padding: 1rem; background: rgba(201, 169, 98, 0.1); border: 1px dashed var(--primary); border-radius: 12px; display: flex; gap: 0.8rem; align-items: flex-start;">
+          <div style="color: var(--primary); font-size: 1.2rem;">💡</div>
+          <div style="font-size: 0.85rem; color: rgba(255, 255, 255, 0.8); line-height: 1.4;">
+            <strong style="color: var(--primary); display: block; margin-bottom: 0.2rem;">Pro Tip: Full Payment Savings</strong>
+            If you pay in full now, your discount covers the <strong style="color: var(--white);">entire total</strong>—including the delivery fee! Pay on Delivery requires the delivery fee to be paid separately.
+          </div>
         </div>
       </div>
 
@@ -633,10 +682,26 @@
           <!-- Cart items will be populated by JavaScript -->
         </div>
 
+        <!-- Coupon Code -->
+        <div class="coupon-section" style="margin-bottom: 1.5rem; padding-bottom: 1.5rem; border-bottom: 1px solid rgba(201, 169, 98, 0.15);">
+          <div class="form-field">
+            <label>Have a coupon?</label>
+            <div style="display: flex; gap: 0.5rem; margin-top: 0.5rem;">
+              <input type="text" id="couponCode" placeholder="Enter code" style="flex: 1; padding: 0.6rem;">
+              <button class="btn-secondary" onclick="applyCoupon()" style="padding: 0 1rem; border-radius: 10px;">Apply</button>
+            </div>
+            <div id="couponMessage" style="font-size: 0.85rem; margin-top: 0.4rem;"></div>
+          </div>
+        </div>
+
         <div class="summary-totals">
           <div class="total-row">
             <span>Subtotal</span>
             <span id="subtotal">KSh 0</span>
+          </div>
+          <div class="total-row" id="discountRow" style="display: none;">
+            <span>Discount</span>
+            <span id="discount" style="color: var(--success);">-KSh 0</span>
           </div>
           <div class="total-row">
             <span>Shipping</span>
@@ -650,11 +715,15 @@
             <span>Total</span>
             <span id="total">KSh 0</span>
           </div>
+          <div class="total-row" id="balanceRow" style="display: none; margin-top: 0.5rem; padding-top: 0.5rem; border-top: 1px dashed rgba(201, 169, 98, 0.2);">
+            <span style="color: var(--gold); font-weight: 600;">Balance to pay</span>
+            <span id="balance" style="color: var(--gold); font-weight: 700;">Pay when delivered</span>
+          </div>
         </div>
 
         <button class="checkout-btn" onclick="processPayment()" id="checkoutBtn">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
-          Pay KSh <span id="payAmount">0</span>
+          Complete Payment: <span id="payAmount">0</span>
         </button>
       </div>
     </div>
@@ -681,9 +750,207 @@
     let shipping = 300;
     let tax = 0;
     let total = 0;
+    let discount = 0;
+    let isPOD = false;
+    let appliedCoupon = null;
+    let currentPayAmount = 0;
+    let currentBalance = 0;
+
+    // Check Auth Status
+    function checkAuth() {
+      const token = localStorage.getItem('authToken');
+      const isGuest = localStorage.getItem('isGuestCheckout');
+      const podOption = document.getElementById('podOption');
+      
+      if (token) {
+        if (podOption) podOption.style.display = 'flex';
+      } else {
+        if (podOption) podOption.style.display = 'none';
+        if (!isGuest) {
+          // Show auth popup using global system
+          showPopup({
+            title: 'Identify Yourself',
+            subtitle: 'Login to your account or continue as a guest to complete your order.',
+            content: `
+              <div style="display: grid; gap: 1rem; margin-top: 1.5rem;">
+                <a href="login.html?redirect=checkout.html" class="auth-btn-custom primary">
+                  <svg viewBox="0 0 24 24" width="20" height="20" style="margin-right: 10px;"><path d="M11 7L9.6 8.4l2.6 2.6H2v2h10.2l-2.6 2.6L11 17l5-5-5-5zm9 12h-8v2h8c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-8v2h8v14z" fill="currentColor"/></svg>
+                  Sign In to Account
+                </a>
+                
+                <a href="signup.html?redirect=checkout.html" class="auth-btn-custom secondary">
+                  <svg viewBox="0 0 24 24" width="20" height="20" style="margin-right: 10px;"><path d="M15 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm-9-2V7H4v3H1v2h3v3h2v-3h3v-2H6zm9 4c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" fill="currentColor"/></svg>
+                  Create New Account
+                </a>
+                
+                <button onclick="continueAsGuest()" class="auth-btn-custom guest">
+                  Continue as Guest
+                </button>
+              </div>
+              <style>
+                .auth-btn-custom {
+                  padding: 1.1rem;
+                  border-radius: 14px;
+                  font-weight: 700;
+                  font-size: 1rem;
+                  cursor: pointer;
+                  transition: all 0.3s ease;
+                  border: none;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  text-decoration: none;
+                }
+                .auth-btn-custom.primary {
+                  background: linear-gradient(135deg, #c9a962 0%, #a88a4a 100%);
+                  color: #1a1a1a;
+                }
+                .auth-btn-custom.secondary {
+                  background: rgba(255, 255, 255, 0.05);
+                  color: #fff;
+                  border: 1px solid rgba(255, 255, 255, 0.1);
+                }
+                .auth-btn-custom.guest {
+                  background: transparent;
+                  color: #c9a962;
+                  border: 2px solid #c9a962;
+                  margin-top: 0.5rem;
+                }
+                .auth-btn-custom:hover {
+                  transform: translateY(-3px);
+                  filter: brightness(1.1);
+                }
+              </style>
+            `,
+            showConfirm: false,
+            onCancel: () => {
+              window.location.href = 'cart.html';
+            }
+          });
+        }
+      }
+    }
+
+    // Set Pay on Delivery
+    function setPOD(enabled) {
+      isPOD = enabled;
+      calculateTotals();
+    }
+
+    // Apply Coupon
+    async function applyCoupon() {
+      const codeInput = document.getElementById('couponCode');
+      const code = codeInput.value.trim().toUpperCase();
+      if (!code) return;
+      
+      const btn = codeInput.nextElementSibling;
+
+      try {
+        setLoading(btn, true);
+        // Use subtotal for validation
+        const currentSubtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+        const res = await fetch(`${api.BASE_URL}/coupons/validate`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ code, orderAmount: currentSubtotal })
+        });
+        
+        const data = await res.json();
+        
+        if (res.ok && data.coupon) {
+          appliedCoupon = data.coupon;
+          const discountVal = data.discount || 0;
+          showToast('Coupon Applied', `You saved KSh ${discountVal.toLocaleString()}`, 'success');
+          calculateTotals();
+        } else {
+          showToast('Invalid Coupon', data.error || 'Could not apply coupon', 'error');
+        }
+      } catch (err) {
+        console.error('Coupon error:', err);
+        showToast('Error', 'Failed to validate coupon', 'error');
+      } finally {
+        setLoading(btn, false);
+      }
+    }
+
+    function continueAsGuest() {
+      localStorage.setItem('isGuestCheckout', 'true');
+      hidePopup();
+    }
+
+    // Fetch User Profile for Autofill
+    async function fetchUserProfile() {
+      const token = localStorage.getItem('authToken');
+      if (!token) return;
+
+      // Show save info checkbox for logged in users
+      const saveWrapper = document.getElementById('saveInfoWrapper');
+      if (saveWrapper) saveWrapper.style.display = 'flex';
+
+      try {
+        const res = await window.getUserProfile();
+        if (res && !res.error) {
+          const user = res.user || res;
+          // Split name if it's a single string
+          let firstName = '';
+          let lastName = '';
+          
+          if (user.name) {
+            const parts = user.name.split(' ');
+            firstName = parts[0];
+            lastName = parts.slice(1).join(' ');
+          }
+
+          document.getElementById('firstName').value = firstName || user.firstName || '';
+          document.getElementById('lastName').value = lastName || user.lastName || '';
+          document.getElementById('email').value = user.email || '';
+          document.getElementById('phone').value = user.phone || '';
+          const addr = user.address || {};
+          document.getElementById('address').value = addr.street || '';
+          document.getElementById('city').value = addr.city || '';
+          document.getElementById('county').value = addr.state || '';
+          document.getElementById('zipCode').value = addr.zipCode || '';
+          if (addr.country) document.getElementById('country').value = addr.country;
+        }
+      } catch (err) {
+        console.error('Failed to fetch profile for autofill:', err);
+      }
+    }
+
+    // Save Profile Information
+    async function handleProfileSave() {
+      const saveChecked = document.getElementById('saveForNextTime').checked;
+      const token = localStorage.getItem('authToken');
+      
+      if (saveChecked && token) {
+        const updates = {
+          firstName: document.getElementById('firstName').value,
+          lastName: document.getElementById('lastName').value,
+          phone: document.getElementById('phone').value,
+          address: {
+            street: document.getElementById('address').value,
+            city: document.getElementById('city').value,
+            state: document.getElementById('county').value,
+            zipCode: document.getElementById('zipCode').value,
+            country: document.getElementById('country').value
+          }
+        };
+        
+        // Also update name if needed
+        updates.name = `${updates.firstName} ${updates.lastName}`.trim();
+        
+        try {
+          await window.updateUserProfile(updates);
+        } catch (err) {
+          console.error('Failed to save profile information:', err);
+        }
+      }
+    }
 
     // Load cart from localStorage
     function loadCart() {
+      checkAuth();
+      fetchUserProfile();
       cart = JSON.parse(localStorage.getItem('cart')) || [];
       renderCartItems();
       calculateTotals();
@@ -722,19 +989,79 @@
     function calculateTotals() {
       subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
       
-      // Free shipping for orders over KSh 10,000
+      // Calculate discount
+      discount = 0;
+      if (appliedCoupon) {
+        const val = parseFloat(appliedCoupon.discountValue);
+        if (appliedCoupon.discountType === 'percentage') {
+          discount = Math.round(subtotal * (val / 100));
+        } else {
+          discount = val;
+        }
+      }
+
+      // If discount is more than subtotal, apply it to shipping too (redeem delivery fee)
+      let remainingDiscount = discount;
+      let actualDiscountOnSubtotal = Math.min(subtotal, remainingDiscount);
+      remainingDiscount -= actualDiscountOnSubtotal;
+
+      const afterDiscountSubtotal = subtotal - actualDiscountOnSubtotal;
+      
+      // Free shipping logic - based on original subtotal to be consistent
       shipping = subtotal >= 10000 ? 0 : 300;
       
-      // Tax (16% VAT)
-      tax = Math.round(subtotal * 0);
+      // Apply remaining discount to shipping
+      let actualDiscountOnShipping = Math.min(shipping, remainingDiscount);
+      shipping -= actualDiscountOnShipping;
       
-      total = subtotal + shipping + tax;
+      tax = 0; 
+      
+      total = afterDiscountSubtotal + shipping + tax;
+      
+      // Pay Amount logic
+      currentPayAmount = total;
+      currentBalance = 0;
+      
+      if (isPOD) {
+        // If POD, pay shipping fee now (even if reduced by coupon). 
+        // If shipping is 0 (already free), pay a small commitment fee of 500 (or the total if it's less).
+        currentPayAmount = shipping > 0 ? shipping : Math.min(500, total);
+        currentBalance = total - currentPayAmount;
+      }
 
+      // Update UI
       document.getElementById('subtotal').textContent = `KSh ${subtotal.toLocaleString()}`;
       document.getElementById('shipping').textContent = shipping === 0 ? 'FREE' : `KSh ${shipping.toLocaleString()}`;
       document.getElementById('tax').textContent = `KSh ${tax.toLocaleString()}`;
+      
+      const discRow = document.getElementById('discountRow');
+      if (discRow) {
+        const totalDiscount = actualDiscountOnSubtotal + actualDiscountOnShipping;
+        discRow.style.display = totalDiscount > 0 ? 'flex' : 'none';
+        document.getElementById('discount').textContent = `- KSh ${totalDiscount.toLocaleString()}`;
+      }
+      
       document.getElementById('total').textContent = `KSh ${total.toLocaleString()}`;
-      document.getElementById('payAmount').textContent = total.toLocaleString();
+      
+      // Balance row for POD
+      const balanceRow = document.getElementById('balanceRow');
+      if (balanceRow) {
+        balanceRow.style.display = isPOD && currentBalance > 0 ? 'flex' : 'none';
+        document.getElementById('balance').textContent = `KSh ${currentBalance.toLocaleString()} (Pay when delivered)`;
+      }
+      
+      const payBtn = document.getElementById('checkoutBtn');
+      if (isPOD) {
+        payBtn.innerHTML = `
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
+          Pay Delivery Fee: KSh <span id="payAmount">${currentPayAmount.toLocaleString()}</span>
+        `;
+      } else {
+        payBtn.innerHTML = `
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
+          Complete Payment: KSh <span id="payAmount">${currentPayAmount.toLocaleString()}</span>
+        `;
+      }
     }
 
     // Select payment method
@@ -742,6 +1069,7 @@
       document.querySelectorAll('.payment-option').forEach(opt => opt.classList.remove('selected'));
       element.classList.add('selected');
       element.querySelector('input').checked = true;
+      setPOD(method === 'pod');
     }
 
     // Validate form
@@ -764,15 +1092,18 @@
 
     // Process payment with PayStack
     function processPayment() {
+      const btn = document.getElementById('checkoutBtn');
       if (!validateForm()) {
-        showAlertToast('error', 'Missing Fields', 'Please fill in all required fields');
+        showToast('Missing Fields', 'Please fill in all required fields', 'error');
         return;
       }
 
       if (cart.length === 0) {
-        showAlertToast('warning', 'Empty Cart', 'Your cart is empty');
+        showToast('Empty Cart', 'Your cart is empty', 'warning');
         return;
       }
+
+      setLoading(btn, true);
 
       const email = document.getElementById('email').value;
       const firstName = document.getElementById('firstName').value;
@@ -782,234 +1113,116 @@
       const handler = PaystackPop.setup({
         key: PAYSTACK_PUBLIC_KEY,
         email: email,
-        amount: total * 100, // PayStack expects amount in kobo/cents
+        amount: Math.round(currentPayAmount * 100), // Use the correctly calculated amount
         currency: CURRENCY,
         ref: 'AA' + Math.floor(Math.random() * 1000000000),
         callback: function(response) {
           // Payment successful
           const reference = response.reference;
           
-          // Save order to localStorage
-          const order = {
-            id: 'ORD' + Date.now(),
-            reference: reference,
-            customer: {
+          // Save profile info if requested
+          handleProfileSave();
+          
+          // Prepare order data for backend
+          const orderData = {
+            items: cart.map(item => ({
+              name: item.name,
+              size: item.size || 'One Size',
+              quantity: item.quantity,
+              price: item.price
+            })),
+            total: total,
+            amountPaid: currentPayAmount,
+            paymentMethod: isPOD ? 'pay_on_delivery' : 'paystack',
+            balanceRemaining: currentBalance,
+            paymentReference: reference,
+            couponCode: appliedCoupon ? appliedCoupon.code : null,
+            discountAmount: discount,
+            status: isPOD ? 'partially_paid' : 'confirmed',
+            shippingAddress: {
               firstName,
               lastName,
               email,
               phone,
-              address: document.getElementById('address').value,
+              street: document.getElementById('address').value,
               city: document.getElementById('city').value,
-              county: document.getElementById('county').value,
+              state: document.getElementById('county').value,
+              zipCode: document.getElementById('zipCode').value,
               country: document.getElementById('country').value
-            },
-            items: cart,
-            subtotal,
-            shipping,
-            tax,
-            total,
-            status: 'paid',
-            date: new Date().toISOString()
+            }
           };
 
-          // Save order
-          const orders = JSON.parse(localStorage.getItem('orders')) || [];
-          orders.push(order);
-          localStorage.setItem('orders', JSON.stringify(orders));
+          let orderId = 'ORD' + Date.now();
 
-          // Clear cart
-          localStorage.setItem('cart', JSON.stringify([]));
+          // Define success handling function
+          const completeOrder = (finalOrderId) => {
+            // Save order to localStorage for confirmation page
+            const order = {
+              ...orderData,
+              id: finalOrderId,
+              reference: reference,
+              customer: orderData.shippingAddress,
+              subtotal,
+              shipping,
+              tax,
+              date: new Date().toISOString()
+            };
 
-          // Show success popup toast and redirect
-          showPaymentSuccess(reference, order.id);
+            const orders = JSON.parse(localStorage.getItem('orders')) || [];
+            orders.push(order);
+            localStorage.setItem('orders', JSON.stringify(orders));
+
+            // Clear cart
+            localStorage.setItem('cart', JSON.stringify([]));
+
+            // Show success popup and redirect
+            showPopup({
+              title: 'Payment Successful!',
+              subtitle: 'Thank you for your purchase!',
+              content: `<div style="text-align: center; padding: 1rem;">
+                <p>Order Reference: <strong style="color: #c9a962;">${reference}</strong></p>
+                <p style="margin-top: 10px; color: #888;">A confirmation email has been sent to ${email}</p>
+              </div>`,
+              confirmText: 'View Order',
+              showCancel: false,
+              onConfirm: () => {
+                window.location.href = 'order-confirmation.html?order=' + finalOrderId;
+              }
+            });
+          };
+
+          // Save order to backend if logged in
+          if (localStorage.getItem('authToken')) {
+            api.createOrder(orderData)
+              .then(apiResult => {
+                if (apiResult && apiResult.order) {
+                  completeOrder(apiResult.order.id);
+                } else {
+                  completeOrder(orderId);
+                }
+              })
+              .catch(err => {
+                console.error('Error saving order to backend:', err);
+                completeOrder(orderId);
+              })
+              .finally(() => setLoading(btn, false));
+          } else {
+            completeOrder(orderId);
+            setLoading(btn, false);
+          }
         },
         onClose: function() {
           // Payment modal closed
           console.log('Payment cancelled');
+          setLoading(btn, false);
         }
       });
 
       handler.openIframe();
     }
 
-    // Show payment success popup
-    function showPaymentSuccess(reference, orderId) {
-      const overlay = document.getElementById('popupToastOverlay');
-      const popup = document.getElementById('popupToast');
-      const titleEl = document.getElementById('popupToastTitle');
-      const messageEl = document.getElementById('popupToastMessage');
-      const btn = document.querySelector('.popup-toast-btn');
-      
-      popup.className = 'popup-toast success';
-      titleEl.textContent = 'Payment Successful!';
-      messageEl.innerHTML = `Thank you for your purchase!<br>Order Reference: <strong>${reference}</strong>`;
-      btn.textContent = 'View Order';
-      btn.onclick = function() {
-        window.location.href = 'order-confirmation.html?order=' + orderId;
-      };
-      
-      overlay.classList.add('active');
-      popup.classList.add('active');
-    }
-
-    // Alert toast helper
-    function showAlertToast(type, title, message) {
-      const overlay = document.getElementById('popupToastOverlay');
-      const popup = document.getElementById('popupToast');
-      const icon = document.getElementById('popupToastIcon');
-      const titleEl = document.getElementById('popupToastTitle');
-      const messageEl = document.getElementById('popupToastMessage');
-      const btn = document.querySelector('.popup-toast-btn');
-      
-      const icons = {
-        success: '<path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>',
-        error: '<path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>',
-        warning: '<path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/>'
-      };
-      
-      popup.className = `popup-toast ${type}`;
-      icon.innerHTML = icons[type] || icons.info;
-      titleEl.textContent = title;
-      messageEl.textContent = message;
-      btn.textContent = 'OK';
-      btn.onclick = closePopupToast;
-      
-      overlay.classList.add('active');
-      popup.classList.add('active');
-    }
-
-    function closePopupToast() {
-      document.getElementById('popupToastOverlay').classList.remove('active');
-      document.getElementById('popupToast').classList.remove('active');
-    }
-
     // Initialize
     document.addEventListener('DOMContentLoaded', loadCart);
   </script>
-
-  <!-- Popup Toast -->
-  <div class="popup-toast-overlay" id="popupToastOverlay"></div>
-  <div class="popup-toast" id="popupToast">
-    <div class="popup-toast-icon">
-      <svg viewBox="0 0 24 24" id="popupToastIcon"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-    </div>
-    <h3 class="popup-toast-title" id="popupToastTitle">Success!</h3>
-    <p class="popup-toast-message" id="popupToastMessage">Operation completed</p>
-    <button class="popup-toast-btn" onclick="closePopupToast()">OK</button>
-  </div>
-
-  <style>
-    .popup-toast-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(0, 0, 0, 0.7);
-      backdrop-filter: blur(4px);
-      z-index: 10000;
-      opacity: 0;
-      visibility: hidden;
-      transition: all 0.3s ease;
-    }
-
-    .popup-toast-overlay.active {
-      opacity: 1;
-      visibility: visible;
-    }
-
-    .popup-toast {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%) scale(0.9);
-      background: var(--bg-light);
-      border: 1px solid var(--primary-gold);
-      border-radius: 20px;
-      padding: 2.5rem;
-      min-width: 350px;
-      max-width: 90%;
-      text-align: center;
-      box-shadow: 0 25px 80px rgba(0, 0, 0, 0.3);
-      opacity: 0;
-      visibility: hidden;
-      transition: all 0.3s ease;
-      z-index: 10001;
-    }
-
-    .popup-toast.active {
-      opacity: 1;
-      visibility: visible;
-      transform: translate(-50%, -50%) scale(1);
-    }
-
-    .popup-toast-icon {
-      width: 80px;
-      height: 80px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 1.5rem;
-    }
-
-    .popup-toast-icon svg {
-      width: 40px;
-      height: 40px;
-    }
-
-    .popup-toast.success .popup-toast-icon {
-      background: linear-gradient(135deg, rgba(34, 197, 94, 0.2) 0%, rgba(34, 197, 94, 0.1) 100%);
-    }
-
-    .popup-toast.success .popup-toast-icon svg {
-      fill: #22c55e;
-    }
-
-    .popup-toast.error .popup-toast-icon {
-      background: linear-gradient(135deg, rgba(239, 68, 68, 0.2) 0%, rgba(239, 68, 68, 0.1) 100%);
-    }
-
-    .popup-toast.error .popup-toast-icon svg {
-      fill: #ef4444;
-    }
-
-    .popup-toast.warning .popup-toast-icon {
-      background: linear-gradient(135deg, rgba(251, 191, 36, 0.2) 0%, rgba(251, 191, 36, 0.1) 100%);
-    }
-
-    .popup-toast.warning .popup-toast-icon svg {
-      fill: #f59e0b;
-    }
-
-    .popup-toast-title {
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: var(--text-dark);
-      margin-bottom: 0.5rem;
-    }
-
-    .popup-toast-message {
-      color: var(--text-light);
-      margin-bottom: 1.5rem;
-      line-height: 1.6;
-    }
-
-    .popup-toast-btn {
-      background: linear-gradient(135deg, var(--primary-gold) 0%, #a88a4a 100%);
-      color: white;
-      border: none;
-      padding: 0.8rem 2rem;
-      border-radius: 10px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-
-    .popup-toast-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 25px rgba(201, 169, 98, 0.4);
-    }
-  </style>
 </body>
 </html>
