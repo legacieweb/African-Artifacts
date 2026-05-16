@@ -1,5 +1,5 @@
 const api = {
-  BASE_URL: 'http://localhost:5000/api',
+  BASE_URL: 'https://african-artifacts-pihe.onrender.com/api',
 
   async loginUser(email, password) {
     try {

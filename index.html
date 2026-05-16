@@ -54,7 +54,7 @@
     }
 
     /* ========================================
-       HEADER & NAVIGATION
+       HEADER & NAVIGATION (REDESIGNED)
        ======================================== */
     .main-header {
       position: fixed;
@@ -62,162 +62,276 @@
       left: 0;
       right: 0;
       z-index: 1000;
-      background: linear-gradient(180deg, rgba(26, 26, 26, 0.98) 0%, rgba(26, 26, 26, 0.92) 100%);
-      backdrop-filter: blur(12px);
-      transition: var(--transition);
+      background: rgba(15, 15, 15, 0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(201, 169, 98, 0.1);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     .header-top {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 1rem 2rem;
-      border-bottom: 1px solid rgba(201, 169, 98, 0.15);
+      padding: 1.2rem 2rem;
+      max-width: 1400px;
+      margin: 0 auto;
     }
 
     .logo {
-      font-size: 1.6rem;
-      font-weight: 800;
+      font-size: 1.8rem;
+      font-weight: 900;
       color: var(--primary);
-      letter-spacing: 2px;
+      letter-spacing: -0.5px;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
     }
 
     .logo span {
       color: var(--white);
+      font-weight: 300;
     }
 
-    .header-actions {
+    .header-right {
       display: flex;
       align-items: center;
-      gap: 1rem;
-    }
-
-    .header-btn {
-      padding: 0.6rem 1.2rem;
-      border-radius: 8px;
-      font-weight: 600;
-      font-size: 0.85rem;
-      cursor: pointer;
-      transition: var(--transition);
-      border: none;
-    }
-
-    .header-btn.login {
-      background: transparent;
-      color: var(--white);
-      border: 1px solid rgba(255, 255, 255, 0.25);
-    }
-
-    .header-btn.login:hover {
-      background: rgba(255, 255, 255, 0.08);
-      border-color: var(--primary);
-      color: var(--primary);
-    }
-
-    .header-btn.signup {
-      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-      color: #1a1a1a;
-    }
-
-    .header-btn.signup:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(201, 169, 98, 0.35);
-    }
-
-    .header-btn.dashboard {
-      background: var(--secondary);
-      color: var(--white);
-      display: none;
-    }
-
-    .header-btn.logout {
-      background: rgba(200, 50, 50, 0.2);
-      color: #ff6b6b;
-      border: 1px solid rgba(200, 50, 50, 0.3);
-      display: none;
+      gap: 1.5rem;
     }
 
     .cart-icon-btn {
       position: relative;
-      background: transparent;
-      border: none;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      width: 45px;
+      height: 45px;
+      border-radius: 12px;
       cursor: pointer;
-      padding: 0.5rem;
       display: flex;
       align-items: center;
       justify-content: center;
-    }
-
-    .cart-icon-btn svg {
-      width: 22px;
-      height: 22px;
-      fill: var(--white);
       transition: var(--transition);
     }
 
-    .cart-icon-btn:hover svg {
-      fill: var(--primary);
+    .cart-icon-btn:hover {
+      background: rgba(201, 169, 98, 0.1);
+      border-color: var(--primary);
+      transform: translateY(-2px);
+    }
+
+    .cart-icon-btn svg {
+      width: 20px;
+      height: 20px;
+      fill: var(--white);
     }
 
     .cart-badge {
       position: absolute;
-      top: -2px;
-      right: -2px;
+      top: -5px;
+      right: -5px;
       background: var(--primary);
-      color: #1a1a1a;
-      font-size: 0.65rem;
+      color: var(--dark);
+      font-size: 0.7rem;
       font-weight: 800;
-      width: 16px;
-      height: 16px;
-      border-radius: 50%;
-      display: none;
+      min-width: 18px;
+      height: 18px;
+      padding: 0 4px;
+      border-radius: 10px;
+      display: flex;
       align-items: center;
       justify-content: center;
+      border: 2px solid #0f0f0f;
     }
 
-    /* Main Navigation */
+    /* Desktop Navigation */
     .main-nav {
+      background: rgba(255, 255, 255, 0.02);
+      padding: 0.5rem 2rem;
+    }
+
+    .nav-container {
+      max-width: 1400px;
+      margin: 0 auto;
       display: flex;
       justify-content: center;
       align-items: center;
-      padding: 0.7rem 2rem;
-      background: rgba(0, 0, 0, 0.25);
+      position: relative;
     }
 
     .nav-links {
       display: flex;
       list-style: none;
-      gap: 2.5rem;
+      gap: 1rem;
+      align-items: center;
     }
 
     .nav-links a {
-      color: rgba(255, 255, 255, 0.85);
+      color: rgba(255, 255, 255, 0.6);
       font-weight: 500;
-      font-size: 0.95rem;
-      padding: 0.4rem 0.8rem;
-      border-radius: 6px;
+      font-size: 0.9rem;
+      padding: 0.6rem 1.2rem;
+      border-radius: 50px;
       transition: var(--transition);
-      position: relative;
+      text-transform: uppercase;
+      letter-spacing: 1px;
     }
 
-    .nav-links a:hover {
+    .nav-links a:hover, .nav-links a.active {
       color: var(--primary);
+      background: rgba(201, 169, 98, 0.08);
+    }
+
+    /* Auth Buttons in Nav (Hidden by default, shown in mobile/logic) */
+    .nav-auth {
+      display: flex;
+      gap: 0.5rem;
+      margin-left: 1rem;
+      padding-left: 1rem;
+      border-left: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .header-btn {
+      padding: 0.5rem 1.2rem;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: var(--transition);
+    }
+
+    .header-btn.login {
+      color: var(--white);
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .header-btn.signup {
+      background: var(--primary);
+      color: var(--dark);
+      border: none;
+    }
+
+    .header-btn:hover {
+      transform: scale(1.05);
     }
 
     /* Mobile Menu Toggle */
     .menu-toggle {
-      display: none;
-      flex-direction: column;
-      gap: 5px;
+      width: 45px;
+      height: 45px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
       cursor: pointer;
-      padding: 5px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      transition: var(--transition);
+    }
+
+    .menu-toggle:hover {
+      border-color: var(--primary);
     }
 
     .menu-toggle span {
-      width: 24px;
+      width: 20px;
       height: 2px;
       background: var(--white);
+      border-radius: 2px;
+      transition: all 0.3s ease;
+    }
+
+    .menu-toggle.active span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+    .menu-toggle.active span:nth-child(2) {
+      opacity: 0;
+    }
+    /* Mobile Menu Overlay Redesign */
+    .mobile-menu-overlay {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 100%;
+      height: 100vh;
+      background: rgba(10, 10, 10, 0.98);
+      backdrop-filter: blur(15px);
+      z-index: 999;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 4rem 2rem;
+      transition: all 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+    }
+
+    .mobile-menu-overlay.active {
+      right: 0;
+    }
+
+    .mobile-nav-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      text-align: center;
+    }
+
+    .mobile-nav-links a {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--white);
+      text-transform: uppercase;
+      letter-spacing: 2px;
       transition: var(--transition);
+    }
+
+    .mobile-nav-links a:hover {
+      color: var(--primary);
+    }
+
+    .mobile-auth {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-top: 2rem;
+      align-items: center;
+    }
+
+    .mobile-auth .header-btn {
+      width: 100%;
+      max-width: 300px;
+      padding: 1rem;
+      font-size: 1rem;
+    }
+
+    @media (max-width: 768px) {
+      .main-nav {
+        display: none;
+      }
+      .logo {
+        font-size: 1.4rem;
+      }
+    }
+
+    @media (min-width: 769px) {
+      .menu-toggle {
+        display: none;
+      }
+    }
+
+    /* Scroll State */
+    .main-header.scrolled {
+      padding: 0;
+      background: rgba(10, 10, 10, 0.95);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+
+    .main-header.scrolled .header-top {
+      padding: 0.8rem 2rem;
     }
 
     /* ========================================
@@ -435,145 +549,298 @@
     }
 
     /* ========================================
-       FEATURED PRODUCT SECTION
+       FEATURED PRODUCT SECTION (REDESIGNED)
        ======================================== */
     .featured-section {
-      padding: 5rem 2rem;
-      background: var(--dark);
+      padding: 8rem 2rem;
+      background: linear-gradient(180deg, var(--dark) 0%, var(--darker) 100%);
+      position: relative;
+    }
+
+    .featured-section::before {
+      content: 'FEATURED';
+      position: absolute;
+      top: 5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 8rem;
+      font-weight: 900;
+      color: rgba(201, 169, 98, 0.03);
+      letter-spacing: 20px;
+      z-index: 0;
+      pointer-events: none;
     }
 
     .section-header {
       text-align: center;
-      margin-bottom: 3.5rem;
+      margin-bottom: 5rem;
+      position: relative;
+      z-index: 1;
     }
 
     .section-header h2 {
-      font-size: 2.3rem;
-      margin-bottom: 0.6rem;
-      font-weight: 700;
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      font-weight: 800;
+      letter-spacing: -1px;
     }
 
-    .section-header p {
-      color: var(--gray);
-      font-size: 1.05rem;
+    .section-header .accent-line {
+      width: 80px;
+      height: 4px;
+      background: var(--primary);
+      margin: 0 auto 1.5rem;
+      border-radius: 2px;
     }
 
     .featured-carousel {
       position: relative;
-      max-width: 1000px;
+      max-width: 100% !important; /* Allow it to span more if needed, but we'll use padding */
       margin: 0 auto;
-      overflow: hidden;
-      border-radius: 20px;
+      z-index: 1;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none; /* Firefox */
+      -ms-overflow-style: none; /* IE/Edge */
+      padding: 1rem 2rem;
+      scroll-behavior: smooth;
+    }
+
+    .featured-carousel::-webkit-scrollbar {
+      display: none; /* Chrome/Safari */
     }
 
     .featured-track {
       display: flex;
-      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-      width: 100%;
+      gap: 2rem;
+      width: max-content; /* Ensure it expands to fit items */
     }
 
     .featured-product {
-      flex: 0 0 100%;
+      flex: 0 0 85vw; /* Each product takes 85% of viewport width */
+      max-width: 1100px;
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      background: linear-gradient(135deg, rgba(201, 169, 98, 0.08) 0%, rgba(139, 90, 43, 0.06) 100%);
-      border: 1px solid rgba(201, 169, 98, 0.25);
+      grid-template-columns: 1.1fr 0.9fr;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(201, 169, 98, 0.1);
+      border-radius: 30px;
       overflow: hidden;
-      transition: var(--transition);
-    }
-
-    .carousel-dots {
-      display: flex;
-      justify-content: center;
-      gap: 0.8rem;
-      margin-top: 1.5rem;
-    }
-
-    .dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.2);
-      cursor: pointer;
-      transition: var(--transition);
-    }
-
-    .dot.active {
-      background: var(--primary);
-      transform: scale(1.3);
+      min-height: 550px;
+      backdrop-filter: blur(10px);
+      scroll-snap-align: center;
+      transition: transform 0.3s ease;
     }
 
     .featured-product:hover {
-      border-color: var(--primary);
-      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+      transform: translateY(-5px);
+      border-color: rgba(201, 169, 98, 0.3);
     }
 
-    .featured-image {
+    .featured-image-wrapper {
       position: relative;
-      overflow: hidden;
+      background: rgba(0, 0, 0, 0.3);
+      padding: 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
-    .featured-image img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      min-height: 380px;
-      transition: var(--transition);
+    .featured-image-wrapper img {
+      max-width: 90%;
+      max-height: 450px;
+      object-fit: contain;
+      filter: drop-shadow(0 20px 50px rgba(0,0,0,0.5));
+      transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 
-    .featured-product:hover .featured-image img {
-      transform: scale(1.06);
+    .featured-product:hover .featured-image-wrapper img {
+      transform: scale(1.08) rotate(-2deg);
     }
 
     .featured-badge {
       position: absolute;
-      top: 18px;
-      left: 18px;
+      top: 30px;
+      left: 30px;
       background: var(--primary);
-      color: #1a1a1a;
-      padding: 0.45rem 1.1rem;
-      border-radius: 20px;
-      font-weight: 700;
-      font-size: 0.8rem;
-      letter-spacing: 0.5px;
+      color: var(--dark);
+      padding: 0.6rem 1.4rem;
+      border-radius: 50px;
+      font-weight: 800;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      box-shadow: 0 10px 20px rgba(201, 169, 98, 0.3);
     }
 
     .featured-details {
-      padding: 2.8rem;
+      padding: 5rem 4rem;
       display: flex;
       flex-direction: column;
       justify-content: center;
+      background: linear-gradient(90deg, rgba(255,255,255,0.02) 0%, transparent 100%);
+    }
+
+    .featured-category {
+      color: var(--primary);
+      font-weight: 700;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      margin-bottom: 1rem;
     }
 
     .featured-details h3 {
-      font-size: 1.8rem;
-      margin-bottom: 0.8rem;
-      font-weight: 700;
+      font-size: 3rem;
+      margin-bottom: 1.5rem;
+      font-weight: 800;
+      line-height: 1.1;
+      color: var(--white);
     }
 
     .featured-details .description {
-      color: var(--gray);
-      margin-bottom: 1.2rem;
-      line-height: 1.7;
-      font-size: 0.95rem;
+      color: rgba(255, 255, 255, 0.6);
+      margin-bottom: 2.5rem;
+      line-height: 1.8;
+      font-size: 1.1rem;
+      max-width: 450px;
+    }
+
+    .featured-price-tag {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      margin-bottom: 2.5rem;
     }
 
     .featured-price {
-      font-size: 2.2rem;
-      font-weight: 800;
+      font-size: 3rem;
+      font-weight: 900;
+      color: var(--white);
+    }
+
+    .featured-currency {
+      font-size: 1.2rem;
       color: var(--primary);
-      margin-bottom: 0.4rem;
+      font-weight: 700;
     }
 
-    .featured-sizes {
-      color: var(--gray);
-      margin-bottom: 1.5rem;
-      font-size: 0.9rem;
+    .featured-actions {
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
     }
 
-    .featured-details .btn-primary {
-      align-self: flex-start;
-      padding: 0.8rem 2rem;
+    .carousel-controls {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .carousel-btn {
+      background: transparent;
+      border: 1px solid rgba(201, 169, 98, 0.3);
+      color: var(--white);
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+
+    .carousel-btn:hover {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: var(--dark);
+      transform: scale(1.1);
+    }
+
+    .carousel-dots {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .dot {
+      width: 40px;
+      height: 4px;
+      border-radius: 2px;
+      background: rgba(255, 255, 255, 0.1);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .dot.active {
+      background: var(--primary);
+      width: 60px;
+    }
+
+    @media (max-width: 992px) {
+      .featured-product {
+        grid-template-columns: 1fr;
+      }
+      .featured-details {
+        padding: 4rem 2rem;
+      }
+      .featured-details h3 {
+        font-size: 2.2rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .featured-section {
+        padding: 5rem 1.5rem;
+      }
+      .featured-section::before {
+        font-size: 4rem;
+        top: 3rem;
+        letter-spacing: 10px;
+      }
+      .featured-details {
+        padding: 3rem 1.5rem;
+      }
+      .featured-details h3 {
+        font-size: 1.8rem;
+      }
+      .featured-price {
+        font-size: 2.2rem;
+      }
+      .featured-image-wrapper {
+        padding: 2rem;
+      }
+      .featured-image-wrapper img {
+        max-height: 300px;
+      }
+      .carousel-controls {
+        gap: 1rem;
+      }
+      .dot {
+        width: 25px;
+      }
+      .dot.active {
+        width: 40px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .featured-section::before {
+        display: none;
+      }
+      .featured-details h3 {
+        font-size: 1.5rem;
+      }
+      .featured-price {
+        font-size: 1.8rem;
+      }
+      .featured-badge {
+        top: 20px;
+        left: 20px;
+        padding: 0.4rem 1rem;
+        font-size: 0.65rem;
+      }
     }
 
     /* ========================================
@@ -619,7 +886,7 @@
     .product-image img {
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      object-fit: contain;
       transition: transform 0.5s ease;
     }
 
@@ -687,7 +954,7 @@
     .gallery-item img {
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      object-fit: contain;
       transition: var(--transition);
     }
 
@@ -1023,10 +1290,6 @@
        RESPONSIVE STYLES
        ======================================== */
     @media (max-width: 900px) {
-      .featured-product {
-        grid-template-columns: 1fr;
-      }
-      
       .gallery-grid {
         grid-template-columns: repeat(2, 1fr);
       }
@@ -1091,18 +1354,6 @@
       }
 
       .section-header h2 {
-        font-size: 1.8rem;
-      }
-
-      .featured-details {
-        padding: 2rem;
-      }
-
-      .featured-details h3 {
-        font-size: 1.5rem;
-      }
-
-      .featured-price {
         font-size: 1.8rem;
       }
 
@@ -1192,34 +1443,61 @@
     <div class="header-top">
       <a href="index.html" class="logo">AFRICAN <span>ARTIFACTS</span></a>
       
-      <div class="header-actions">
-        <a href="login.html" class="header-btn login" id="loginBtn">Login</a>
-        <a href="signup.html" class="header-btn signup" id="signupBtn">Sign Up</a>
-        <a href="admin-dashboard.html" class="header-btn dashboard" id="adminBtn" style="display: none; background: var(--primary); color: #1a1a1a;">Admin Panel</a>
-        <a href="dashboard.html" class="header-btn dashboard" id="dashboardBtn">Dashboard</a>
-        <button class="header-btn logout" id="logoutBtn">Logout</button>
+      <div class="header-right">
         <a href="cart.html" class="cart-icon-btn">
           <svg viewBox="0 0 24 24"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>
           <span class="cart-badge" id="cartBadge">0</span>
         </a>
-      </div>
 
-      <div class="menu-toggle" onclick="toggleMenu()">
-        <span></span>
-        <span></span>
-        <span></span>
+        <div class="menu-toggle" id="menuToggle" onclick="toggleMenu()">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
       </div>
     </div>
 
     <nav class="main-nav">
-      <ul class="nav-links" id="navLinks">
-        <li><a href="#">Home</a></li>
-        <li><a href="#shop">Shop</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
+      <div class="nav-container">
+        <ul class="nav-links" id="navLinks">
+          <li><a href="index.html" class="active">Home</a></li>
+          <li><a href="#shop">Shop</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#contact">Contact</a></li>
+          
+          <!-- Desktop Only Auth/Dashboard (Hidden on Mobile) -->
+          <li class="desktop-only"><a href="admin-dashboard.html" id="adminBtnDesktop" style="display: none;">Admin</a></li>
+          <li class="desktop-only"><a href="dashboard.html" id="dashboardBtnDesktop" style="display: none;">My Account</a></li>
+          
+          <div class="nav-auth" id="navAuthDesktop">
+            <a href="login.html" class="header-btn login">Login</a>
+            <a href="signup.html" class="header-btn signup">Sign Up</a>
+          </div>
+          <li class="desktop-only"><a href="#" id="logoutBtnDesktop" style="display: none; color: #ff6b6b;">Logout</a></li>
+        </ul>
+      </div>
     </nav>
   </header>
+
+  <!-- Mobile Menu Overlay -->
+  <div class="mobile-menu-overlay" id="mobileMenu">
+    <div class="mobile-menu-content">
+      <ul class="mobile-nav-links">
+        <li><a href="index.html" onclick="toggleMenu()">Home</a></li>
+        <li><a href="#shop" onclick="toggleMenu()">Shop</a></li>
+        <li><a href="#about" onclick="toggleMenu()">About</a></li>
+        <li><a href="#contact" onclick="toggleMenu()">Contact</a></li>
+        <hr style="border: none; border-top: 1px solid rgba(255,255,255,0.1); margin: 1rem 0;">
+        <li id="adminBtnMobile" style="display: none;"><a href="admin-dashboard.html" onclick="toggleMenu()">Admin Panel</a></li>
+        <li id="dashboardBtnMobile" style="display: none;"><a href="dashboard.html" onclick="toggleMenu()">My Dashboard</a></li>
+        <div class="mobile-auth" id="mobileAuth">
+          <a href="login.html" class="header-btn login">Login</a>
+          <a href="signup.html" class="header-btn signup">Join Now</a>
+        </div>
+        <li id="logoutBtnMobile" style="display: none;"><a href="#" style="color: #ff6b6b;" id="logoutBtnMobileClick">Logout Account</a></li>
+      </ul>
+    </div>
+  </div>
 
   <!-- Hero Section -->
   <section class="hero">
@@ -1237,7 +1515,8 @@
   <!-- Featured Product Carousel -->
   <section class="featured-section" id="shop">
     <div class="section-header">
-      <h2>Featured Products</h2>
+      <div class="accent-line"></div>
+      <h2>Handpicked Classics</h2>
       <p>Our most popular authentic African pieces</p>
     </div>
 
@@ -1245,52 +1524,76 @@
       <div class="featured-track" id="featuredTrack">
         <!-- Slide 1 -->
         <div class="featured-product">
-          <div class="featured-image">
+          <div class="featured-image-wrapper">
             <img src="04356685-feb5-4748-a4d3-1bbcf855785e.jpg" alt="Featured Ankara Dress">
-            <span class="featured-badge">⭐ Best Seller</span>
+            <span class="featured-badge">Best Seller</span>
           </div>
           <div class="featured-details">
+            <span class="featured-category">Traditional Wear</span>
             <h3>Ankara Evening Dress</h3>
             <p class="description">Elegant traditional Ankara dress perfect for special occasions. Handcrafted with authentic African prints, featuring vibrant colors and premium quality fabric.</p>
-            <div class="featured-price">KSh 4,800</div>
-            <div class="featured-sizes">Sizes: S - XL</div>
-            <a href="product-details.html?product=ankara-dress&price=4800&image04356685-feb5-4748-a4d3-1bbcf855785e.jpg" class="btn-primary">Shop Now</a>
+            <div class="featured-price-tag">
+              <span class="featured-currency">KSh</span>
+              <span class="featured-price">4,800</span>
+            </div>
+            <div class="featured-actions">
+              <a href="product-details.html?product=ankara-dress&price=4800&image04356685-feb5-4748-a4d3-1bbcf855785e.jpg" class="btn-primary">Shop Now</a>
+            </div>
           </div>
         </div>
         <!-- Slide 2 -->
         <div class="featured-product">
-          <div class="featured-image">
+          <div class="featured-image-wrapper">
             <img src="Handcrafted Kenyan soapstone figurines designs and….jpg" alt="Featured Soapstone Collection">
-            <span class="featured-badge">⭐ Collection</span>
+            <span class="featured-badge">Artisan Craft</span>
           </div>
           <div class="featured-details">
-            <h3>Authentic Soapstone Collection</h3>
-            <p class="description">Discover our exquisite range of hand-carved Soapstone Bowl. From majestic elephants to intricate decorative pieces, each item is a unique masterpiece of African craftsmanship.</p>
-            <div class="featured-price">Starting from KSh 1,500</div>
-            <div class="featured-sizes">Hand-Carved in Kenya</div>
-            <a href="product-details.html?product=soapstone-collection&price=1500&image=Handcrafted Kenyan soapstone figurines designs and….jpg" class="btn-primary">View Collection</a>
+            <span class="featured-category">Home Decor</span>
+            <h3>Soapstone Collection</h3>
+            <p class="description">Discover our exquisite range of hand-carved Soapstone Bowl. Each item is a unique masterpiece of African craftsmanship, carved from the finest Kisii stone.</p>
+            <div class="featured-price-tag">
+              <span class="featured-currency">From KSh</span>
+              <span class="featured-price">1,500</span>
+            </div>
+            <div class="featured-actions">
+              <a href="product-details.html?product=soapstone-collection&price=1500&image=Handcrafted Kenyan soapstone figurines designs and….jpg" class="btn-primary">View Collection</a>
+            </div>
           </div>
         </div>
         <!-- Slide 3 -->
         <div class="featured-product">
-          <div class="featured-image">
+          <div class="featured-image-wrapper">
             <img src="d9022d67-ac11-438e-815d-a1d14ed69031.jpg" alt="Royal Beaded Earrings">
-            <span class="featured-badge">⭐ New Arrival</span>
+            <span class="featured-badge">New Arrival</span>
           </div>
           <div class="featured-details">
+            <span class="featured-category">Accessories</span>
             <h3>Royal Beaded Earrings</h3>
             <p class="description">Traditional Maasai craftsmanship meets modern elegance. Each bead is meticulously placed to create a vibrant story of heritage and sophisticated style.</p>
-            <div class="featured-price">KSh 1,200</div>
-            <div class="featured-sizes">Hand-crafted Excellence</div>
-            <a href="product-details.html?product=royal-beaded-earrings&price=1200&image=d9022d67-ac11-438e-815d-a1d14ed69031.jpg" class="btn-primary">Shop Now</a>
+            <div class="featured-price-tag">
+              <span class="featured-currency">KSh</span>
+              <span class="featured-price">1,200</span>
+            </div>
+            <div class="featured-actions">
+              <a href="product-details.html?product=royal-beaded-earrings&price=1200&image=d9022d67-ac11-438e-815d-a1d14ed69031.jpg" class="btn-primary">Shop Now</a>
+            </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="carousel-dots">
-      <div class="dot active" onclick="jumpToSlide(0)"></div>
-      <div class="dot" onclick="jumpToSlide(1)"></div>
-      <div class="dot" onclick="jumpToSlide(2)"></div>
+
+    <div class="carousel-controls">
+      <button class="carousel-btn" onclick="moveSlide(-1)">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+      </button>
+      <div class="carousel-dots" id="carouselDots">
+        <div class="dot active" onclick="jumpToSlide(0)"></div>
+        <div class="dot" onclick="jumpToSlide(1)"></div>
+        <div class="dot" onclick="jumpToSlide(2)"></div>
+      </div>
+      <button class="carousel-btn" onclick="moveSlide(1)">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+      </button>
     </div>
   </section>
 
@@ -1850,47 +2153,97 @@
       }
     }
 
-    // Check auth status
+    // Header Scroll Effect
+    window.addEventListener('scroll', () => {
+      const header = document.querySelector('.main-header');
+      if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+
+    // Redesigned toggleMenu
+    function toggleMenu() {
+      const menu = document.getElementById('mobileMenu');
+      const toggle = document.getElementById('menuToggle');
+      menu.classList.toggle('active');
+      toggle.classList.toggle('active');
+      document.body.style.overflow = menu.classList.contains('active') ? 'hidden' : '';
+    }
+
+    // Updated checkAuthStatus
     async function checkAuthStatus() {
       const token = localStorage.getItem('authToken');
-      const loginBtn = document.getElementById('loginBtn');
-      const signupBtn = document.getElementById('signupBtn');
-      const dashboardBtn = document.getElementById('dashboardBtn');
-      const adminBtn = document.getElementById('adminBtn');
-      const logoutBtn = document.getElementById('logoutBtn');
+      
+      const navAuthDesktop = document.getElementById('navAuthDesktop');
+      const mobileAuth = document.getElementById('mobileAuth');
+      
+      const adminBtnDesktop = document.getElementById('adminBtnDesktop');
+      const adminBtnMobile = document.getElementById('adminBtnMobile');
+      
+      const dashboardBtnDesktop = document.getElementById('dashboardBtnDesktop');
+      const dashboardBtnMobile = document.getElementById('dashboardBtnMobile');
+      
+      const logoutBtnDesktop = document.getElementById('logoutBtnDesktop');
+      const logoutBtnMobile = document.getElementById('logoutBtnMobile');
 
       if (token) {
-        if (loginBtn) loginBtn.style.display = 'none';
-        if (signupBtn) signupBtn.style.display = 'none';
-        if (dashboardBtn) dashboardBtn.style.display = 'block';
-        if (logoutBtn) logoutBtn.style.display = 'block';
+        // Logged In
+        if (navAuthDesktop) navAuthDesktop.style.display = 'none';
+        if (mobileAuth) mobileAuth.style.display = 'none';
         
-        // Check for admin role
+        if (dashboardBtnDesktop) dashboardBtnDesktop.style.display = 'block';
+        if (dashboardBtnMobile) dashboardBtnMobile.style.display = 'block';
+        
+        if (logoutBtnDesktop) logoutBtnDesktop.style.display = 'block';
+        if (logoutBtnMobile) logoutBtnMobile.style.display = 'block';
+        
         try {
           const user = await getUserProfile();
-          if (user && user.role === 'admin' && adminBtn) {
-            adminBtn.style.display = 'block';
+          if (user && user.role === 'admin') {
+            if (adminBtnDesktop) adminBtnDesktop.style.display = 'block';
+            if (adminBtnMobile) adminBtnMobile.style.display = 'block';
           }
         } catch (e) {
-          console.error('Error checking admin role:', e);
+          console.error('Auth check failed:', e);
         }
+      } else {
+        // Not Logged In
+        if (navAuthDesktop) navAuthDesktop.style.display = 'flex';
+        if (mobileAuth) mobileAuth.style.display = 'flex';
+        
+        if (dashboardBtnDesktop) dashboardBtnDesktop.style.display = 'none';
+        if (dashboardBtnMobile) dashboardBtnMobile.style.display = 'none';
+        
+        if (adminBtnDesktop) adminBtnDesktop.style.display = 'none';
+        if (adminBtnMobile) adminBtnMobile.style.display = 'none';
+        
+        if (logoutBtnDesktop) logoutBtnDesktop.style.display = 'none';
+        if (logoutBtnMobile) logoutBtnMobile.style.display = 'none';
       }
     }
 
-    // Logout
-    document.getElementById('logoutBtn')?.addEventListener('click', function() {
+    // Unified Logout
+    function handleLogout() {
       localStorage.removeItem('authToken');
       localStorage.removeItem('cart');
       sessionStorage.removeItem('checkoutData');
+      if (document.getElementById('mobileMenu').classList.contains('active')) {
+        toggleMenu();
+      }
       checkAuthStatus();
       window.location.href = 'index.html';
-    });
-
-    // Mobile menu toggle
-    function toggleMenu() {
-      const navLinks = document.getElementById('navLinks');
-      navLinks.classList.toggle('active');
     }
+
+    document.getElementById('logoutBtnDesktop')?.addEventListener('click', (e) => {
+      e.preventDefault();
+      handleLogout();
+    });
+    document.getElementById('logoutBtnMobileClick')?.addEventListener('click', (e) => {
+      e.preventDefault();
+      handleLogout();
+    });
 
     // Filter products
     function filterProducts(category, element) {
@@ -1914,20 +2267,48 @@
     // Featured Carousel Logic
     let currentSlide = 0;
     const totalSlides = 3;
+    const carousel = document.querySelector('.featured-carousel');
     const track = document.getElementById('featuredTrack');
     const dots = document.querySelectorAll('.dot');
+    let carouselInterval = setInterval(autoPlayCarousel, 6000);
 
     function updateCarousel() {
-      if (!track) return;
-      track.style.transform = `translateX(-${currentSlide * 100}%)`;
-      dots.forEach((dot, index) => {
+      if (!carousel) return;
+      const slideWidth = carousel.querySelector('.featured-product').offsetWidth + 32; // width + gap
+      carousel.scrollTo({
+        left: currentSlide * slideWidth,
+        behavior: 'smooth'
+      });
+      
+      updateDots();
+    }
+
+    function updateDots() {
+      document.querySelectorAll('.dot').forEach((dot, index) => {
         dot.classList.toggle('active', index === currentSlide);
       });
+    }
+
+    // Sync dots on scroll
+    carousel?.addEventListener('scroll', () => {
+      const slideWidth = carousel.querySelector('.featured-product').offsetWidth + 32;
+      const index = Math.round(carousel.scrollLeft / slideWidth);
+      if (index !== currentSlide) {
+        currentSlide = index;
+        updateDots();
+      }
+    });
+
+    function moveSlide(direction) {
+      currentSlide = (currentSlide + direction + totalSlides) % totalSlides;
+      updateCarousel();
+      resetInterval();
     }
 
     function jumpToSlide(index) {
       currentSlide = index;
       updateCarousel();
+      resetInterval();
     }
 
     function autoPlayCarousel() {
@@ -1935,15 +2316,18 @@
       updateCarousel();
     }
 
-    let carouselInterval = setInterval(autoPlayCarousel, 5000);
+    function resetInterval() {
+      clearInterval(carouselInterval);
+      carouselInterval = setInterval(autoPlayCarousel, 6000);
+    }
 
     // Pause on hover
-    document.querySelector('.featured-carousel')?.addEventListener('mouseenter', () => {
+    carousel?.addEventListener('mouseenter', () => {
       clearInterval(carouselInterval);
     });
 
-    document.querySelector('.featured-carousel')?.addEventListener('mouseleave', () => {
-      carouselInterval = setInterval(autoPlayCarousel, 5000);
+    carousel?.addEventListener('mouseleave', () => {
+      resetInterval();
     });
 
     // Category Auto-scroll Logic
